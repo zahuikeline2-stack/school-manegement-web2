@@ -1,0 +1,27 @@
+{
+  "name": "school-manegement-web2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zahuikeline2-stack/school-manegement-web2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/zahuikeline2-stack/school-manegement-web2/issues"
+  },
+  "homepage": "https://github.com/zahuikeline2-stack/school-manegement-web2#readme",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

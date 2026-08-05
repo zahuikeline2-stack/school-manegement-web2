@@ -1,0 +1,107 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+   background-color: #2872A1;
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 8%;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h2 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    cursor: pointer;
+    
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+     padding: 1rem 2.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+section {
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    margin: 10%;
+   
+}
+span{
+    color: #CBDDE9;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+  
+}
+ a{
+    text-decoration: none;
+    color: white;
+ }
+p {
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-size: 1.15rem;
+    color: white;
+}
+
+button  {
+    padding: 1rem 2.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+section img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+   
+}
+
+
+
