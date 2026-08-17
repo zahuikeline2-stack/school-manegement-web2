@@ -1,28 +1,42 @@
 import express from "express";
 import path from "path";
+
 import authMiddleware from "../middleware/authmiddleware.js";
 import roleMiddleware from "../middleware/roleMiddleware.js";
 
 const router = express.Router();
 
 
-// Page principale
+// ==========================
+// PAGE D'ACCUEIL
+// ==========================
+
 router.get("/", (req, res) => {
+
     res.sendFile(
         path.join(process.cwd(), "views", "index.html")
     );
+
 });
 
 
-// Page de connexion
+// ==========================
+// PAGE DE CONNEXION
+// ==========================
+
 router.get("/login", (req, res) => {
+
     res.sendFile(
         path.join(process.cwd(), "views", "login.html")
     );
+
 });
 
 
-// Page Admin
+// ==========================
+// PAGE ADMIN
+// ==========================
+
 router.get(
     "/admin",
     authMiddleware,
@@ -37,30 +51,54 @@ router.get(
 );
 
 
-// Page Professeur
+// ==========================
+// PAGE UTILISATEURS
+// ==========================
+
 router.get(
-    "/professeur",
+    "/users",
     authMiddleware,
-    roleMiddleware("professeur"),
+    roleMiddleware("admin"),
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "professeur.html")
+            path.join(process.cwd(), "views", "users.html")
         );
 
     }
 );
 
 
-// Page Étudiant
+// ==========================
+// PAGE AJOUTER UTILISATEUR
+// ==========================
+
 router.get(
-    "/etudiant",
+    "/ajouter",
     authMiddleware,
-    roleMiddleware("etudiant"),
+    roleMiddleware("admin"),
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "etudiant.html")
+            path.join(process.cwd(), "views", "ajouter.html")
+        );
+
+    }
+);
+
+
+// ==========================
+// PAGE LISTE UTILISATEURS
+// ==========================
+
+router.get(
+    "/users/api",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(process.cwd(), "views", "usersApi.html")
         );
 
     }

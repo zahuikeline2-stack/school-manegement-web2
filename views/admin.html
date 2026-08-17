@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>School Manager - Admin</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BARRE LATERALE
+    ========================== -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+            <!-- Accueil -->
+
+            <a href="/admin" id="admin">
+               <i class="fa-solid fa-house"></i>
+               <span> Accueil</span>
+                
+            </a>
+
+
+            <!-- Utilisateurs -->
+
+            <a href="/users" id="users">
+                <i class="fa-solid fa-user"></i>
+                <span>Utilisateur</span>
+            </a>
+
+
+            <!-- Étudiants -->
+
+            <a href="/etudiants" id="etudiants">
+                 <i class="fa-solid fa-user-graduate"></i>
+                <span>Étudiant</span>
+            </a>
+
+
+            <!-- Professeurs -->
+
+            <a href="/professeurs" id="professeurs">
+                <i class="fa-solid fa-chalkboard-user"></i>
+               <span>Professeurs</span>
+                 
+            </a>
+
+
+            <!-- Matières -->
+
+            <a href="/matieres" id="matieres">
+               <i class="fa-solid fa-book"></i>
+               <span>Matières</span>
+                 
+            </a>
+
+
+            <!-- Notes -->
+
+            <a href="/notes" id="notes">
+               <i class="fa-solid fa-clipboard-list"></i>
+               <span>Notes</span>
+                
+            </a>
+
+
+            <!-- Absences -->
+
+            <a href="/absences" id="absences">
+               <i class="fa-solid fa-calendar-xmark"></i>
+               <span>Absences</span>
+                 
+            </a>
+
+
+            <!-- Statistiques -->
+
+            <a href="/statistiques" id="statistiques">
+              <i class="fa-solid fa-chart-pie"></i>
+               <span> Statistiques</span>
+                
+            </a>
+
+        </nav>
+
+
+        <!-- Déconnexion -->
+
+        <a
+            href="/login"
+            id="deconnecter"
+            class="deconnecter">
+        
+        <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Déconnexion</span> 
+        </a>
+
+    </aside>
+
+
+
+    <!-- =========================
+         CONTENU PRINCIPAL
+    ========================== -->
+
+    <main class="content">
+
+
+        <h1>
+            Bienvenue dans l'espace administrateur
+        </h1>
+
+
+        <p>
+            Gérez votre établissement depuis cette
+            interface.
+        </p>
+
+
+
+        <!-- =========================
+             CARTES
+        ========================== -->
+
+        <div class="actions">
+
+
+            <!-- Utilisateurs -->
+
+            <a
+                href="/users"
+                class="card"
+                id="cardUsers"
+            >
+
+                <h3>
+                     Utilisateurs
+                </h3>
+
+                <p>
+                    Gérer les comptes des utilisateurs.
+                </p>
+
+            </a>
+
+
+
+            <!-- Étudiants -->
+
+            <a
+                href="/etudiants"
+                class="card"
+                id="cardEtudiants"
+            >
+
+                <h3>
+                     Étudiants
+                </h3>
+
+                <p>
+                    Gérer les étudiants.
+                </p>
+
+            </a>
+
+
+
+            <!-- Professeurs -->
+
+            <a
+                href="/professeurs"
+                class="card"
+                id="cardProfesseurs"
+            >
+
+                <h3>
+                    Professeurs
+                </h3>
+
+                <p>
+                    Gérer les professeurs.
+                </p>
+
+            </a>
+
+
+
+            <!-- Matières -->
+
+            <a
+                href="/matieres"
+                class="card"
+                id="cardMatieres"
+            >
+
+                <h3>
+                     Matières
+                </h3>
+
+                <p>
+                    Gérer les matières enseignées.
+                </p>
+
+            </a>
+
+
+
+            <!-- Notes -->
+
+            <a
+                href="/notes"
+                class="card"
+                id="cardNotes"
+            >
+
+                <h3>
+                     Notes
+                </h3>
+
+                <p>
+                    Consulter et gérer les notes.
+                </p>
+
+            </a>
+
+
+
+            <!-- Absences -->
+
+            <a
+                href="/absences"
+                class="card"
+                id="cardAbsences"
+            >
+
+                <h3>
+                     Absences
+                </h3>
+
+                <p>
+                    Gérer les absences des étudiants.
+                </p>
+
+            </a>
+
+
+
+            <!-- Statistiques -->
+
+            <a
+                href="/statistiques"
+                class="card"
+                id="cardStatistiques"
+            >
+
+                <h3>
+                     Statistiques
+                </h3>
+
+                <p>
+                    Voir les statistiques de l'école.
+                </p>
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="/js/admin.js"></script>
+
+</body>
+
+</html>

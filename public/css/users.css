@@ -1,0 +1,429 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #CBDDE9;
+}
+
+
+/* =========================
+   BARRE LATERALE
+========================= */
+
+.Barre {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 230px;
+    height: 100vh;
+
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Barre h2 {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.Barre nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.Barre a {
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    transition: 0.2s;
+
+}
+
+
+.Barre a:hover {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+/* Lien actif */
+
+.Barre a.active {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+/* Déconnexion */
+
+#deconnecter {
+
+    margin-top: auto;
+
+}
+
+
+
+/* =========================
+   CONTENU PRINCIPAL
+========================= */
+
+.content {
+
+    margin-left: 230px;
+
+    padding: 40px;
+
+}
+
+
+.content h1 {
+
+    color: #2872A1;
+
+    margin-bottom: 10px;
+
+}
+
+
+.content > p {
+
+    color: #2872A1;
+
+    margin-bottom: 25px;
+
+}
+
+
+
+/* =========================
+   BOUTONS D'ACTIONS
+========================= */
+
+.actions {
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 30px;
+
+}
+
+
+.actions button {
+
+    border: none;
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 13px 20px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+
+}
+
+
+.actions button:hover {
+
+    background-color: #CBDDE9;
+    color: #2872A1;
+
+}
+
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 8px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.section h2 {
+
+    color: #2872A1;
+
+    margin-bottom: 20px;
+
+}
+
+
+
+/* =========================
+   FORMULAIRE
+========================= */
+
+#userForm {
+
+    display: flex;
+
+    flex-direction: column;
+
+    max-width: 500px;
+
+}
+
+
+#userForm label {
+
+    color: #2872A1;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+
+}
+
+
+#userForm input,
+#userForm select {
+
+    padding: 12px;
+
+    border: 1px solid #CBDDE9;
+
+    border-radius: 5px;
+
+    margin-bottom: 15px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+#userForm input:focus,
+#userForm select:focus {
+
+    border-color: #2872A1;
+
+}
+
+
+#userForm button {
+
+    background-color: #2872A1;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+#userForm button:hover {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+
+/* =========================
+   LISTE DES UTILISATEURS
+========================= */
+
+#usersList {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+
+.user-card {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background-color: #CBDDE9;
+
+    padding: 18px;
+
+    border-radius: 6px;
+
+}
+
+
+.user-info h3 {
+
+    color: #2872A1;
+
+    margin-bottom: 7px;
+
+}
+
+
+.user-info p {
+
+    color: #333;
+
+    margin: 3px 0;
+
+}
+
+
+
+/* =========================
+   BOUTON SUPPRIMER
+========================= */
+
+.delete-btn {
+
+    border: none;
+
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+}
+
+
+.delete-btn:hover {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 800px) {
+
+    .Barre {
+
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+
+    .content {
+
+        margin-left: 0;
+
+        padding: 25px;
+
+    }
+
+
+    .user-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .actions button {
+
+        width: 100%;
+
+    }
+
+}
