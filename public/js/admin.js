@@ -1,7 +1,6 @@
 const token = localStorage.getItem("token");
 
 
-// Vérifier si le token existe
 if (!token) {
 
     window.location.href = "/login";
@@ -9,87 +8,196 @@ if (!token) {
 }
 
 
-// Fonction pour ajouter le token à l'URL
+// Fonction pour aller vers une page avec le token
+
 function allerVers(page) {
 
-    window.location.href = page + "?token=" + token;
+    window.location.href =
+        page + "?token=" + encodeURIComponent(token);
 
 }
 
 
-// Accueil Admin
-document.getElementById("admin").addEventListener("click", (e) => {
+// Étudiants
 
-    e.preventDefault();
+document
+    .getElementById("etudiants")
+    .addEventListener("click", (e) => {
 
-    allerVers("/admin");
+        e.preventDefault();
 
-});
+        allerVers("/etudiants");
+
+    });
 
 
 // Utilisateurs
-document.getElementById("users").addEventListener("click", (e) => {
 
-    e.preventDefault();
+document
+    .getElementById("users")
+    .addEventListener("click", (e) => {
 
-    allerVers("/users");
+        e.preventDefault();
 
-});
+        allerVers("/users");
 
-
-// Ajouter utilisateur
-document.getElementById("addUser").addEventListener("click", (e) => {
-
-    e.preventDefault();
-
-    allerVers("/ajouter");
-
-});
+    });
 
 
-// Liste utilisateurs
-document.getElementById("usersApi").addEventListener("click", (e) => {
+// Professeurs
 
-    e.preventDefault();
+document
+    .getElementById("professeurs")
+    .addEventListener("click", (e) => {
 
-    allerVers("/users/api");
+        e.preventDefault();
 
-});
+        allerVers("/professeurs");
 
-
-// Carte utilisateurs
-document.getElementById("card").addEventListener("click", (e) => {
-
-    e.preventDefault();
-
-    allerVers("/users");
-
-});
+    });
 
 
-// Carte ajouter utilisateur
-document.getElementById("addUserCard").addEventListener("click", (e) => {
+// Matières
 
-    e.preventDefault();
+document
+    .getElementById("matieres")
+    .addEventListener("click", (e) => {
 
-    allerVers("/ajouter");
+        e.preventDefault();
 
-});
+        allerVers("/matieres");
+
+    });
 
 
-// Carte liste utilisateurs
-document.getElementById("usersApiCard").addEventListener("click", (e) => {
+// Notes
 
-    e.preventDefault();
+document
+    .getElementById("notes")
+    .addEventListener("click", (e) => {
 
-    allerVers("/users/api");
+        e.preventDefault();
 
-});
+        allerVers("/notes");
+
+    });
+
+
+// Absences
+
+document
+    .getElementById("absences")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/absences");
+
+    });
+
+
+// Statistiques
+
+document
+    .getElementById("statistiques")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/statistiques");
+
+    });
+
+
+// Cartes
+
+document
+    .getElementById("cardUsers")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/users");
+
+    });
+
+
+document
+    .getElementById("cardEtudiants")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/etudiants");
+
+    });
+
+
+document
+    .getElementById("cardProfesseurs")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/professeurs");
+
+    });
+
+
+document
+    .getElementById("cardMatieres")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/matieres");
+
+    });
+
+
+document
+    .getElementById("cardNotes")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/notes");
+
+    });
+
+
+document
+    .getElementById("cardAbsences")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/absences");
+
+    });
+
+
+document
+    .getElementById("cardStatistiques")
+    .addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/statistiques");
+
+    });
 
 
 // Déconnexion
-document.getElementById("deconnecter").addEventListener("click", () => {
 
-    localStorage.removeItem("token");
+document
+    .getElementById("deconnecter")
+    .addEventListener("click", (e) => {
 
-});
+        e.preventDefault();
+
+        localStorage.removeItem("token");
+
+        window.location.href = "/login";
+
+    });

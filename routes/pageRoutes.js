@@ -103,6 +103,22 @@ router.get(
 
     }
 );
+router.get(
+    "/etudiants",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "etudiants.html"
+            )
+        );
+
+    }
+);
 
 
 export default router;

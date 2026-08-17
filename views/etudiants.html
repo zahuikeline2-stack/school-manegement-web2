@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Étudiants</title>
+
+    <link rel="stylesheet" href="/css/etudiants.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         BARRE LATERALE
+    ========================== -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+            <a href="/admin">
+                <i class="fa-solid fa-house"></i>
+                <span>Accueil</span>
+            </a>
+
+
+            <a href="/users">
+                <i class="fa-solid fa-user"></i>
+                <span>Utilisateurs</span>
+            </a>
+
+
+            <a href="/etudiants" class="active">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Étudiants</span>
+            </a>
+
+
+            <a href="/professeurs">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Professeurs</span>
+            </a>
+
+
+            <a href="/matieres">
+                <i class="fa-solid fa-book"></i>
+                <span>Matières</span>
+            </a>
+
+
+            <a href="/notes">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>Notes</span>
+            </a>
+
+
+            <a href="/absences">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <span>Absences</span>
+            </a>
+
+
+            <a href="/statistiques">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Statistiques</span>
+            </a>
+
+        </nav>
+
+
+        <a href="/login" id="deconnecter">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- =========================
+         CONTENU
+    ========================== -->
+
+    <main class="content">
+
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Gestion des étudiants</h1>
+
+                <p>
+                    Ajouter, rechercher, modifier et gérer
+                    les étudiants.
+                </p>
+
+            </div>
+
+
+            <button
+                id="btnRetour"
+                class="btn-retour"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Retour au menu
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =========================
+             BOUTONS D'ACTIONS
+        ========================== -->
+
+        <div class="actions">
+
+
+            <button
+                id="btnAjouter"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                <div>
+
+                    <h3>Ajouter</h3>
+
+                    <p>
+                        Ajouter un étudiant
+                    </p>
+
+                </div>
+
+            </button>
+
+
+
+            <button
+                id="btnLister"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-list"></i>
+
+                <div>
+
+                    <h3>Liste</h3>
+
+                    <p>
+                        Voir les étudiants
+                    </p>
+
+                </div>
+
+            </button>
+
+
+
+            <button
+                id="btnRechercher"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <div>
+
+                    <h3>Rechercher</h3>
+
+                    <p>
+                        Rechercher un étudiant
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+
+      <section
+    id="formulaireSection"
+    class="section"
+    style="display: none;"
+>
+
+    <h2>Ajouter un étudiant</h2>
+
+    <form id="etudiantForm">
+
+        <div class="form-group">
+
+            <label for="matricule">
+                Matricule
+            </label>
+
+            <input
+                type="text"
+                id="matricule"
+                placeholder="Ex : 16025297H"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="nom">
+                Nom
+            </label>
+
+            <input
+                type="text"
+                id="nom"
+                placeholder="Nom de l'étudiant"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="prenom">
+                Prénom
+            </label>
+
+            <input
+                type="text"
+                id="prenom"
+                placeholder="Prénom de l'étudiant"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="age">
+                Âge
+            </label>
+
+            <input
+                type="number"
+                id="age"
+                min="1"
+                max="100"
+                placeholder="Âge"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="classe">
+                Classe
+            </label>
+
+            <input
+                type="text"
+                id="classe"
+                placeholder="Ex : 3ème, Tle D..."
+                required
+            >
+
+        </div>
+
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+                <i class="fa-solid fa-check"></i>
+                Ajouter
+            </button>
+
+
+            <button
+                type="button"
+                id="btnAnnuler"
+                class="btn-secondary"
+            >
+                Annuler
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+        <!-- =========================
+             RECHERCHE
+        ========================== -->
+
+        <section
+            id="rechercheSection"
+            class="section"
+            style="display: none;"
+        >
+
+            <h2>Rechercher un étudiant</h2>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="recherche"
+                    placeholder="Entrez l'identifiant de l'étudiant..."
+                >
+
+
+                <button
+                    id="btnLancerRecherche"
+                    class="btn-primary"
+                >
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Rechercher
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             LISTE
+        ========================== -->
+
+        <section
+            id="listeSection"
+            class="section"
+            style="display: none;"
+        >
+
+            <h2>Liste des étudiants</h2>
+
+
+            <div id="etudiantsList">
+
+                <!-- Les étudiants seront ajoutés ici
+                     avec JavaScript -->
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="/js/etudiants.js"></script>
+
+</body>
+
+</html>
