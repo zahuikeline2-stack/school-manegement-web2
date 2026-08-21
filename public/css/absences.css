@@ -4,10 +4,12 @@
     box-sizing: border-box;
 }
 
-
 body {
+
     font-family: Arial, sans-serif;
+
     background-color: #CBDDE9;
+
 }
 
 
@@ -23,6 +25,7 @@ body {
     top: 0;
 
     width: 230px;
+
     height: 100vh;
 
     background-color: #2872A1;
@@ -34,6 +37,7 @@ body {
     display: flex;
 
     flex-direction: column;
+
 }
 
 
@@ -65,7 +69,7 @@ body {
 
     padding: 12px;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     display: flex;
 
@@ -103,7 +107,6 @@ body {
 }
 
 
-
 /* =========================
    CONTENU
 ========================= */
@@ -130,25 +133,24 @@ body {
 }
 
 
-.content h1 {
+.page-header h1 {
 
     color: #2872A1;
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
 }
 
 
-.content p {
+.page-header p {
 
     color: #2872A1;
 
 }
-
 
 
 /* =========================
-   BOUTON RETOUR
+   RETOUR
 ========================= */
 
 .btn-retour {
@@ -165,19 +167,18 @@ body {
 
     cursor: pointer;
 
-    font-size: 14px;
+    font-size: 15px;
 
 }
 
 
 .btn-retour:hover {
 
-    background-color: #CBDDE9;
+    background-color: white;
 
     color: #2872A1;
 
 }
-
 
 
 /* =========================
@@ -186,10 +187,7 @@ body {
 
 .actions {
 
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
+    display: flex;
 
     gap: 20px;
 
@@ -200,15 +198,17 @@ body {
 
 .action-card {
 
-    background-color: white;
+    width: 250px;
+
+    min-height: 110px;
 
     border: none;
 
-    padding: 25px;
+    border-radius: 10px;
 
-    border-radius: 8px;
+    background-color: white;
 
-    cursor: pointer;
+    padding: 20px;
 
     display: flex;
 
@@ -217,6 +217,8 @@ body {
     gap: 18px;
 
     text-align: left;
+
+    cursor: pointer;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1);
@@ -228,7 +230,7 @@ body {
 
 .action-card i {
 
-    font-size: 28px;
+    font-size: 30px;
 
     color: #2872A1;
 
@@ -239,14 +241,12 @@ body {
 
     color: #2872A1;
 
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 
 }
 
 
 .action-card p {
-
-    font-size: 14px;
 
     color: #555;
 
@@ -260,7 +260,6 @@ body {
 }
 
 
-
 /* =========================
    SECTIONS
 ========================= */
@@ -271,12 +270,12 @@ body {
 
     padding: 30px;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1);
 
-    margin-bottom: 25px;
+    max-width: 800px;
 
 }
 
@@ -290,94 +289,82 @@ body {
 }
 
 
-
 /* =========================
    FORMULAIRE
 ========================= */
 
-#etudiantForm {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
-}
-
-
 .form-group {
 
-    display: flex;
-
-    flex-direction: column;
+    margin-bottom: 18px;
 
 }
 
 
 .form-group label {
 
+    display: block;
+
+    margin-bottom: 7px;
+
     color: #2872A1;
 
     font-weight: bold;
 
-    margin-bottom: 8px;
-
 }
 
 
-.form-group input {
+.form-group input,
+.form-group select {
+
+    width: 100%;
 
     padding: 12px;
 
     border: 1px solid #ccc;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     font-size: 15px;
-
-    outline: none;
 
 }
 
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus {
+
+    outline: none;
 
     border-color: #2872A1;
 
 }
 
 
-.form-buttons {
+/* =========================
+   BOUTONS
+========================= */
 
-    grid-column: 1 / -1;
+.form-buttons {
 
     display: flex;
 
     gap: 10px;
 
-    margin-top: 10px;
+    margin-top: 20px;
 
 }
 
 
-
-/* =========================
-   BOUTONS
-========================= */
-
 .btn-primary {
+
+    border: none;
 
     background-color: #2872A1;
 
     color: white;
 
-    border: none;
-
     padding: 12px 20px;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     cursor: pointer;
 
@@ -386,24 +373,22 @@ body {
 
 .btn-primary:hover {
 
-    background-color: #CBDDE9;
-
-    color: #2872A1;
+    opacity: 0.9;
 
 }
 
 
 .btn-secondary {
 
+    border: none;
+
     background-color: #CBDDE9;
 
     color: #2872A1;
 
-    border: none;
-
     padding: 12px 20px;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     cursor: pointer;
 
@@ -419,7 +404,6 @@ body {
 }
 
 
-
 /* =========================
    RECHERCHE
 ========================= */
@@ -429,6 +413,8 @@ body {
     display: flex;
 
     gap: 10px;
+
+    margin-bottom: 25px;
 
 }
 
@@ -441,48 +427,33 @@ body {
 
     border: 1px solid #ccc;
 
-    border-radius: 5px;
-
-    outline: none;
+    border-radius: 6px;
 
     font-size: 15px;
 
 }
 
 
-.search-box input:focus {
-
-    border-color: #2872A1;
-
-}
-
-
-
 /* =========================
-   CARTE ÉTUDIANT
+   CARTE ABSENCE
 ========================= */
 
-.etudiant-card {
+.absence-card {
 
-    border: 1px solid #CBDDE9;
+    border: 1px solid #ddd;
 
-    padding: 20px;
+    border-radius: 8px;
 
-    border-radius: 7px;
+    padding: 18px;
 
     margin-bottom: 12px;
 
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
+    background-color: #f8fbfd;
 
 }
 
 
-
-.etudiant-info h3 {
+.absence-card h3 {
 
     color: #2872A1;
 
@@ -491,92 +462,37 @@ body {
 }
 
 
-.etudiant-info p {
+.absence-card p {
 
-    color: #555;
+    margin-bottom: 6px;
 
-    margin-bottom: 5px;
+    color: #444;
 
 }
 
 
-.btn-modifier {
+.status {
 
-    background-color: #2872A1;
+    display: inline-block;
 
-    color: white;
-
-    border: none;
-
-    padding: 10px 15px;
+    padding: 5px 10px;
 
     border-radius: 5px;
-
-    cursor: pointer;
-
-}
-
-
-.btn-modifier:hover {
 
     background-color: #CBDDE9;
 
     color: #2872A1;
 
-}
-
-
-.btn-supprimer {
-
-    background-color: #2872A1;
-
-    color: white;
-
-    border: none;
-
-    padding: 10px 15px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    margin-left: 5px;
+    font-weight: bold;
 
 }
-
-
-.btn-supprimer:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
-}
-
 
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 900px) {
-
-    .actions {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    #etudiantForm {
-
-        grid-template-columns: 1fr;
-
-    }
-
-}
-
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
     .Barre {
 
@@ -588,17 +504,19 @@ body {
 
         margin-left: 190px;
 
-        padding: 20px;
+        padding: 25px;
 
     }
 
-    .page-header {
+    .actions {
 
         flex-direction: column;
 
-        align-items: flex-start;
+    }
 
-        gap: 15px;
+    .action-card {
+
+        width: 100%;
 
     }
 

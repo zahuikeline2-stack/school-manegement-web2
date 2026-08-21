@@ -118,7 +118,94 @@ router.get(
         );
 
     }
+
 );
+// ========================================
+// PAGE PROFESSEURS
+// ========================================
 
+router.get(
+    "/professeurs",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
 
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeur.html"
+            )
+        );
+
+    }
+);
+router.get(
+    "/matieres",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "matiere.html"
+            )
+        );
+
+    }
+);
+// ========================================
+// PAGE GESTION DES NOTES
+// ========================================
+
+router.get(
+    "/notes",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "notes.html"
+            )
+        );
+
+    }
+);
+router.get(
+    "/absences",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "absences.html"
+            )
+        );
+
+    }
+);
+router.get(
+    "/statistiques",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "statistique.html"
+            )
+        );
+
+    }
+);
 export default router;

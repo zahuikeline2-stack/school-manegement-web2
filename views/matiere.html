@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Manager - Matières</title>
+
+    <link rel="stylesheet" href="/css/matiere.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- BARRE LATERALE -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+        <nav>
+
+            <a href="/admin">
+                <i class="fa-solid fa-house"></i>
+                <span>Accueil</span>
+            </a>
+
+            <a href="/users">
+                <i class="fa-solid fa-user"></i>
+                <span>Utilisateurs</span>
+            </a>
+
+            <a href="/etudiants">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Étudiants</span>
+            </a>
+
+            <a href="/professeurs">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Professeurs</span>
+            </a>
+
+            <a href="/matieres" class="active">
+                <i class="fa-solid fa-book"></i>
+                <span>Matières</span>
+            </a>
+
+            <a href="/notes">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>Notes</span>
+            </a>
+
+            <a href="/absences">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <span>Absences</span>
+            </a>
+
+            <a href="/statistiques">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Statistiques</span>
+            </a>
+
+        </nav>
+
+        <a href="/login" id="deconnecter">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+    <!-- CONTENU -->
+
+    <main class="content">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Gestion des matières</h1>
+
+                <p>
+                    Ajouter, lister et affecter les matières.
+                </p>
+
+            </div>
+
+            <button id="btnRetour" class="btn-retour">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Retour au menu
+
+            </button>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <button id="btnAjouter" class="action-card">
+
+                <i class="fa-solid fa-book-medical"></i>
+
+                <div>
+
+                    <h3>Ajouter</h3>
+
+                    <p>
+                        Ajouter une matière
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button id="btnLister" class="action-card">
+
+                <i class="fa-solid fa-list"></i>
+
+                <div>
+
+                    <h3>Liste</h3>
+
+                    <p>
+                        Voir les matières
+                    </p>
+
+                </div>
+
+            </button>
+
+
+            <button id="btnAffecter" class="action-card">
+
+                <i class="fa-solid fa-user-check"></i>
+
+                <div>
+
+                    <h3>Affecter</h3>
+
+                    <p>
+                        Affecter un professeur
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+        <!-- FORMULAIRE AJOUT -->
+
+        <section
+            id="formulaireSection"
+            class="section"
+            style="display:none;"
+        >
+
+            <h2>Ajouter une matière</h2>
+
+            <form id="matiereForm">
+
+                <div class="form-group">
+
+                    <label for="nom">
+                        Nom de la matière
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nom"
+                        placeholder="Ex : Mathématiques"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="teacher_id">
+                        ID du professeur
+                    </label>
+
+                    <input
+                        type="number"
+                        id="teacher_id"
+                        placeholder="Ex : 1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Ajouter
+
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnAnnuler"
+                        class="btn-secondary"
+                    >
+
+                        Annuler
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- AFFECTER -->
+
+        <section
+            id="affecterSection"
+            class="section"
+            style="display:none;"
+        >
+
+            <h2>Affecter un professeur</h2>
+
+            <form id="affecterForm">
+
+                <div class="form-group">
+
+                    <label for="matiere_id">
+                        ID de la matière
+                    </label>
+
+                    <input
+                        type="number"
+                        id="matiere_id"
+                        placeholder="Ex : 1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="affectTeacherId">
+                        ID du professeur
+                    </label>
+
+                    <input
+                        type="number"
+                        id="affectTeacherId"
+                        placeholder="Ex : 2"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+
+                        <i class="fa-solid fa-link"></i>
+
+                        Affecter
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTE -->
+
+        <section
+            id="listeSection"
+            class="section"
+            style="display:none;"
+        >
+
+            <h2>Liste des matières</h2>
+
+            <div id="matieresList"></div>
+
+        </section>
+
+    </main>
+
+
+    <script src="/js/matiere.js"></script>
+
+</body>
+
+</html>

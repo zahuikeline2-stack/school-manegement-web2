@@ -10,23 +10,15 @@ if (!token) {
 
 
 // ========================================
-// ÉLÉMENTS HTML
+// ELEMENTS HTML
 // ========================================
 
-const btnAjouter =
-    document.getElementById("btnAjouter");
+const btnAjouter = document.getElementById("btnAjouter");
+const btnLister = document.getElementById("btnLister");
+const btnRechercher = document.getElementById("btnRechercher");
+const btnRetour = document.getElementById("btnRetour");
 
-const btnLister =
-    document.getElementById("btnLister");
-
-const btnRechercher =
-    document.getElementById("btnRechercher");
-
-const btnRetour =
-    document.getElementById("btnRetour");
-
-const btnAnnuler =
-    document.getElementById("btnAnnuler");
+const btnAnnuler = document.getElementById("btnAnnuler");
 
 const formulaireSection =
     document.getElementById("formulaireSection");
@@ -45,21 +37,19 @@ const etudiantsList =
 
 
 // ========================================
-// CACHER TOUT
+// CACHER LES SECTIONS
 // ========================================
 
 function cacherTout() {
 
     formulaireSection.style.display = "none";
-
     rechercheSection.style.display = "none";
-
     listeSection.style.display = "none";
 
 }
 
 
-// Au chargement
+// Au démarrage
 
 cacherTout();
 
@@ -91,14 +81,27 @@ btnAnnuler.addEventListener("click", () => {
 
 
 // ========================================
-// LISTER
+// AJOUTER UN ETUDIANT
 // ========================================
 
-btnLister.addEventListener("click", async () => {
+etudiantForm.addEventListener("submit", async (e) => {
 
-    cacherTout();
+    e.preventDefault();
 
-    listeSection.style.display = "block";
+    const matricule =
+        document.getElementById("matricule").value;
+
+    const nom =
+        document.getElementById("nom").value;
+
+    const prenom =
+        document.getElementById("prenom").value;
+
+    const age =
+        document.getElementById("age").value;
+
+    const classe =
+        document.getElementById("classe").value;
 
 
     try {
@@ -106,12 +109,29 @@ btnLister.addEventListener("click", async () => {
         const response = await fetch(
             "/api/etudiants",
             {
-                method: "GET",
+
+                method: "POST",
 
                 headers: {
+
+                    "Content-Type":
+                        "application/json",
+
                     "Authorization":
                         "Bearer " + token
-                }
+
+                },
+
+                body: JSON.stringify({
+
+                    matricule: matricule,
+                    nom: nom,
+                    prenom: prenom,
+                    age: age,
+                    classe: classe
+
+                })
+
             }
         );
 
@@ -119,15 +139,102 @@ btnLister.addEventListener("click", async () => {
         const data = await response.json();
 
 
+        console.log(data);
+
+
         if (!data.status) {
 
             alert(data.message);
 
             return;
+
         }
 
 
-        afficherEtudiants(data.etudiants);
+        alert(
+            "Étudiant ajouté avec succès !"
+        );
+
+
+        etudiantForm.reset();
+
+
+        cacherTout();
+
+
+        listeSection.style.display = "block";
+
+
+        chargerEtudiants();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Erreur lors de l'ajout de l'étudiant"
+        );
+
+    }
+
+});
+
+
+// ========================================
+// LISTER LES ETUDIANTS
+// ========================================
+
+btnLister.addEventListener("click", () => {
+
+    cacherTout();
+
+    listeSection.style.display = "block";
+
+    chargerEtudiants();
+
+});
+
+
+async function chargerEtudiants() {
+
+    try {
+
+        const response = await fetch(
+            "/api/etudiants",
+            {
+
+                method: "GET",
+
+                headers: {
+
+                    "Authorization":
+                        "Bearer " + token
+
+                }
+
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        console.log(data);
+
+
+        if (!data.status) {
+
+            alert(data.message);
+
+            return;
+
+        }
+
+
+        afficherEtudiants(
+            data.etudiants
+        );
 
 
     } catch (error) {
@@ -140,11 +247,11 @@ btnLister.addEventListener("click", async () => {
 
     }
 
-});
+}
 
 
 // ========================================
-// AFFICHER LES ÉTUDIANTS
+// AFFICHER LES ETUDIANTS
 // ========================================
 
 function afficherEtudiants(etudiants) {
@@ -155,10 +262,13 @@ function afficherEtudiants(etudiants) {
     if (!etudiants || etudiants.length === 0) {
 
         etudiantsList.innerHTML = `
-            <p>Aucun étudiant trouvé.</p>
+            <p class="aucun-etudiant">
+                Aucun étudiant enregistré.
+            </p>
         `;
 
         return;
+
     }
 
 
@@ -167,40 +277,68 @@ function afficherEtudiants(etudiants) {
         const div =
             document.createElement("div");
 
-        div.classList.add("student-card");
+        div.classList.add(
+            "student-card"
+        );
 
 
         div.innerHTML = `
 
-            <h3>
-                ${etudiant.nom}
-                ${etudiant.prenom}
-            </h3>
+            <div class="student-info">
 
-            <p>
-                <strong>ID :</strong>
-                ${etudiant.id}
-            </p>
+                <h3>
+                    ${etudiant.nom}
+                    ${etudiant.prenom}
+                </h3>
 
-            <p>
-                <strong>Matricule :</strong>
-                ${etudiant.matricule}
-            </p>
+                <p>
+                    <strong>ID :</strong>
+                    ${etudiant.id}
+                </p>
 
-            <p>
-                <strong>Âge :</strong>
-                ${etudiant.age}
-            </p>
+                <p>
+                    <strong>Matricule :</strong>
+                    ${etudiant.matricule}
+                </p>
 
-            <p>
-                <strong>Classe :</strong>
-                ${etudiant.classe}
-            </p>
+                <p>
+                    <strong>Âge :</strong>
+                    ${etudiant.age}
+                </p>
 
-            <p>
-                <strong>User ID :</strong>
-                ${etudiant.user_id}
-            </p>
+                <p>
+                    <strong>Classe :</strong>
+                    ${etudiant.classe}
+                </p>
+
+                <p>
+                    <strong>User ID :</strong>
+                    ${etudiant.user_id}
+                </p>
+
+            </div>
+
+
+            <div class="student-actions">
+
+                <button
+                    class="btn-modifier"
+                    data-id="${etudiant.id}"
+                >
+                    <i class="fa-solid fa-pen"></i>
+                    Modifier
+                </button>
+
+
+                <button
+                    class="btn-supprimer"
+                    data-id="${etudiant.id}"
+                >
+                    <i class="fa-solid fa-trash"></i>
+                    Supprimer
+                </button>
+
+            </div>
 
         `;
 
@@ -213,20 +351,280 @@ function afficherEtudiants(etudiants) {
 
 
 // ========================================
+// SUPPRIMER UN ETUDIANT
+// ========================================
+
+etudiantsList.addEventListener(
+    "click",
+    async (e) => {
+
+        const bouton =
+            e.target.closest(
+                ".btn-supprimer"
+            );
+
+
+        if (!bouton) {
+
+            return;
+
+        }
+
+
+        const id =
+            bouton.dataset.id;
+
+
+        const confirmation =
+            confirm(
+                "Voulez-vous vraiment supprimer cet étudiant ?"
+            );
+
+
+        if (!confirmation) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/etudiants/" + id,
+                    {
+
+                        method: "DELETE",
+
+                        headers: {
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(data);
+
+
+            if (!data.status) {
+
+                alert(data.message);
+
+                return;
+
+            }
+
+
+            alert(
+                "Étudiant supprimé avec succès !"
+            );
+
+
+            chargerEtudiants();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Erreur lors de la suppression de l'étudiant"
+            );
+
+        }
+
+    }
+);
+
+
+// ========================================
+// MODIFIER UN ETUDIANT
+// ========================================
+
+etudiantsList.addEventListener(
+    "click",
+    async (e) => {
+
+        const bouton =
+            e.target.closest(
+                ".btn-modifier"
+            );
+
+
+        if (!bouton) {
+
+            return;
+
+        }
+
+
+        const id =
+            bouton.dataset.id;
+
+
+        const matricule =
+            prompt(
+                "Nouveau matricule :"
+            );
+
+
+        if (matricule === null) {
+            return;
+        }
+
+
+        const nom =
+            prompt(
+                "Nouveau nom :"
+            );
+
+
+        if (nom === null) {
+            return;
+        }
+
+
+        const prenom =
+            prompt(
+                "Nouveau prénom :"
+            );
+
+
+        if (prenom === null) {
+            return;
+        }
+
+
+        const age =
+            prompt(
+                "Nouvel âge :"
+            );
+
+
+        if (age === null) {
+            return;
+        }
+
+
+        const classe =
+            prompt(
+                "Nouvelle classe :"
+            );
+
+
+        if (classe === null) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/etudiants/" + id,
+                    {
+
+                        method: "PUT",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        },
+
+                        body: JSON.stringify({
+
+                            matricule:
+                                matricule,
+
+                            nom:
+                                nom,
+
+                            prenom:
+                                prenom,
+
+                            age:
+                                age,
+
+                            classe:
+                                classe
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(data);
+
+
+            if (!data.status) {
+
+                alert(data.message);
+
+                return;
+
+            }
+
+
+            alert(
+                "Étudiant modifié avec succès !"
+            );
+
+
+            chargerEtudiants();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Erreur lors de la modification"
+            );
+
+        }
+
+    }
+);
+
+
+// ========================================
 // RECHERCHER
 // ========================================
 
-btnRechercher.addEventListener("click", () => {
+btnRechercher.addEventListener(
+    "click",
+    () => {
 
-    cacherTout();
+        cacherTout();
 
-    rechercheSection.style.display = "block";
+        rechercheSection.style.display =
+            "block";
 
-});
+    }
+);
 
 
 // ========================================
-// LANCER LA RECHERCHE
+// LANCER RECHERCHE
 // ========================================
 
 const btnLancerRecherche =
@@ -248,26 +646,32 @@ btnLancerRecherche.addEventListener(
         if (!id) {
 
             alert(
-                "Veuillez entrer l'identifiant de l'étudiant"
+                "Entrez l'identifiant de l'étudiant"
             );
 
             return;
+
         }
 
 
         try {
 
-            const response = await fetch(
-                "/api/etudiants/" + id,
-                {
-                    method: "GET",
+            const response =
+                await fetch(
+                    "/api/etudiants/" + id,
+                    {
 
-                    headers: {
-                        "Authorization":
-                            "Bearer " + token
+                        method: "GET",
+
+                        headers: {
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
+
                     }
-                }
-            );
+                );
 
 
             const data =
@@ -279,15 +683,15 @@ btnLancerRecherche.addEventListener(
                 alert(data.message);
 
                 return;
+
             }
-
-
-            listeSection.style.display =
-                "block";
 
 
             rechercheSection.style.display =
                 "none";
+
+            listeSection.style.display =
+                "block";
 
 
             afficherEtudiants(
@@ -310,13 +714,47 @@ btnLancerRecherche.addEventListener(
 
 
 // ========================================
-// RETOUR AU MENU ADMIN
+// RETOUR ADMIN
 // ========================================
 
-btnRetour.addEventListener("click", () => {
+btnRetour.addEventListener(
+    "click",
+    () => {
 
-    window.location.href =
-        "/admin?token=" +
-        encodeURIComponent(token);
+        window.location.href =
+            "/admin?token=" +
+            encodeURIComponent(token);
 
-});
+    }
+);
+
+
+// ========================================
+// DECONNEXION
+// ========================================
+
+const deconnecter =
+    document.getElementById(
+        "deconnecter"
+    );
+
+
+if (deconnecter) {
+
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
+
+            e.preventDefault();
+
+            localStorage.removeItem(
+                "token"
+            );
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+}

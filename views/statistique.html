@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Statistiques</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/statistiques.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     BARRE LATERALE
+======================================== -->
+
+<aside class="Barre">
+
+    <h2>School Manager</h2>
+
+
+    <nav>
+
+        <a href="/admin">
+            <i class="fa-solid fa-house"></i>
+            <span>Accueil</span>
+        </a>
+
+
+        <a href="/users">
+            <i class="fa-solid fa-user"></i>
+            <span>Utilisateurs</span>
+        </a>
+
+
+        <a href="/etudiants">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Étudiants</span>
+        </a>
+
+
+        <a href="/professeurs">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Professeurs</span>
+        </a>
+
+
+        <a href="/matieres">
+            <i class="fa-solid fa-book"></i>
+            <span>Matières</span>
+        </a>
+
+
+        <a href="/notes">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Notes</span>
+        </a>
+
+
+        <a href="/absences">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <span>Absences</span>
+        </a>
+
+
+        <a
+            href="/statistiques"
+            class="active"
+        >
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>Statistiques</span>
+
+        </a>
+
+    </nav>
+
+
+    <a
+        href="/login"
+        id="deconnecter"
+    >
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <span>Déconnexion</span>
+
+    </a>
+
+</aside>
+
+
+
+<!-- ========================================
+     CONTENU
+======================================== -->
+
+<main class="content">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Statistiques</h1>
+
+            <p>
+                Consultez les statistiques de
+                l'établissement.
+            </p>
+
+        </div>
+
+
+        <button
+            id="btnRetour"
+            class="btn-retour"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Retour au menu
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ========================================
+         CARTES
+    ======================================== -->
+
+    <div class="stats-container">
+
+
+        <!-- Meilleur étudiant -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-trophy"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Meilleur étudiant
+                </h3>
+
+                <p id="meilleurEtudiant">
+                    Chargement...
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Moyenne générale -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Moyenne générale
+                </h3>
+
+                <p id="moyenneGenerale">
+                    Chargement...
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Absences -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Total des absences
+                </h3>
+
+                <p id="totalAbsences">
+                    Chargement...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================
+         ACTUALISER
+    ======================================== -->
+
+    <div class="actions">
+
+        <button
+            id="btnActualiser"
+            class="btn-primary"
+        >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Actualiser les statistiques
+
+        </button>
+
+    </div>
+
+
+</main>
+
+
+<script src="/js/statistique.js"></script>
+
+</body>
+
+</html>

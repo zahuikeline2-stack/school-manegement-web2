@@ -11,7 +11,7 @@ function addStudent(matricule,nom,prenom,age,classe,user_id) {
     insertStudent.run(matricule,nom,prenom,age,classe,user_id);
     console.log("Etudiant ajouter avec succès!")
 }
-addStudent("16025297H","franceline","zahui",23,"Tle",3)
+//addStudent("16025297H","franceline","zahui",23,"Tle",3)
 
 ///modifier un etudiant//
 function updateStudent(id,matricule,nom,prenom,age,classe) {

@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 body {
     font-family: Arial, sans-serif;
     background-color: #CBDDE9;
@@ -16,9 +15,7 @@ body {
 ========================= */
 
 .Barre {
-
     position: fixed;
-
     left: 0;
     top: 0;
 
@@ -32,35 +29,22 @@ body {
     padding: 25px 15px;
 
     display: flex;
-
     flex-direction: column;
 }
-
 
 .Barre h2 {
-
     text-align: center;
-
     margin-bottom: 30px;
-
 }
-
 
 .Barre nav {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
-
 }
 
-
 .Barre a {
-
     color: white;
-
     text-decoration: none;
 
     padding: 12px;
@@ -68,40 +52,20 @@ body {
     border-radius: 5px;
 
     display: flex;
-
     align-items: center;
 
-    gap: 12px;
-
-    transition: 0.2s;
-
+    gap: 10px;
 }
 
-
-.Barre a:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
-}
-
-
+.Barre a:hover,
 .Barre a.active {
-
     background-color: #CBDDE9;
-
     color: #2872A1;
-
 }
-
 
 #deconnecter {
-
     margin-top: auto;
-
 }
-
 
 
 /* =========================
@@ -109,16 +73,16 @@ body {
 ========================= */
 
 .content {
-
     margin-left: 230px;
-
     padding: 40px;
-
 }
 
 
-.page-header {
+/* =========================
+   HEADER
+========================= */
 
+.page-header {
     display: flex;
 
     justify-content: space-between;
@@ -126,25 +90,17 @@ body {
     align-items: center;
 
     margin-bottom: 30px;
-
 }
 
-
-.content h1 {
-
+.page-header h1 {
     color: #2872A1;
 
     margin-bottom: 10px;
-
 }
 
-
-.content p {
-
+.page-header p {
     color: #2872A1;
-
 }
-
 
 
 /* =========================
@@ -152,7 +108,6 @@ body {
 ========================= */
 
 .btn-retour {
-
     border: none;
 
     background-color: #2872A1;
@@ -166,18 +121,11 @@ body {
     cursor: pointer;
 
     font-size: 14px;
-
 }
-
 
 .btn-retour:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
+    background-color: #1f5c82;
 }
-
 
 
 /* =========================
@@ -185,80 +133,59 @@ body {
 ========================= */
 
 .actions {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
+    display: flex;
 
     gap: 20px;
 
     margin-bottom: 30px;
-
 }
 
-
 .action-card {
-
-    background-color: white;
+    width: 220px;
 
     border: none;
 
-    padding: 25px;
+    background-color: white;
+
+    padding: 20px;
 
     border-radius: 8px;
-
-    cursor: pointer;
 
     display: flex;
 
     align-items: center;
 
-    gap: 18px;
+    gap: 15px;
+
+    cursor: pointer;
 
     text-align: left;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1);
-
-    transition: 0.2s;
-
 }
 
-
 .action-card i {
-
     font-size: 28px;
 
     color: #2872A1;
-
 }
-
 
 .action-card h3 {
-
     color: #2872A1;
 
-    margin-bottom: 6px;
-
+    margin-bottom: 5px;
 }
-
 
 .action-card p {
-
-    font-size: 14px;
-
     color: #555;
 
+    font-size: 13px;
 }
-
 
 .action-card:hover {
-
     transform: translateY(-3px);
-
 }
-
 
 
 /* =========================
@@ -266,68 +193,47 @@ body {
 ========================= */
 
 .section {
-
     background-color: white;
 
-    padding: 30px;
+    padding: 25px;
 
     border-radius: 8px;
+
+    margin-top: 20px;
 
     box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1);
 
-    margin-bottom: 25px;
-
+    display: none;
 }
-
 
 .section h2 {
-
     color: #2872A1;
 
-    margin-bottom: 25px;
-
+    margin-bottom: 20px;
 }
-
 
 
 /* =========================
    FORMULAIRE
 ========================= */
 
-#etudiantForm {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 20px;
-
-}
-
-
 .form-group {
-
-    display: flex;
-
-    flex-direction: column;
-
+    margin-bottom: 18px;
 }
-
 
 .form-group label {
+    display: block;
+
+    margin-bottom: 7px;
 
     color: #2872A1;
 
     font-weight: bold;
-
-    margin-bottom: 8px;
-
 }
 
-
 .form-group input {
+    width: 100%;
 
     padding: 12px;
 
@@ -335,89 +241,56 @@ body {
 
     border-radius: 5px;
 
-    font-size: 15px;
-
     outline: none;
-
 }
-
 
 .form-group input:focus {
-
     border-color: #2872A1;
-
 }
-
-
-.form-buttons {
-
-    grid-column: 1 / -1;
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 10px;
-
-}
-
 
 
 /* =========================
    BOUTONS
 ========================= */
 
-.btn-primary {
+.form-buttons {
+    display: flex;
 
-    background-color: #2872A1;
+    gap: 10px;
 
-    color: white;
+    margin-top: 20px;
+}
 
+.btn-primary,
+.btn-secondary {
     border: none;
 
-    padding: 12px 20px;
+    padding: 12px 18px;
 
     border-radius: 5px;
 
     cursor: pointer;
-
 }
 
+.btn-primary {
+    background-color: #2872A1;
+
+    color: white;
+}
 
 .btn-primary:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
+    background-color: #1f5c82;
 }
-
 
 .btn-secondary {
-
     background-color: #CBDDE9;
 
     color: #2872A1;
-
-    border: none;
-
-    padding: 12px 20px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
 }
-
 
 .btn-secondary:hover {
-
-    background-color: #2872A1;
-
-    color: white;
-
+    background-color: #aac8d8;
 }
-
 
 
 /* =========================
@@ -425,16 +298,12 @@ body {
 ========================= */
 
 .search-box {
-
     display: flex;
 
     gap: 10px;
-
 }
 
-
 .search-box input {
-
     flex: 1;
 
     padding: 12px;
@@ -442,164 +311,112 @@ body {
     border: 1px solid #ccc;
 
     border-radius: 5px;
-
-    outline: none;
-
-    font-size: 15px;
-
 }
-
-
-.search-box input:focus {
-
-    border-color: #2872A1;
-
-}
-
 
 
 /* =========================
-   CARTE ÉTUDIANT
+   CARTE PROFESSEUR
 ========================= */
 
-.etudiant-card {
+.teacher-card {
+    background-color: #f7fafc;
 
-    border: 1px solid #CBDDE9;
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
 
     padding: 20px;
 
-    border-radius: 7px;
-
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
     display: flex;
 
     justify-content: space-between;
 
     align-items: center;
-
 }
 
-
-
-.etudiant-info h3 {
-
+.teacher-info h3 {
     color: #2872A1;
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+}
 
+.teacher-info p {
+    margin: 5px 0;
+
+    color: #444;
 }
 
 
-.etudiant-info p {
+/* =========================
+   BOUTONS MODIFIER / SUPPRIMER
+========================= */
 
-    color: #555;
+.teacher-actions {
+    display: flex;
 
-    margin-bottom: 5px;
-
+    gap: 10px;
 }
 
-
-.btn-modifier {
-
-    background-color: #2872A1;
-
-    color: white;
-
+.edit-btn,
+.delete-btn {
     border: none;
 
-    padding: 10px 15px;
+    padding: 10px 14px;
 
     border-radius: 5px;
 
     cursor: pointer;
 
-}
-
-
-.btn-modifier:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
-}
-
-
-.btn-supprimer {
-
-    background-color: #2872A1;
-
     color: white;
-
-    border: none;
-
-    padding: 10px 15px;
-
-    border-radius: 5px;
-
-    cursor: pointer;
-
-    margin-left: 5px;
-
 }
 
-
-.btn-supprimer:hover {
-
-    background-color: #CBDDE9;
-
-    color: #2872A1;
-
+.edit-btn {
+    background-color: #2872A1;
 }
 
+.edit-btn:hover {
+    background-color: #1f5c82;
+}
+
+.delete-btn {
+    background-color: #b33a3a;
+}
+
+.delete-btn:hover {
+    background-color: #8f2929;
+}
 
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width: 900px) {
-
-    .actions {
-
-        grid-template-columns: 1fr;
-
-    }
-
-    #etudiantForm {
-
-        grid-template-columns: 1fr;
-
-    }
-
-}
-
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
     .Barre {
-
         width: 190px;
-
     }
 
     .content {
-
         margin-left: 190px;
+        padding: 25px;
+    }
 
-        padding: 20px;
+    .actions {
+        flex-direction: column;
+    }
 
+    .action-card {
+        width: 100%;
     }
 
     .page-header {
-
         flex-direction: column;
-
         align-items: flex-start;
 
         gap: 15px;
-
     }
 
 }

@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: #CBDDE9;
+
+    color: #222;
+
+}
+
+
+/* ========================================
+   BARRE LATERALE
+======================================== */
+
+.Barre {
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    width: 250px;
+
+    height: 100vh;
+
+    background:  #2872A1;
+
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.Barre h2 {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+}
+
+
+.Barre nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.Barre nav a,
+#deconnecter {
+
+    text-decoration: none;
+
+    color: #dbe2ef;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    transition: 0.3s;
+
+}
+
+
+.Barre nav a:hover,
+.Barre nav a.active {
+
+    background: #2d6cdf;
+
+    color: white;
+
+}
+
+
+#deconnecter {
+
+    margin-top: auto;
+
+    background: #c0392b;
+
+}
+
+
+#deconnecter:hover {
+
+    background: #e74c3c;
+
+}
+
+
+/* ========================================
+   CONTENU
+======================================== */
+
+.content {
+
+    margin-left: 250px;
+
+    padding: 40px;
+
+}
+
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+
+}
+
+
+.page-header h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.page-header p {
+
+    color: #777;
+
+}
+
+
+/* ========================================
+   BOUTON RETOUR
+======================================== */
+
+.btn-retour {
+
+    border: none;
+
+    background: #172033;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.btn-retour:hover {
+
+    background: #2d6cdf;
+
+}
+
+
+/* ========================================
+   STATISTIQUES
+======================================== */
+
+.stats-container {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.08);
+
+}
+
+
+.stat-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: #eaf1ff;
+
+    color: #2d6cdf;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+}
+
+
+.stat-card h3 {
+
+    color: #555;
+
+    margin-bottom: 10px;
+
+}
+
+
+.stat-card p {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #172033;
+
+}
+
+
+/* ========================================
+   ACTION
+======================================== */
+
+.actions {
+
+    margin-top: 35px;
+
+}
+
+
+.btn-primary {
+
+    border: none;
+
+    background: #2d6cdf;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.btn-primary:hover {
+
+    background: #1d56b5;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .stats-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .Barre {
+
+        width: 200px;
+
+    }
+
+
+    .content {
+
+        margin-left: 200px;
+
+        padding: 20px;
+
+    }
+
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+}
