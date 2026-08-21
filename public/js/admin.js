@@ -1,5 +1,13 @@
+// ========================================
+// RÉCUPÉRER LE TOKEN
+// ========================================
+
 const token = localStorage.getItem("token");
 
+
+// ========================================
+// VÉRIFIER LE TOKEN
+// ========================================
 
 if (!token) {
 
@@ -8,34 +16,51 @@ if (!token) {
 }
 
 
-// Fonction pour aller vers une page avec le token
+// ========================================
+// FONCTION POUR ALLER VERS UNE PAGE
+// AVEC LE TOKEN
+// ========================================
 
 function allerVers(page) {
 
     window.location.href =
-        page + "?token=" + encodeURIComponent(token);
+        page +
+        "?token=" +
+        encodeURIComponent(token);
 
 }
 
 
-// Étudiants
+// ========================================
+// ACCUEIL ADMIN
+// ========================================
 
-document
-    .getElementById("etudiants")
-    .addEventListener("click", (e) => {
+const admin =
+    document.getElementById("admin");
+
+if (admin) {
+
+    admin.addEventListener("click", (e) => {
 
         e.preventDefault();
 
-        allerVers("/etudiants");
+        allerVers("/admin");
 
     });
 
+}
 
-// Utilisateurs
 
-document
-    .getElementById("users")
-    .addEventListener("click", (e) => {
+// ========================================
+// UTILISATEURS
+// ========================================
+
+const users =
+    document.getElementById("users");
+
+if (users) {
+
+    users.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -43,88 +68,19 @@ document
 
     });
 
-
-// Professeurs
-
-document
-    .getElementById("professeurs")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/professeurs");
-
-    });
+}
 
 
-// Matières
+// ========================================
+// ÉTUDIANTS
+// ========================================
 
-document
-    .getElementById("matieres")
-    .addEventListener("click", (e) => {
+const etudiants =
+    document.getElementById("etudiants");
 
-        e.preventDefault();
+if (etudiants) {
 
-        allerVers("/matieres");
-
-    });
-
-
-// Notes
-
-document
-    .getElementById("notes")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/notes");
-
-    });
-
-
-// Absences
-
-document
-    .getElementById("absences")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/absences");
-
-    });
-
-
-// Statistiques
-
-document
-    .getElementById("statistiques")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/statistiques");
-
-    });
-
-
-// Cartes
-
-document
-    .getElementById("cardUsers")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/users");
-
-    });
-
-
-document
-    .getElementById("cardEtudiants")
-    .addEventListener("click", (e) => {
+    etudiants.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -132,10 +88,19 @@ document
 
     });
 
+}
 
-document
-    .getElementById("cardProfesseurs")
-    .addEventListener("click", (e) => {
+
+// ========================================
+// PROFESSEURS
+// ========================================
+
+const professeurs =
+    document.getElementById("professeurs");
+
+if (professeurs) {
+
+    professeurs.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -143,10 +108,19 @@ document
 
     });
 
+}
 
-document
-    .getElementById("cardMatieres")
-    .addEventListener("click", (e) => {
+
+// ========================================
+// MATIÈRES
+// ========================================
+
+const matieres =
+    document.getElementById("matieres");
+
+if (matieres) {
+
+    matieres.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -154,10 +128,19 @@ document
 
     });
 
+}
 
-document
-    .getElementById("cardNotes")
-    .addEventListener("click", (e) => {
+
+// ========================================
+// NOTES
+// ========================================
+
+const notes =
+    document.getElementById("notes");
+
+if (notes) {
+
+    notes.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -165,10 +148,19 @@ document
 
     });
 
+}
 
-document
-    .getElementById("cardAbsences")
-    .addEventListener("click", (e) => {
+
+// ========================================
+// ABSENCES
+// ========================================
+
+const absences =
+    document.getElementById("absences");
+
+if (absences) {
+
+    absences.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -176,10 +168,19 @@ document
 
     });
 
+}
 
-document
-    .getElementById("cardStatistiques")
-    .addEventListener("click", (e) => {
+
+// ========================================
+// STATISTIQUES
+// ========================================
+
+const statistiques =
+    document.getElementById("statistiques");
+
+if (statistiques) {
+
+    statistiques.addEventListener("click", (e) => {
 
         e.preventDefault();
 
@@ -187,17 +188,172 @@ document
 
     });
 
+}
 
-// Déconnexion
 
-document
-    .getElementById("deconnecter")
-    .addEventListener("click", (e) => {
+// ========================================
+// CARTE UTILISATEURS
+// ========================================
+
+const cardUsers =
+    document.getElementById("cardUsers");
+
+if (cardUsers) {
+
+    cardUsers.addEventListener("click", (e) => {
 
         e.preventDefault();
+
+        allerVers("/users");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE ÉTUDIANTS
+// ========================================
+
+const cardEtudiants =
+    document.getElementById("cardEtudiants");
+
+if (cardEtudiants) {
+
+    cardEtudiants.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/etudiants");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE PROFESSEURS
+// ========================================
+
+const cardProfesseurs =
+    document.getElementById("cardProfesseurs");
+
+if (cardProfesseurs) {
+
+    cardProfesseurs.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/professeurs");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE MATIÈRES
+// ========================================
+
+const cardMatieres =
+    document.getElementById("cardMatieres");
+
+if (cardMatieres) {
+
+    cardMatieres.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/matieres");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE NOTES
+// ========================================
+
+const cardNotes =
+    document.getElementById("cardNotes");
+
+if (cardNotes) {
+
+    cardNotes.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/notes");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE ABSENCES
+// ========================================
+
+const cardAbsences =
+    document.getElementById("cardAbsences");
+
+if (cardAbsences) {
+
+    cardAbsences.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/absences");
+
+    });
+
+}
+
+
+// ========================================
+// CARTE STATISTIQUES
+// ========================================
+
+const cardStatistiques =
+    document.getElementById("cardStatistiques");
+
+if (cardStatistiques) {
+
+    cardStatistiques.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        allerVers("/statistiques");
+
+    });
+
+}
+
+
+// ========================================
+// DÉCONNEXION
+// ========================================
+
+const deconnecter =
+    document.getElementById("deconnecter");
+
+if (deconnecter) {
+
+    deconnecter.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+
+        // Supprimer le token
 
         localStorage.removeItem("token");
+
+
+        // Retour connexion
 
         window.location.href = "/login";
 
     });
+
+}

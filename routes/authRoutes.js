@@ -21,6 +21,7 @@ import {
     DEleteTeacher,
     getTeacherById
 } from "../Services/teacherService.js";
+
 import {
     addSubjects,
     affectSubject,
@@ -39,7 +40,14 @@ import {
     addAbsence,
     updateAbsence,
     getAbsence
-} from "../services/absencesService.js";
+} from "../Services/absencesService.js";
+
+import {
+    identifiStudent,
+    moyenneGenerale,
+    CompterAbsences
+} from "../Services/statistiqueService.js";
+
 const router = express.Router();
 
 
@@ -1283,5 +1291,89 @@ router.get(
 
     }
 );
+router.get(
+    "/api/statistiques",
+    authMiddleware,
+    roleMiddleware("admin"),
+    (req, res) => {
 
+        try {
+
+            const meilleurEtudiant =
+                identifiStudent();
+
+            const moyenne =
+                moyenneGenerale();
+
+            const absences =
+                CompterAbsences();
+
+
+            res.json({
+
+                status: true,
+
+                meilleurEtudiant:
+                    meilleurEtudiant,
+
+                moyenneGenerale:
+                    moyenne,
+
+                totalAbsences:
+                    absences
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            res.status(500).json({
+
+                status: false,
+
+                message:
+                    "Erreur lors du chargement des statistiques"
+
+            });
+
+        }
+
+    }
+);
+router.get(
+    "/api/professeur/matieres",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const matieres = getSubjects();
+
+            res.json({
+
+                status: true,
+
+                matieres: matieres
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            res.status(500).json({
+
+                status: false,
+
+                message:
+                    "Erreur lors du chargement des matières"
+
+            });
+
+        }
+
+    }
+);
 export default router;

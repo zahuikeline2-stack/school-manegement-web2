@@ -2,7 +2,8 @@
 // TOKEN
 // ========================================
 
-const token = localStorage.getItem("token");
+const token =
+    localStorage.getItem("token");
 
 
 if (!token) {
@@ -16,34 +17,20 @@ if (!token) {
 // ÉLÉMENTS HTML
 // ========================================
 
-const meilleurEtudiant =
-    document.getElementById(
-        "meilleurEtudiant"
-    );
+const btnMeilleur =
+    document.getElementById("btnMeilleur");
 
+const btnMoyenne =
+    document.getElementById("btnMoyenne");
 
-const moyenneGenerale =
-    document.getElementById(
-        "moyenneGenerale"
-    );
-
-
-const totalAbsences =
-    document.getElementById(
-        "totalAbsences"
-    );
-
-
-const btnActualiser =
-    document.getElementById(
-        "btnActualiser"
-    );
-
+const btnAbsences =
+    document.getElementById("btnAbsences");
 
 const btnRetour =
-    document.getElementById(
-        "btnRetour"
-    );
+    document.getElementById("btnRetour");
+
+const resultat =
+    document.getElementById("resultat");
 
 
 // ========================================
@@ -54,21 +41,22 @@ async function chargerStatistiques() {
 
     try {
 
-        const response = await fetch(
-            "/api/statistiques",
-            {
+        const response =
+            await fetch(
+                "/api/statistiques",
+                {
 
-                method: "GET",
+                    method: "GET",
 
-                headers: {
+                    headers: {
 
-                    "Authorization":
-                        "Bearer " + token
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
 
         const data =
@@ -87,72 +75,7 @@ async function chargerStatistiques() {
         }
 
 
-        // =================================
-        // MEILLEUR ÉTUDIANT
-        // =================================
-
-        if (data.meilleurEtudiant) {
-
-            meilleurEtudiant.textContent =
-                "Étudiant ID : " +
-                data.meilleurEtudiant.student_id +
-                " — Moyenne : " +
-                Number(
-                    data.meilleurEtudiant.moyenne
-                ).toFixed(2) +
-                "/20";
-
-        } else {
-
-            meilleurEtudiant.textContent =
-                "Aucun étudiant";
-
-        }
-
-
-        // =================================
-        // MOYENNE GÉNÉRALE
-        // =================================
-
-        if (data.moyenneGenerale) {
-
-            const moyenne =
-                data.moyenneGenerale
-                    .moyenne_generale;
-
-
-            if (moyenne !== null) {
-
-                moyenneGenerale.textContent =
-                    Number(moyenne)
-                        .toFixed(2) +
-                    " / 20";
-
-            } else {
-
-                moyenneGenerale.textContent =
-                    "Aucune note";
-
-            }
-
-        }
-
-
-        // =================================
-        // ABSENCES
-        // =================================
-
-        if (data.absences) {
-
-            totalAbsences.textContent =
-                data.absences.total_absences;
-
-        } else {
-
-            totalAbsences.textContent =
-                "0";
-
-        }
+        return data;
 
 
     } catch (error) {
@@ -169,62 +92,169 @@ async function chargerStatistiques() {
 
 
 // ========================================
-// ACTUALISER
+// MEILLEUR ÉTUDIANT
 // ========================================
 
-btnActualiser.addEventListener(
-    "click",
-    () => {
+if (btnMeilleur) {
 
-        chargerStatistiques();
+    btnMeilleur.addEventListener(
+        "click",
+        async () => {
 
-    }
-);
+            const data =
+                await chargerStatistiques();
+
+
+            if (!data) return;
+
+
+            const meilleur =
+                data.meilleurEtudiant;
+
+
+            if (!meilleur) {
+
+                resultat.innerHTML =
+                    "<p>Aucune note trouvée.</p>";
+
+                return;
+
+            }
+
+
+            resultat.innerHTML = `
+
+                <div class="stat-card">
+
+                    <h3>🏆 Meilleur étudiant</h3>
+
+                    <p>
+                        <strong>ID étudiant :</strong>
+                        ${meilleur.student_id}
+                    </p>
+
+                    <p>
+                        <strong>Moyenne :</strong>
+                        ${Number(
+                            meilleur.moyenne
+                        ).toFixed(2)}/20
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// ========================================
+// MOYENNE GÉNÉRALE
+// ========================================
+
+if (btnMoyenne) {
+
+    btnMoyenne.addEventListener(
+        "click",
+        async () => {
+
+            const data =
+                await chargerStatistiques();
+
+
+            if (!data) return;
+
+
+            const moyenne =
+                data.moyenneGenerale;
+
+
+            resultat.innerHTML = `
+
+                <div class="stat-card">
+
+                    <h3>📊 Moyenne générale</h3>
+
+                    <p>
+                        Moyenne :
+                        <strong>
+                            ${Number(
+                                moyenne.moyenne_generale || 0
+                            ).toFixed(2)}/20
+                        </strong>
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// ========================================
+// TOTAL ABSENCES
+// ========================================
+
+if (btnAbsences) {
+
+    btnAbsences.addEventListener(
+        "click",
+        async () => {
+
+            const data =
+                await chargerStatistiques();
+
+
+            if (!data) return;
+
+
+            const absences =
+                data.totalAbsences;
+
+
+            resultat.innerHTML = `
+
+                <div class="stat-card">
+
+                    <h3>📅 Absences</h3>
+
+                    <p>
+                        Nombre total :
+                        <strong>
+                            ${absences.total_absences}
+                        </strong>
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
 
 
 // ========================================
 // RETOUR
 // ========================================
 
-btnRetour.addEventListener(
-    "click",
-    () => {
+if (btnRetour) {
 
-        window.location.href =
-            "/admin?token=" +
-            encodeURIComponent(token);
+    btnRetour.addEventListener(
+        "click",
+        () => {
 
-    }
-);
+            window.location.href =
+                "/admin?token=" +
+                encodeURIComponent(token);
 
-
-// ========================================
-// DÉCONNEXION
-// ========================================
-
-const deconnecter =
-    document.getElementById(
-        "deconnecter"
+        }
     );
 
-
-deconnecter.addEventListener(
-    "click",
-    (e) => {
-
-        e.preventDefault();
-
-        localStorage.removeItem("token");
-
-        window.location.href =
-            "/login";
-
-    }
-);
-
-
-// ========================================
-// CHARGEMENT AUTOMATIQUE
-// ========================================
-
-chargerStatistiques();
+}

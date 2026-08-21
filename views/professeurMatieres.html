@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>School Manager - Mes matières</title>
+
+    <link rel="stylesheet" href="/css/professeur.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- ========================================
+         BARRE LATERALE
+    ========================================= -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+        <nav>
+
+            <a href="/professeur" id="accueil">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Accueil</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/matieres"
+                id="matieres"
+                class="active"
+            >
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>Mes matières</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/etudiants"
+                id="etudiants"
+            >
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>Étudiants</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/notes"
+                id="notes"
+            >
+
+                <i class="fa-solid fa-clipboard-list"></i>
+
+                <span>Notes</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/absences"
+                id="absences"
+            >
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>Absences</span>
+
+            </a>
+
+        </nav>
+
+
+        <a
+            href="/login"
+            id="deconnecter"
+            class="deconnecter"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- ========================================
+         CONTENU
+    ========================================= -->
+
+    <main class="content">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Mes matières</h1>
+
+                <p>
+                    Consultez les matières qui vous sont affectées.
+                </p>
+
+            </div>
+
+
+            <button
+                id="btnRetour"
+                class="btn-retour"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Retour
+
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             ACTION
+        ========================================= -->
+
+        <div class="actions">
+
+            <button
+                id="btnLister"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-list"></i>
+
+                <div>
+
+                    <h3>Mes matières</h3>
+
+                    <p>
+                        Voir la liste de mes matières.
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             LISTE
+        ========================================= -->
+
+        <section
+            id="listeSection"
+            class="section"
+        >
+
+            <h2>Liste des matières</h2>
+
+            <div id="matieresList">
+
+                <p>
+                    Cliquez sur « Mes matières » pour afficher la liste.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="/js/professeurMatieres.js"></script>
+
+</body>
+
+</html>

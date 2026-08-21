@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Professeur</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/professeurs.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         BARRE LATERALE
+    ========================================= -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+
+            <!-- Accueil -->
+
+            <a
+                href="/professeur"
+                id="accueil"
+                class="active"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Accueil
+                </span>
+
+            </a>
+
+
+            <!-- Mes matières -->
+
+            <a
+                href="/professeur/matieres"
+                id="matieres"
+            >
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>
+                    Mes matières
+                </span>
+
+            </a>
+
+
+            <!-- Étudiants -->
+
+            <a
+                href="/professeur/etudiants"
+                id="etudiants"
+            >
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>
+                    Étudiants
+                </span>
+
+            </a>
+
+
+            <!-- Notes -->
+
+            <a
+                href="/professeur/notes"
+                id="notes"
+            >
+
+                <i class="fa-solid fa-clipboard-list"></i>
+
+                <span>
+                    Notes
+                </span>
+
+            </a>
+
+
+            <!-- Absences -->
+
+            <a
+                href="/professeur/absences"
+                id="absences"
+            >
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>
+                    Absences
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- Déconnexion -->
+
+        <a
+            href="/login"
+            id="deconnecter"
+            class="deconnecter"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Déconnexion
+            </span>
+
+        </a>
+
+
+    </aside>
+
+
+
+    <!-- ========================================
+         CONTENU PRINCIPAL
+    ========================================= -->
+
+    <main class="content">
+
+
+        <!-- ====================================
+             EN-TÊTE
+        ===================================== -->
+
+        <h1>
+            Bienvenue dans votre espace professeur
+        </h1>
+
+
+        <p class="description">
+
+            Gérez vos matières, vos étudiants,
+            les notes et les absences.
+
+        </p>
+
+
+
+        <!-- ====================================
+             CARTES
+        ===================================== -->
+
+        <div class="actions">
+
+
+            <!-- ==================================
+                 MATIÈRES
+            =================================== -->
+
+            <a
+                href="/professeur/matieres"
+                class="card"
+                id="cardMatieres"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-book"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Mes matières
+                    </h3>
+
+                    <p>
+                        Voir les matières qui
+                        vous sont affectées.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ==================================
+                 ÉTUDIANTS
+            =================================== -->
+
+            <a
+                href="/professeur/etudiants"
+                class="card"
+                id="cardEtudiants"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Étudiants
+                    </h3>
+
+                    <p>
+                        Lister et rechercher
+                        les étudiants.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ==================================
+                 NOTES
+            =================================== -->
+
+            <a
+                href="/professeur/notes"
+                class="card"
+                id="cardNotes"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-clipboard-list"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Notes
+                    </h3>
+
+                    <p>
+                        Ajouter et modifier
+                        les notes des étudiants.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ==================================
+                 ABSENCES
+            =================================== -->
+
+            <a
+                href="/professeur/absences"
+                class="card"
+                id="cardAbsences"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Absences
+                    </h3>
+
+                    <p>
+                        Enregistrer, justifier
+                        et consulter les absences.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="/js/professeur.js"></script>
+
+
+</body>
+
+</html>
