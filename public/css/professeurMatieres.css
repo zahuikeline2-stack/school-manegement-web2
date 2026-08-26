@@ -1,0 +1,508 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background:  #CBDDE9;
+    color: #1f2937;
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   BARRE LATERALE
+======================================== */
+
+.Barre {
+   position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 230px;
+    height: 100vh;
+
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* TITRE */
+
+.Barre h2 {
+    color: white;
+    text-align: center;
+
+    font-size: 24px;
+
+    margin-bottom: 40px;
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+.Barre nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.Barre nav a,
+#deconnecter {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    text-decoration: none;
+
+    color: white;
+
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    transition: 0.3s;
+}
+
+
+.Barre nav a i,
+#deconnecter i {
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+
+.Barre nav a span,
+#deconnecter span {
+    font-size: 15px;
+}
+
+
+/* HOVER */
+
+.Barre nav a:hover {
+    background: #CBDDE9;
+
+    color: #2872A1;
+
+    transform: translateX(3px);
+}
+
+
+/* LIEN ACTIF */
+
+.Barre nav a.active {
+    background: #CBDDE9;
+
+    color: #2872A1;
+
+    box-shadow: 0 5px 12px rgba(37, 99, 235, 0.25);
+}
+
+
+/* ========================================
+   DECONNEXION
+======================================== */
+
+#deconnecter {
+    margin-top: auto;
+
+    color:white;
+}
+
+
+#deconnecter:hover {
+    background: #CBDDE9;
+
+    color: #2872A1;
+}
+
+
+/* ========================================
+   CONTENU PRINCIPAL
+======================================== */
+
+.content {
+    margin-left: 250px;
+
+    padding: 40px;
+
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   EN-TETE
+======================================== */
+
+.page-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+
+.page-header h1 {
+    font-size: 32px;
+
+    color: #2872A1;
+
+    margin-bottom: 8px;
+}
+
+
+.page-header p {
+    color: #2872A1;
+
+    font-size: 15px;
+}
+
+
+/* ========================================
+   BOUTON RETOUR
+======================================== */
+
+.btn-retour {
+    border: none;
+
+    background: #2872A1;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+
+
+/* ========================================
+   SECTION
+======================================== */
+
+.section {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+.section h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #2872A1;
+
+    font-size: 22px;
+
+    margin-bottom: 25px;
+}
+
+
+.section h2 i {
+    color:#2872A1;
+}
+
+
+/* ========================================
+   LISTE DES MATIERES
+======================================== */
+
+#matieresList {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   CARTE MATIERE
+======================================== */
+
+.matiere-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    transition: 0.3s;
+}
+
+
+.matiere-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #2872A1;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.12);
+}
+
+
+/* ========================================
+   ICONE MATIERE
+======================================== */
+
+.matiere-icon {
+    width: 55px;
+
+    height: 55px;
+
+    min-width: 55px;
+
+    border-radius: 12px;
+
+    background: #CBDDE9;
+
+    color: #2872A1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* ========================================
+   INFORMATIONS MATIERE
+======================================== */
+
+.matiere-info h3 {
+    color: #2872A1;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.matiere-info p {
+    color: #2872A1;
+
+    font-size: 14px;
+}
+
+
+.matiere-info strong {
+    color: black;
+}
+
+
+/* 
+  CHARGEMEN
+*/
+
+.chargement {
+    text-align: center;
+
+    color: #2872A1;
+
+    padding: 40px;
+}
+
+
+/* ========================================
+   AUCUNE MATIERE
+======================================== */
+
+.aucune {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    color: #2872A1;
+}
+
+
+.aucune i {
+    font-size: 45px;
+
+    color: #2872A1;
+
+    margin-bottom: 15px;
+}
+
+
+.aucune p {
+    font-size: 16px;
+}
+
+
+/* ========================================
+   ERREUR
+======================================== */
+
+.erreur {
+    grid-column: 1 / -1;
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .Barre {
+        width: 210px;
+    }
+
+    .content {
+        margin-left: 210px;
+
+        padding: 25px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .Barre {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        min-height: auto;
+    }
+
+
+    .Barre h2 {
+        margin-bottom: 20px;
+    }
+
+
+    .Barre nav {
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    .Barre nav a {
+        flex: 1 1 150px;
+    }
+
+
+    #deconnecter {
+        margin-top: 20px;
+    }
+
+
+    .content {
+        margin-left: 0;
+
+        padding: 20px;
+    }
+
+
+    .page-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+
+    .page-header h1 {
+        font-size: 26px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    #matieresList {
+        grid-template-columns: 1fr;
+    }
+
+
+    .section {
+        padding: 20px;
+    }
+
+
+    .matiere-card {
+        padding: 15px;
+    }
+
+}

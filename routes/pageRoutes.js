@@ -228,7 +228,6 @@ router.get(
 // ESPACE PROFESSEUR
 // ========================================
 
-// Accueil professeur
 router.get(
     "/professeur",
     authMiddleware,
@@ -248,7 +247,7 @@ router.get(
 
 
 // ========================================
-// MATIÈRES DU PROFESSEUR
+// MES MATIÈRES
 // ========================================
 
 router.get(
@@ -292,11 +291,11 @@ router.get(
 
 
 // ========================================
-// NOTES
+// AJOUTER UNE NOTE
 // ========================================
 
 router.get(
-    "/professeur/notes",
+    "/professeur/notes/ajouter",
     authMiddleware,
     roleMiddleware("professeur"),
     (req, res) => {
@@ -305,7 +304,7 @@ router.get(
             path.join(
                 process.cwd(),
                 "views",
-                "professeurNotes.html"
+                "professeurAjouterNote.html"
             )
         );
 
@@ -314,11 +313,11 @@ router.get(
 
 
 // ========================================
-// ABSENCES
+// MODIFIER UNE NOTE
 // ========================================
 
 router.get(
-    "/professeur/absences",
+    "/professeur/notes/modifier",
     authMiddleware,
     roleMiddleware("professeur"),
     (req, res) => {
@@ -327,7 +326,95 @@ router.get(
             path.join(
                 process.cwd(),
                 "views",
-                "professeurAbsences.html"
+                "professeurModifierNote.html"
+            )
+        );
+
+    }
+);
+
+
+// ========================================
+// ENREGISTRER UNE ABSENCE
+// ========================================
+
+router.get(
+    "/professeur/absences/ajouter",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeurAjouterAbsence.html"
+            )
+        );
+
+    }
+);
+
+
+// ========================================
+// JUSTIFIER UNE ABSENCE
+// ========================================
+
+router.get(
+    "/professeur/absences/justifier",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeurJustifierAbsence.html"
+            )
+        );
+
+    }
+);
+
+
+// ========================================
+// HISTORIQUE DES ABSENCES
+// ========================================
+
+router.get(
+    "/professeur/absences/historique",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeurHistoriqueAbsences.html"
+            )
+        );
+
+    }
+);
+
+
+// ========================================
+// RECHERCHER UN ÉTUDIANT
+// ========================================
+
+router.get(
+    "/professeur/etudiants/rechercher",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeurRechercherEtudiant.html"
             )
         );
 

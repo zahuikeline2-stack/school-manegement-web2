@@ -4,66 +4,60 @@
 
 const token = localStorage.getItem("token");
 
-
 if (!token) {
-
     window.location.href = "/login";
-
 }
 
 
 // ========================================
-// ÉLÉMENTS
+// ÉLÉMENTS HTML
 // ========================================
-
-const btnLister =
-    document.getElementById("btnLister");
-
-const btnRetour =
-    document.getElementById("btnRetour");
 
 const matieresList =
     document.getElementById("matieresList");
 
+const btnRetour =
+    document.getElementById("btnRetour");
+
+const deconnecter =
+    document.getElementById("deconnecter");
+
 
 // ========================================
-// LISTER LES MATIÈRES
+// CHARGER LES MATIÈRES
 // ========================================
 
-btnLister.addEventListener("click", async () => {
+async function chargerMatieres() {
 
     try {
 
         const response = await fetch(
             "/api/professeur/matieres",
             {
-
                 method: "GET",
 
                 headers: {
-
                     "Authorization":
                         "Bearer " + token
-
                 }
-
             }
         );
 
 
-        const data =
-            await response.json();
-
+        const data = await response.json();
 
         console.log(data);
 
 
         if (!data.status) {
 
-            alert(data.message);
+            matieresList.innerHTML = `
+                <p class="erreur">
+                    ${data.message}
+                </p>
+            `;
 
             return;
-
         }
 
 
@@ -74,13 +68,15 @@ btnLister.addEventListener("click", async () => {
 
         console.error(error);
 
-        alert(
-            "Erreur lors du chargement des matières"
-        );
+        matieresList.innerHTML = `
+            <p class="erreur">
+                Erreur lors du chargement des matières.
+            </p>
+        `;
 
     }
 
-});
+}
 
 
 // ========================================
@@ -92,49 +88,58 @@ function afficherMatieres(matieres) {
     matieresList.innerHTML = "";
 
 
-    if (
-        !matieres ||
-        matieres.length === 0
-    ) {
+    if (!matieres || matieres.length === 0) {
 
         matieresList.innerHTML = `
-            <p>Aucune matière trouvée.</p>
+            <div class="aucune">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                <p>
+                    Aucune matière ne vous est affectée.
+                </p>
+
+            </div>
         `;
 
         return;
-
     }
 
 
     matieres.forEach((matiere) => {
 
-        const div =
+        const card =
             document.createElement("div");
 
+        card.classList.add("matiere-card");
 
-        div.classList.add("student-card");
+
+        card.innerHTML = `
+
+            <div class="matiere-icon">
+
+                <i class="fa-solid fa-book"></i>
+
+            </div>
 
 
-        div.innerHTML = `
+            <div class="matiere-info">
 
-            <h3>
-                ${matiere.nom}
-            </h3>
+                <h3>
+                    ${matiere.nom}
+                </h3>
 
-            <p>
-                <strong>ID :</strong>
-                ${matiere.id}
-            </p>
+                <p>
+                    ID de la matière :
+                    <strong>${matiere.id}</strong>
+                </p>
 
-            <p>
-                <strong>Professeur :</strong>
-                ${matiere.teacher_id}
-            </p>
+            </div>
 
         `;
 
 
-        matieresList.appendChild(div);
+        matieresList.appendChild(card);
 
     });
 
@@ -148,7 +153,29 @@ function afficherMatieres(matieres) {
 btnRetour.addEventListener("click", () => {
 
     window.location.href =
-        "/professeur?token=" +
-        encodeURIComponent(token);
+        "/professeur";
 
 });
+
+
+// ========================================
+// DÉCONNEXION
+// ========================================
+
+deconnecter.addEventListener("click", (e) => {
+
+    e.preventDefault();
+
+    localStorage.removeItem("token");
+
+    window.location.href =
+        "/login";
+
+});
+
+
+// ========================================
+// LANCEMENT
+// ========================================
+
+chargerMatieres();

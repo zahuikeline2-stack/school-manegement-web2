@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
 
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
-    <title>School Manager - Professeurs</title>
 
-    <link rel="stylesheet" href="./css/professeur.css">
+    <title>School Manager - Professeur</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/professeur.css"
+    >
 
     <link
         rel="stylesheet"
@@ -18,61 +24,115 @@
 
 </head>
 
+
 <body>
 
-    <!-- =========================
+
+    <!-- ========================================
          BARRE LATERALE
-    ========================== -->
+    ========================================= -->
 
     <aside class="Barre">
 
         <h2>School Manager</h2>
 
+
         <nav>
 
-            <a href="/admin">
+            <a
+                href="/professeur"
+                class="active"
+            >
+
                 <i class="fa-solid fa-house"></i>
+
                 <span>Accueil</span>
+
             </a>
 
-            <a href="/users">
-                <i class="fa-solid fa-user"></i>
-                <span>Utilisateurs</span>
-            </a>
 
-            <a href="/etudiants">
-                <i class="fa-solid fa-user-graduate"></i>
-                <span>Étudiants</span>
-            </a>
+            <a href="/professeur/matieres">
 
-            <a href="/professeurs" class="active">
-                <i class="fa-solid fa-chalkboard-user"></i>
-                <span>Professeurs</span>
-            </a>
-
-            <a href="/matieres">
                 <i class="fa-solid fa-book"></i>
-                <span>Matières</span>
+
+                <span>Mes matières</span>
+
             </a>
 
-            <a href="/notes">
-                <i class="fa-solid fa-clipboard-list"></i>
-                <span>Notes</span>
+
+            <a href="/professeur/etudiants">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>Étudiants</span>
+
             </a>
 
-            <a href="/absences">
-                <i class="fa-solid fa-calendar-xmark"></i>
-                <span>Absences</span>
+
+            <a href="/professeur/notes/ajouter">
+
+                <i class="fa-solid fa-plus"></i>
+
+                <span>Ajouter une note</span>
+
             </a>
 
-            <a href="/statistiques">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Statistiques</span>
+
+            <a href="/professeur/notes/modifier">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                <span>Modifier une note</span>
+
+            </a>
+
+
+            <a href="/professeur/absences/ajouter">
+
+                <i class="fa-solid fa-calendar-plus"></i>
+
+                <span>Enregistrer une absence</span>
+
+            </a>
+
+
+            <a href="/professeur/absences/justifier">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Justifier une absence</span>
+
+            </a>
+
+
+            <a href="/professeur/absences/historique">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Historique des absences</span>
+
+            </a>
+
+
+            <a href="/professeur/etudiants/rechercher">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <span>Rechercher un étudiant</span>
+
             </a>
 
         </nav>
 
-        <a href="/login" id="deconnecter">
+
+        <!-- ========================================
+             DÉCONNEXION
+        ========================================= -->
+
+        <a
+            href="/login"
+            id="deconnecter"
+        >
 
             <i class="fa-solid fa-right-from-bracket"></i>
 
@@ -83,242 +143,276 @@
     </aside>
 
 
-    <!-- =========================
+
+    <!-- ========================================
          CONTENU
-    ========================== -->
+    ========================================= -->
 
     <main class="content">
+
 
         <div class="page-header">
 
             <div>
 
-                <h1>Gestion des professeurs</h1>
+                <h1>
+                    Bienvenue dans votre espace professeur
+                </h1>
 
                 <p>
-                    Ajouter, rechercher, modifier et supprimer
-                    les professeurs.
+                    Gérez vos matières, vos étudiants,
+                    les notes et les absences.
                 </p>
 
             </div>
 
-            <button
-                id="btnRetour"
-                class="btn-retour"
-            >
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-                Retour au menu
-
-            </button>
-
         </div>
 
 
-        <!-- ACTIONS -->
+
+        <!-- ========================================
+             CARTES
+        ========================================= -->
 
         <div class="actions">
 
-            <button
-                id="btnAjouter"
+
+            <!-- MES MATIÈRES -->
+
+            <a
+                href="/professeur/matieres"
                 class="action-card"
             >
 
-                <i class="fa-solid fa-user-plus"></i>
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-book"></i>
+
+                </div>
 
                 <div>
 
-                    <h3>Ajouter</h3>
+                    <h3>
+                        Mes matières
+                    </h3>
 
                     <p>
-                        Ajouter un professeur
+                        Voir les matières qui
+                        vous sont affectées.
                     </p>
 
                 </div>
 
-            </button>
+            </a>
 
 
-            <button
-                id="btnLister"
+
+            <!-- ÉTUDIANTS -->
+
+            <a
+                href="/professeur/etudiants"
                 class="action-card"
             >
 
-                <i class="fa-solid fa-list"></i>
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
 
                 <div>
 
-                    <h3>Liste</h3>
+                    <h3>
+                        Lister les étudiants
+                    </h3>
 
                     <p>
-                        Voir les professeurs
+                        Voir la liste des étudiants.
                     </p>
 
                 </div>
 
-            </button>
+            </a>
 
 
-            <button
-                id="btnRechercher"
+
+            <!-- AJOUTER NOTE -->
+
+            <a
+                href="/professeur/notes/ajouter"
                 class="action-card"
             >
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </div>
 
                 <div>
 
-                    <h3>Rechercher</h3>
+                    <h3>
+                        Ajouter une note
+                    </h3>
 
                     <p>
-                        Rechercher un professeur
+                        Enregistrer une nouvelle note.
                     </p>
 
                 </div>
 
-            </button>
+            </a>
+
+
+
+            <!-- MODIFIER NOTE -->
+
+            <a
+                href="/professeur/notes/modifier"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Modifier une note
+                    </h3>
+
+                    <p>
+                        Modifier une note existante.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- AJOUTER ABSENCE -->
+
+            <a
+                href="/professeur/absences/ajouter"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-calendar-plus"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Enregistrer une absence
+                    </h3>
+
+                    <p>
+                        Enregistrer l'absence d'un étudiant.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- JUSTIFIER ABSENCE -->
+
+            <a
+                href="/professeur/absences/justifier"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Justifier une absence
+                    </h3>
+
+                    <p>
+                        Modifier le statut d'une absence.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- HISTORIQUE -->
+
+            <a
+                href="/professeur/absences/historique"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Historique des absences
+                    </h3>
+
+                    <p>
+                        Consulter les absences d'un étudiant.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- RECHERCHE ÉTUDIANT -->
+
+            <a
+                href="/professeur/etudiants/rechercher"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+                <div>
+
+                    <h3>
+                        Rechercher un étudiant
+                    </h3>
+
+                    <p>
+                        Rechercher un étudiant par son ID.
+                    </p>
+
+                </div>
+
+            </a>
+
 
         </div>
 
-
-        <!-- =========================
-             FORMULAIRE
-        ========================== -->
-
-        <section
-            id="formulaireSection"
-            class="section"
-        >
-
-            <h2 id="formTitle">
-                Ajouter un professeur
-            </h2>
-
-
-            <form id="professeurForm">
-
-                <input
-                    type="hidden"
-                    id="professeurId"
-                >
-
-
-                <div class="form-group">
-
-                    <label for="nom">
-                        Nom du professeur
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nom"
-                        placeholder="Ex : Koffi Jean"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="matiere">
-                        Matière
-                    </label>
-
-                    <input
-                        type="text"
-                        id="matiere"
-                        placeholder="Ex : Mathématiques"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-buttons">
-
-                    <button
-                        type="submit"
-                        id="btnEnregistrer"
-                        class="btn-primary"
-                    >
-
-                        <i class="fa-solid fa-check"></i>
-
-                        Enregistrer
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        id="btnAnnuler"
-                        class="btn-secondary"
-                    >
-
-                        Annuler
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-
-        <!-- =========================
-             RECHERCHE
-        ========================== -->
-
-        <section
-            id="rechercheSection"
-            class="section"
-        >
-
-            <h2>Rechercher un professeur</h2>
-
-            <div class="search-box">
-
-                <input
-                    type="number"
-                    id="recherche"
-                    placeholder="ID du professeur"
-                >
-
-                <button
-                    id="btnLancerRecherche"
-                    class="btn-primary"
-                >
-
-                    <i class="fa-solid fa-search"></i>
-
-                    Rechercher
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             LISTE
-        ========================== -->
-
-        <section
-            id="listeSection"
-            class="section"
-        >
-
-            <h2>Liste des professeurs</h2>
-
-            <div id="professeursList"></div>
-
-        </section>
-
     </main>
+
 
 
     <script src="/js/professeur.js"></script>

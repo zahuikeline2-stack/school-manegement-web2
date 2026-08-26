@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Justifier une absence</title>
+
+    <link rel="stylesheet" href="/css/professeur.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<aside class="Barre">
+
+    <h2>School Manager</h2>
+
+    <nav>
+
+        <a href="/professeur">
+            <i class="fa-solid fa-house"></i>
+            <span>Accueil</span>
+        </a>
+
+        <a href="/professeur/matieres">
+            <i class="fa-solid fa-book"></i>
+            <span>Mes matières</span>
+        </a>
+
+        <a href="/professeur/etudiants">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Étudiants</span>
+        </a>
+
+        <a href="/professeur/notes">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Notes</span>
+        </a>
+
+        <a href="/professeur/absences" class="active">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <span>Absences</span>
+        </a>
+
+    </nav>
+
+    <a href="/login" id="deconnecter">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Déconnexion</span>
+    </a>
+
+</aside>
+
+
+<main class="content">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Justifier une absence</h1>
+
+            <p>
+                Modifier le statut d'une absence.
+            </p>
+
+        </div>
+
+        <button id="btnRetour" class="btn-retour">
+            <i class="fa-solid fa-arrow-left"></i>
+            Retour
+        </button>
+
+    </div>
+
+
+    <section class="section">
+
+        <form id="justifierForm">
+
+            <div class="form-group">
+
+                <label for="absence_id">
+                    ID de l'absence
+                </label>
+
+                <input
+                    type="number"
+                    id="absence_id"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="status">
+                    Nouveau statut
+                </label>
+
+                <select id="status" required>
+
+                    <option value="justifiee">
+                        Justifiée
+                    </option>
+
+                    <option value="non_justifiee">
+                        Non justifiée
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Justifier
+
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script src="/js/professeurJustifierAbsence.js"></script>
+
+</body>
+
+</html>

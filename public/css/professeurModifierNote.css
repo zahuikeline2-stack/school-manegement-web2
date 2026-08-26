@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+.Barre {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background: #172554;
+
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.Barre h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.Barre nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.Barre nav a,
+#deconnecter {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    color: #dbeafe;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+.Barre nav a:hover,
+.Barre nav a.active {
+    background: #2563eb;
+    color: white;
+}
+
+.Barre nav i,
+#deconnecter i {
+    width: 22px;
+    text-align: center;
+}
+
+#deconnecter {
+    margin-top: auto;
+}
+
+#deconnecter:hover {
+    background: #dc2626;
+    color: white;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 40px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 35px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #64748b;
+}
+
+.btn-retour {
+    border: none;
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.btn-retour:hover {
+    background: #cbd5e1;
+}
+
+.section {
+    max-width: 700px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.section h2 {
+    color: #172554;
+
+    margin-bottom: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+}
+
+.form-buttons {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.btn-primary,
+.btn-secondary {
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
+}

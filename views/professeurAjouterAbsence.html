@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Enregistrer une absence</title>
+    <link rel="stylesheet" href="/css/professeurAjouterAbsence.css">
+
+    
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<aside class="Barre">
+
+    <h2>School Manager</h2>
+
+    <nav>
+
+        <a href="/professeur">
+            <i class="fa-solid fa-house"></i>
+            <span>Accueil</span>
+        </a>
+
+        <a href="/professeur/matieres">
+            <i class="fa-solid fa-book"></i>
+            <span>Mes matières</span>
+        </a>
+
+        <a href="/professeur/etudiants">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Étudiants</span>
+        </a>
+
+        <a href="/professeur/notes">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <span>Notes</span>
+        </a>
+
+        <a href="/professeur/absences" class="active">
+            <i class="fa-solid fa-calendar-xmark"></i>
+            <span>Absences</span>
+        </a>
+
+    </nav>
+
+    <a href="/login" id="deconnecter">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Déconnexion</span>
+    </a>
+
+</aside>
+
+
+<main class="content">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>Enregistrer une absence</h1>
+
+            <p>
+                Enregistrer l'absence d'un étudiant.
+            </p>
+
+        </div>
+
+        <button id="btnRetour" class="btn-retour">
+            <i class="fa-solid fa-arrow-left"></i>
+            Retour
+        </button>
+
+    </div>
+
+
+    <section class="section">
+
+        <form id="absenceForm">
+
+            <div class="form-group">
+
+                <label for="student_id">
+                    ID de l'étudiant
+                </label>
+
+                <input
+                    type="number"
+                    id="student_id"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="date">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="status">
+                    Statut
+                </label>
+
+                <select id="status" required>
+
+                    <option value="non_justifiee">
+                        Non justifiée
+                    </option>
+
+                    <option value="justifiee">
+                        Justifiée
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-primary"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Enregistrer
+
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<script src="/js/professeurAjouterAbsence.js"></script>
+
+</body>
+
+</html>

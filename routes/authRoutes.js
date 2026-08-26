@@ -1376,4 +1376,323 @@ router.get(
 
     }
 );
+// ========================================
+// PROFESSEUR : RECHERCHER UN ÉTUDIANT
+// ========================================
+
+router.get(
+    "/api/professeur/etudiants/:id",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const id = Number(req.params.id);
+
+            if (!id) {
+
+                return res.status(400).json({
+                    status: false,
+                    message: "ID étudiant invalide"
+                });
+
+            }
+
+            const etudiant = getStudentById(id);
+
+            if (!etudiant) {
+
+                return res.status(404).json({
+                    status: false,
+                    message: "Étudiant introuvable"
+                });
+
+            }
+
+            res.json({
+                status: true,
+                etudiant: etudiant
+            });
+
+        } catch (error) {
+
+            console.error(
+                "ERREUR RECHERCHE ÉTUDIANT :",
+                error
+            );
+
+            res.status(500).json({
+                status: false,
+                message: "Erreur lors de la recherche"
+            });
+
+        }
+
+    }
+);
+// ========================================
+// PROFESSEUR : LISTER LES ÉTUDIANTS
+// ========================================
+
+router.get(
+    "/api/professeur/etudiants",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const etudiants = getStudents();
+
+            console.log("Étudiants :", etudiants);
+
+            res.json({
+                status: true,
+                etudiants: etudiants
+            });
+
+        } catch (error) {
+
+            console.error(
+                "ERREUR LISTE ÉTUDIANTS :",
+                error
+            );
+
+            res.status(500).json({
+                status: false,
+                message: error.message
+            });
+
+        }
+
+    }
+);
+// ========================================
+// PROFESSEUR : MES MATIÈRES
+// ========================================
+
+router.get(
+    "/api/professeur/matieres",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const user_id = req.user.id;
+
+            const matieres =
+                getSubjectsByTeacher(user_id);
+
+            res.json({
+
+                status: true,
+
+                matieres: matieres
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "ERREUR MES MATIÈRES :",
+                error
+            );
+
+            res.status(500).json({
+
+                status: false,
+
+                message:
+                    "Erreur lors du chargement des matières"
+
+            });
+
+        }
+
+    }
+);
+// ========================================
+// PROFESSEUR : AJOUTER UNE NOTE
+// ========================================
+
+router.post(
+    "/api/professeur/notes",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const {
+                student_id,
+                subject_id,
+                note
+            } = req.body;
+
+
+            if (
+                !student_id ||
+                !subject_id ||
+                note === undefined
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "Tous les champs sont obligatoires."
+
+                });
+
+            }
+
+
+            if (
+                Number(note) < 0 ||
+                Number(note) > 20
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "La note doit être comprise entre 0 et 20."
+
+                });
+
+            }
+
+
+            addGrade(
+                Number(student_id),
+                Number(subject_id),
+                Number(note)
+            );
+
+
+            res.json({
+
+                status: true,
+
+                message:
+                    "Note ajoutée avec succès."
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "ERREUR AJOUT NOTE :",
+                error
+            );
+
+            res.status(500).json({
+
+                status: false,
+
+                message:
+                    "Erreur lors de l'ajout de la note."
+
+            });
+
+        }
+
+    }
+);
+// ========================================
+// PROFESSEUR : MODIFIER UNE NOTE
+// ========================================
+
+router.put(
+    "/api/professeur/notes",
+    authMiddleware,
+    roleMiddleware("professeur"),
+    (req, res) => {
+
+        try {
+
+            const {
+                student_id,
+                subject_id,
+                note
+            } = req.body;
+
+
+            if (
+                !student_id ||
+                !subject_id ||
+                note === undefined
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "Tous les champs sont obligatoires."
+
+                });
+
+            }
+
+
+            if (
+                Number(note) < 0 ||
+                Number(note) > 20
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "La note doit être comprise entre 0 et 20."
+
+                });
+
+            }
+
+
+            updateGrade(
+                Number(note),
+                Number(student_id),
+                Number(subject_id)
+            );
+
+
+            res.json({
+
+                status: true,
+
+                message:
+                    "Note modifiée avec succès."
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "ERREUR MODIFICATION NOTE :",
+                error
+            );
+
+
+            res.status(500).json({
+
+                status: false,
+
+                message:
+                    error.message ||
+                    "Erreur lors de la modification de la note."
+
+            });
+
+        }
+
+    }
+);
 export default router;

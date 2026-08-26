@@ -9,7 +9,10 @@
 
     <title>School Manager - Mes matières</title>
 
-    <link rel="stylesheet" href="/css/professeur.css">
+    <link
+        rel="stylesheet"
+        href="/css/professeurMatieres.css"
+    >
 
     <link
         rel="stylesheet"
@@ -18,12 +21,13 @@
 
 </head>
 
+
 <body>
 
 
-    <!-- ========================================
+    <!-- =========================
          BARRE LATERALE
-    ========================================= -->
+    ========================== -->
 
     <aside class="Barre">
 
@@ -31,7 +35,7 @@
 
         <nav>
 
-            <a href="/professeur" id="accueil">
+            <a href="/professeur">
 
                 <i class="fa-solid fa-house"></i>
 
@@ -42,7 +46,6 @@
 
             <a
                 href="/professeur/matieres"
-                id="matieres"
                 class="active"
             >
 
@@ -53,10 +56,7 @@
             </a>
 
 
-            <a
-                href="/professeur/etudiants"
-                id="etudiants"
-            >
+            <a href="/professeur/etudiants">
 
                 <i class="fa-solid fa-user-graduate"></i>
 
@@ -65,10 +65,7 @@
             </a>
 
 
-            <a
-                href="/professeur/notes"
-                id="notes"
-            >
+            <a href="/professeur/notes">
 
                 <i class="fa-solid fa-clipboard-list"></i>
 
@@ -77,10 +74,7 @@
             </a>
 
 
-            <a
-                href="/professeur/absences"
-                id="absences"
-            >
+            <a href="/professeur/absences">
 
                 <i class="fa-solid fa-calendar-xmark"></i>
 
@@ -94,7 +88,6 @@
         <a
             href="/login"
             id="deconnecter"
-            class="deconnecter"
         >
 
             <i class="fa-solid fa-right-from-bracket"></i>
@@ -107,11 +100,12 @@
 
 
 
-    <!-- ========================================
+    <!-- =========================
          CONTENU
-    ========================================= -->
+    ========================== -->
 
     <main class="content">
+
 
         <div class="page-header">
 
@@ -120,7 +114,7 @@
                 <h1>Mes matières</h1>
 
                 <p>
-                    Consultez les matières qui vous sont affectées.
+                    Voici les matières qui vous sont affectées.
                 </p>
 
             </div>
@@ -140,54 +134,32 @@
         </div>
 
 
-        <!-- ========================================
-             ACTION
-        ========================================= -->
 
-        <div class="actions">
+        <!-- =========================
+             LISTE DES MATIÈRES
+        ========================== -->
 
-            <button
-                id="btnLister"
-                class="action-card"
-            >
+        <section class="section">
 
-                <i class="fa-solid fa-list"></i>
+            <h2>
 
-                <div>
+                <i class="fa-solid fa-book"></i>
 
-                    <h3>Mes matières</h3>
+                Liste de mes matières
 
-                    <p>
-                        Voir la liste de mes matières.
-                    </p>
+            </h2>
 
-                </div>
-
-            </button>
-
-        </div>
-
-
-        <!-- ========================================
-             LISTE
-        ========================================= -->
-
-        <section
-            id="listeSection"
-            class="section"
-        >
-
-            <h2>Liste des matières</h2>
 
             <div id="matieresList">
 
-                <p>
-                    Cliquez sur « Mes matières » pour afficher la liste.
+                <p class="loading">
+                    Chargement des matières...
                 </p>
 
             </div>
 
         </section>
+
 
     </main>
 

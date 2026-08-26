@@ -22,6 +22,7 @@ app.use(express.static("public"));
 app.use("/", pageRoutes);
 
 
+
 // API
 app.use(authRoutes);
 

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Étudiants</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/professeurEtudiants.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         BARRE LATERALE
+    ========================================= -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+            <a href="/professeur">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Accueil</span>
+
+            </a>
+
+
+            <a href="/professeur/matieres">
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>Mes matières</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/etudiants"
+                class="active"
+            >
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>Étudiants</span>
+
+            </a>
+
+
+            <a href="/professeur/notes/ajouter">
+
+                <i class="fa-solid fa-pen"></i>
+
+                <span>Notes</span>
+
+            </a>
+
+
+            <a href="/professeur/absences/ajouter">
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>Absences</span>
+
+            </a>
+
+        </nav>
+
+
+        <a
+            href="/login"
+            id="deconnecter"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- ========================================
+         CONTENU
+    ========================================= -->
+
+    <main class="content">
+
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Gestion des étudiants</h1>
+
+                <p>
+                    Consultez et recherchez les étudiants.
+                </p>
+
+            </div>
+
+
+            <button
+                id="btnRetour"
+                class="btn-retour"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Retour
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+             ACTIONS
+        ========================================= -->
+
+        <div class="actions">
+
+
+            <!-- LISTER -->
+
+            <button
+                id="btnLister"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-list"></i>
+
+                <div>
+
+                    <h3>Liste</h3>
+
+                    <p>
+                        Voir tous les étudiants
+                    </p>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- RECHERCHER -->
+
+            <button
+                id="btnRechercher"
+                class="action-card"
+            >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <div>
+
+                    <h3>Rechercher</h3>
+
+                    <p>
+                        Rechercher un étudiant
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+             RECHERCHE
+        ========================================= -->
+
+        <section
+            id="rechercheSection"
+            class="section"
+        >
+
+            <h2>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Rechercher un étudiant
+
+            </h2>
+
+
+            <div class="search-box">
+
+                <input
+                    type="number"
+                    id="recherche"
+                    placeholder="ID de l'étudiant"
+                >
+
+
+                <button
+                    id="btnLancerRecherche"
+                    class="btn-primary"
+                >
+
+                    <i class="fa-solid fa-search"></i>
+
+                    Rechercher
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             LISTE
+        ========================================= -->
+
+        <section
+            id="listeSection"
+            class="section"
+        >
+
+            <h2>
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                Liste des étudiants
+
+            </h2>
+
+
+            <div id="etudiantsList">
+
+                <p class="chargement">
+
+                    Cliquez sur « Liste » pour
+                    afficher les étudiants.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="/js/professeurEtudiants.js"></script>
+
+</body>
+
+</html>
