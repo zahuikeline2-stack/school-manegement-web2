@@ -1,71 +1,81 @@
+
 import db from "../db/base.js";
 import Student from "../model/modelStudent.js";
 import log from "../utils/logger.js";
-///ajouter un Etudiants
 
-function addStudent(matricule,nom,prenom,age,classe,user_id) {
-   const insertStudent = db.prepare(`
-    INSERT INTO students(matricule,nom,prenom,age,classe,user_id)
-    VALUES(?,?,?,?,?,?)
-    `)
-    insertStudent.run(matricule,nom,prenom,age,classe,user_id);
-    console.log("Etudiant ajouter avec succès!")
+/// Ajouter un étudiant
+async function addStudent(matricule, nom, prenom, age, classe, user_id) {
+
+    const insertStudent = await db.prepare(`
+        INSERT INTO students(matricule, nom, prenom, age, classe, user_id)
+        VALUES(?, ?, ?, ?, ?, ?)
+    `);
+
+    await insertStudent.run(matricule, nom, prenom, age, classe, user_id);
+
+    console.log("Etudiant ajouter avec succès!");
 }
-//addStudent("16025297H","franceline","zahui",23,"Tle",3)
 
-///modifier un etudiant//
-function updateStudent(id,matricule,nom,prenom,age,classe) {
-    const uptStudent=db.prepare(`
+
+/// Modifier un étudiant
+async function updateStudent(id, matricule, nom, prenom, age, classe) {
+
+    const uptStudent = await db.prepare(`
         UPDATE students
-        SET matricule =?,
-        nom =?,
-        prenom =?,
-        age = ?,
-        classe = ?
+        SET matricule = ?,
+            nom = ?,
+            prenom = ?,
+            age = ?,
+            classe = ?
         WHERE id = ?
-        `)
-        uptStudent.run(matricule,nom,prenom,age,classe,id)
-        console.log("Etudiant modifier avec succès!")
-}
-///supprimer un etudiant
+    `);
 
-function deleteStudent(id) {
-    const DeleStudents = db.prepare(`
+    await uptStudent.run(matricule, nom, prenom, age, classe, id);
+
+    console.log("Etudiant modifier avec succès!");
+}
+
+
+/// Supprimer un étudiant
+async function deleteStudent(id) {
+
+    const DeleStudents = await db.prepare(`
         DELETE FROM students
         WHERE id = ?
-        `)
-        DeleStudents.run(id)
-        console.log("Etudiant supprimer avec succès!")
+    `);
+
+    await DeleStudents.run(id);
+
+    console.log("Etudiant supprimer avec succès!");
 }
 
-////Rechercher un etudiant
 
-function  getStudentById(id) {
-    const geStudents = db.prepare(`
+/// Rechercher un étudiant
+async function getStudentById(id) {
+
+    const geStudents = await db.prepare(`
         SELECT * FROM students
         WHERE id = ?
-        `).get(id)
-        return geStudents;
+    `);
 
+    const result = await geStudents.get(id);
+
+    return result;
 }
 
-// lister les etudiants
 
+/// Lister les étudiants
+async function getStudents() {
 
-
-function getStudents() {
-    const listeStudents = db.prepare(`
+    const listeStudents = await db.prepare(`
         SELECT * FROM students
-        `).all()
-        return  listeStudents;
+    `);
 
+    const result = await listeStudents.all();
+
+    return result;
 }
 
-
-//addStudent("143674Y","rethu","keline",25,"td3")
-//deleteStudent(1)
-
-//addStudent("3446Y","akpa","sophia",45,"master")
 
 export {
     addStudent,
@@ -74,3 +84,4 @@ export {
     deleteStudent,
     getStudentById,
 };
+

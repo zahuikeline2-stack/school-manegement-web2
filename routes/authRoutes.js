@@ -1,13 +1,17 @@
+
 import express from "express";
 import db from "../db/base.js";
+
 import { loginUser } from "../controllers/authcontrollers.js";
 import authMiddleware from "../middleware/authmiddleware.js";
 import roleMiddleware from "../middleware/roleMiddleware.js";
+
 import {
     getUser,
     addUser,
     DeleteUser
 } from "../Services/userService.js";
+
 import {
     addStudent,
     getStudents,
@@ -15,6 +19,7 @@ import {
     deleteStudent,
     getStudentById
 } from "../Services/studentService.js";
+
 import {
     addTeacher,
     updateTeacher,
@@ -26,8 +31,10 @@ import {
     addSubjects,
     affectSubject,
     getSubjects,
-    getSubjectsById
+    getSubjectsById,
+    getSubjectsByTeacher
 } from "../Services/subjectsService.js";
+
 import {
     addGrade,
     updateGrade,
@@ -48,6 +55,7 @@ import {
     CompterAbsences
 } from "../Services/statistiqueService.js";
 
+
 const router = express.Router();
 
 
@@ -67,15 +75,13 @@ router.post(
 
 router.get(
     "/api/users",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const users = getUser();
+            const users = await getUser();
 
             res.json({
                 status: true,
@@ -88,12 +94,9 @@ router.get(
 
             res.status(500).json({
                 status: false,
-                message:
-                    "Erreur lors de la récupération des utilisateurs"
+                message: "Erreur lors de la récupération des utilisateurs"
             });
-
         }
-
     }
 );
 
@@ -104,11 +107,9 @@ router.get(
 
 router.post(
     "/api/users",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         const {
             name,
@@ -117,42 +118,29 @@ router.post(
             role
         } = req.body;
 
-
         try {
 
-            addUser(
+            await addUser(
                 name,
                 role,
                 password,
                 email
             );
 
-
             res.json({
-
                 status: true,
-
-                message:
-                    "Utilisateur ajouté avec succès"
-
+                message: "Utilisateur ajouté avec succès"
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de l'ajout de l'utilisateur"
-
+                message: "Erreur lors de l'ajout de l'utilisateur"
             });
-
         }
-
     }
 );
 
@@ -163,45 +151,30 @@ router.post(
 
 router.delete(
     "/api/users/:id",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
             const id = req.params.id;
 
-
-            DeleteUser(id);
-
+            await DeleteUser(id);
 
             res.json({
-
                 status: true,
-
-                message:
-                    "Utilisateur supprimé avec succès"
-
+                message: "Utilisateur supprimé avec succès"
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la suppression"
-
+                message: "Erreur lors de la suppression"
             });
-
         }
-
     }
 );
 
@@ -212,21 +185,14 @@ router.delete(
 
 router.get(
     "/admin",
-
     authMiddleware,
     roleMiddleware("admin"),
-
     (req, res) => {
 
         res.json({
-
             status: true,
-
-            message:
-                "Bienvenue dans l'espace Admin"
-
+            message: "Bienvenue dans l'espace Admin"
         });
-
     }
 );
 
@@ -237,21 +203,14 @@ router.get(
 
 router.get(
     "/professeur",
-
     authMiddleware,
     roleMiddleware("professeur"),
-
     (req, res) => {
 
         res.json({
-
             status: true,
-
-            message:
-                "Bienvenue dans l'espace Professeur"
-
+            message: "Bienvenue dans l'espace Professeur"
         });
-
     }
 );
 
@@ -262,21 +221,14 @@ router.get(
 
 router.get(
     "/etudiant",
-
     authMiddleware,
     roleMiddleware("etudiant"),
-
     (req, res) => {
 
         res.json({
-
             status: true,
-
-            message:
-                "Bienvenue dans l'espace Etudiant"
-
+            message: "Bienvenue dans l'espace Etudiant"
         });
-
     }
 );
 
@@ -287,11 +239,9 @@ router.get(
 
 router.post(
     "/api/etudiants",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         const {
             matricule,
@@ -301,13 +251,11 @@ router.post(
             classe
         } = req.body;
 
-
         try {
 
             const user_id = req.user.id;
 
-
-            addStudent(
+            await addStudent(
                 matricule,
                 nom,
                 prenom,
@@ -316,32 +264,20 @@ router.post(
                 user_id
             );
 
-
             res.json({
-
                 status: true,
-
-                message:
-                    "Étudiant ajouté avec succès"
-
+                message: "Étudiant ajouté avec succès"
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de l'ajout de l'étudiant"
-
+                message: "Erreur lors de l'ajout de l'étudiant"
             });
-
         }
-
     }
 );
 
@@ -352,42 +288,28 @@ router.post(
 
 router.get(
     "/api/etudiants",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const etudiants =
-                getStudents();
-
+            const etudiants = await getStudents();
 
             res.json({
-
                 status: true,
-
                 etudiants: etudiants
-
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la récupération des étudiants"
-
+                message: "Erreur lors de la récupération des étudiants"
             });
-
         }
-
     }
 );
 
@@ -398,60 +320,38 @@ router.get(
 
 router.get(
     "/api/etudiants/:id",
-
     authMiddleware,
     roleMiddleware("admin"),
-
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const id =
-                req.params.id;
+            const id = req.params.id;
 
-
-            const etudiant =
-                getStudentById(id);
-
+            const etudiant = await getStudentById(id);
 
             if (!etudiant) {
 
                 return res.status(404).json({
-
                     status: false,
-
-                    message:
-                        "Étudiant introuvable"
-
+                    message: "Étudiant introuvable"
                 });
-
             }
 
-
             res.json({
-
                 status: true,
-
                 etudiant: etudiant
-
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la recherche"
-
+                message: "Erreur lors de la recherche"
             });
-
         }
-
     }
 );
 
@@ -462,15 +362,11 @@ router.get(
 
 router.put(
     "/api/etudiants/:id",
-
     authMiddleware,
     roleMiddleware("admin"),
+    async (req, res) => {
 
-    (req, res) => {
-
-        const id =
-            req.params.id;
-
+        const id = req.params.id;
 
         const {
             matricule,
@@ -480,10 +376,9 @@ router.put(
             classe
         } = req.body;
 
-
         try {
 
-            updateStudent(
+            await updateStudent(
                 id,
                 matricule,
                 nom,
@@ -492,32 +387,20 @@ router.put(
                 classe
             );
 
-
             res.json({
-
                 status: true,
-
-                message:
-                    "Étudiant modifié avec succès"
-
+                message: "Étudiant modifié avec succès"
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la modification"
-
+                message: "Erreur lors de la modification"
             });
-
         }
-
     }
 );
 
@@ -528,48 +411,34 @@ router.put(
 
 router.delete(
     "/api/etudiants/:id",
-
     authMiddleware,
     roleMiddleware("admin"),
+    async (req, res) => {
 
-    (req, res) => {
-
-        const id =
-            req.params.id;
-
+        const id = req.params.id;
 
         try {
 
-            deleteStudent(id);
-
+            await deleteStudent(id);
 
             res.json({
-
                 status: true,
-
-                message:
-                    "Étudiant supprimé avec succès"
-
+                message: "Étudiant supprimé avec succès"
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la suppression"
-
+                message: "Erreur lors de la suppression"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // LISTER LES PROFESSEURS
 // ========================================
@@ -578,13 +447,15 @@ router.get(
     "/api/professeurs",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const professeurs = db.prepare(`
+            const statement = await db.prepare(`
                 SELECT * FROM teachers
-            `).all();
+            `);
+
+            const professeurs = await statement.all();
 
             res.json({
                 status: true,
@@ -599,11 +470,11 @@ router.get(
                 status: false,
                 message: "Erreur lors du chargement des professeurs"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // AJOUTER UN PROFESSEUR
 // ========================================
@@ -612,7 +483,7 @@ router.post(
     "/api/professeurs",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const {
             nom,
@@ -623,7 +494,7 @@ router.post(
 
             const user_id = req.user.id;
 
-            addTeacher(
+            await addTeacher(
                 nom,
                 matiere,
                 user_id
@@ -642,11 +513,11 @@ router.post(
                 status: false,
                 message: "Erreur lors de l'ajout du professeur"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // MODIFIER UN PROFESSEUR
 // ========================================
@@ -655,7 +526,7 @@ router.put(
     "/api/professeurs/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const id = req.params.id;
 
@@ -666,7 +537,7 @@ router.put(
 
         try {
 
-            updateTeacher(
+            await updateTeacher(
                 id,
                 nom,
                 matiere
@@ -685,11 +556,11 @@ router.put(
                 status: false,
                 message: "Erreur lors de la modification"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // SUPPRIMER UN PROFESSEUR
 // ========================================
@@ -698,13 +569,13 @@ router.delete(
     "/api/professeurs/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const id = req.params.id;
 
         try {
 
-            DEleteTeacher(id);
+            await DEleteTeacher(id);
 
             res.json({
                 status: true,
@@ -719,11 +590,11 @@ router.delete(
                 status: false,
                 message: "Erreur lors de la suppression"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // RECHERCHER UN PROFESSEUR
 // ========================================
@@ -732,13 +603,13 @@ router.get(
     "/api/professeurs/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const id = req.params.id;
 
         try {
 
-            const professeur = getTeacherById(id);
+            const professeur = await getTeacherById(id);
 
             if (!professeur) {
 
@@ -746,7 +617,6 @@ router.get(
                     status: false,
                     message: "Professeur introuvable"
                 });
-
             }
 
             res.json({
@@ -762,11 +632,11 @@ router.get(
                 status: false,
                 message: "Erreur lors de la recherche"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // LISTER LES MATIERES
 // ========================================
@@ -775,11 +645,11 @@ router.get(
     "/api/matieres",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const matieres = getSubjects();
+            const matieres = await getSubjects();
 
             res.json({
                 status: true,
@@ -792,12 +662,9 @@ router.get(
 
             res.status(500).json({
                 status: false,
-                message:
-                    "Erreur lors du chargement des matières"
+                message: "Erreur lors du chargement des matières"
             });
-
         }
-
     }
 );
 
@@ -810,7 +677,7 @@ router.post(
     "/api/matieres",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const {
             nom,
@@ -819,15 +686,14 @@ router.post(
 
         try {
 
-            addSubjects(
+            await addSubjects(
                 nom,
                 teacher_id
             );
 
             res.json({
                 status: true,
-                message:
-                    "Matière ajoutée avec succès"
+                message: "Matière ajoutée avec succès"
             });
 
         } catch (error) {
@@ -836,12 +702,9 @@ router.post(
 
             res.status(500).json({
                 status: false,
-                message:
-                    "Erreur lors de l'ajout de la matière"
+                message: "Erreur lors de l'ajout de la matière"
             });
-
         }
-
     }
 );
 
@@ -854,34 +717,25 @@ router.get(
     "/api/matieres/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
             const id = req.params.id;
 
-            const matiere =
-                getSubjectsById(id);
+            const matiere = await getSubjectsById(id);
 
             if (!matiere) {
 
                 return res.status(404).json({
-
                     status: false,
-
-                    message:
-                        "Matière introuvable"
-
+                    message: "Matière introuvable"
                 });
-
             }
 
             res.json({
-
                 status: true,
-
                 matiere: matiere
-
             });
 
         } catch (error) {
@@ -889,16 +743,10 @@ router.get(
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de la recherche"
-
+                message: "Erreur lors de la recherche"
             });
-
         }
-
     }
 );
 
@@ -911,7 +759,7 @@ router.put(
     "/api/matieres/:id/affecter",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const id = req.params.id;
 
@@ -919,21 +767,16 @@ router.put(
             teacher_id
         } = req.body;
 
-
         try {
 
-            affectSubject(
+            await affectSubject(
                 teacher_id,
                 id
             );
 
             res.json({
-
                 status: true,
-
-                message:
-                    "Professeur affecté avec succès"
-
+                message: "Professeur affecté avec succès"
             });
 
         } catch (error) {
@@ -941,18 +784,14 @@ router.put(
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de l'affectation"
-
+                message: "Erreur lors de l'affectation"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // AJOUTER UNE NOTE
 // ========================================
@@ -961,7 +800,7 @@ router.post(
     "/api/notes",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const {
             student_id,
@@ -977,10 +816,9 @@ router.post(
                     status: false,
                     message: "La note doit être entre 0 et 20"
                 });
-
             }
 
-            addGrade(
+            await addGrade(
                 student_id,
                 subject_id,
                 note
@@ -999,9 +837,7 @@ router.post(
                 status: false,
                 message: "Erreur lors de l'ajout de la note"
             });
-
         }
-
     }
 );
 
@@ -1014,15 +850,13 @@ router.get(
     "/api/notes/:student_id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const student_id =
-                req.params.student_id;
+            const student_id = req.params.student_id;
 
-            const notes =
-                getGradesStudent(student_id);
+            const notes = await getGradesStudent(student_id);
 
             res.json({
                 status: true,
@@ -1037,9 +871,7 @@ router.get(
                 status: false,
                 message: "Erreur lors du chargement des notes"
             });
-
         }
-
     }
 );
 
@@ -1052,7 +884,7 @@ router.put(
     "/api/notes",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         const {
             student_id,
@@ -1062,7 +894,7 @@ router.put(
 
         try {
 
-            updateGrade(
+            await updateGrade(
                 note,
                 student_id,
                 subject_id
@@ -1081,9 +913,7 @@ router.put(
                 status: false,
                 message: "Erreur lors de la modification"
             });
-
         }
-
     }
 );
 
@@ -1096,14 +926,13 @@ router.delete(
     "/api/notes/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const id =
-                req.params.id;
+            const id = req.params.id;
 
-            DeleteGrade(id);
+            await DeleteGrade(id);
 
             res.json({
                 status: true,
@@ -1118,9 +947,7 @@ router.delete(
                 status: false,
                 message: "Erreur lors de la suppression"
             });
-
         }
-
     }
 );
 
@@ -1133,15 +960,13 @@ router.get(
     "/api/notes/:student_id/moyenne",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const student_id =
-                req.params.student_id;
+            const student_id = req.params.student_id;
 
-            const moyenne =
-                getGrade(student_id);
+            const moyenne = await getGrade(student_id);
 
             res.json({
                 status: true,
@@ -1156,11 +981,11 @@ router.get(
                 status: false,
                 message: "Erreur lors du calcul de la moyenne"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // ENREGISTRER UNE ABSENCE
 // ========================================
@@ -1169,7 +994,7 @@ router.post(
     "/api/absences",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -1185,10 +1010,9 @@ router.post(
                     status: false,
                     message: "Tous les champs sont obligatoires"
                 });
-
             }
 
-            addAbsence(
+            await addAbsence(
                 student_id,
                 date,
                 status
@@ -1207,11 +1031,11 @@ router.post(
                 status: false,
                 message: "Erreur lors de l'enregistrement de l'absence"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // JUSTIFIER UNE ABSENCE
 // ========================================
@@ -1220,13 +1044,15 @@ router.put(
     "/api/absences/:id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
             const id = req.params.id;
 
-            const { status } = req.body;
+            const {
+                status
+            } = req.body;
 
             if (!status) {
 
@@ -1234,10 +1060,12 @@ router.put(
                     status: false,
                     message: "Le statut est obligatoire"
                 });
-
             }
 
-            updateAbsence(status, id);
+            await updateAbsence(
+                status,
+                id
+            );
 
             res.json({
                 status: true,
@@ -1252,16 +1080,20 @@ router.put(
                 status: false,
                 message: "Erreur lors de la modification"
             });
-
         }
-
     }
 );
+
+
+// ========================================
+// HISTORIQUE DES ABSENCES
+// ========================================
+
 router.get(
     "/api/absences/student/:student_id",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -1269,7 +1101,7 @@ router.get(
 
             console.log("ID étudiant reçu :", student_id);
 
-            const absences = getAbsence(student_id);
+            const absences = await getAbsence(student_id);
 
             console.log("Absences trouvées :", absences);
 
@@ -1286,28 +1118,31 @@ router.get(
                 status: false,
                 message: "Erreur lors du chargement de l'historique"
             });
-
         }
-
     }
 );
+
+
+// ========================================
+// STATISTIQUES
+// ========================================
+
 router.get(
     "/api/statistiques",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
             const meilleurEtudiant =
-                identifiStudent();
+                await identifiStudent();
 
             const moyenne =
-                moyenneGenerale();
+                await moyenneGenerale();
 
             const absences =
-                CompterAbsences();
-
+                await CompterAbsences();
 
             res.json({
 
@@ -1321,7 +1156,6 @@ router.get(
 
                 totalAbsences:
                     absences
-
             });
 
         } catch (error) {
@@ -1334,34 +1168,42 @@ router.get(
 
                 message:
                     "Erreur lors du chargement des statistiques"
-
             });
-
         }
-
     }
 );
+
+
+// ========================================
+// PROFESSEUR : MES MATIÈRES
+// ========================================
+
 router.get(
     "/api/professeur/matieres",
     authMiddleware,
     roleMiddleware("professeur"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const matieres = getSubjects();
+            const user_id = req.user.id;
+
+            const matieres =
+                await getSubjectsByTeacher(user_id);
 
             res.json({
 
                 status: true,
 
                 matieres: matieres
-
             });
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR MES MATIÈRES :",
+                error
+            );
 
             res.status(500).json({
 
@@ -1369,13 +1211,12 @@ router.get(
 
                 message:
                     "Erreur lors du chargement des matières"
-
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // PROFESSEUR : RECHERCHER UN ÉTUDIANT
 // ========================================
@@ -1384,7 +1225,7 @@ router.get(
     "/api/professeur/etudiants/:id",
     authMiddleware,
     roleMiddleware("professeur"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -1396,10 +1237,10 @@ router.get(
                     status: false,
                     message: "ID étudiant invalide"
                 });
-
             }
 
-            const etudiant = getStudentById(id);
+            const etudiant =
+                await getStudentById(id);
 
             if (!etudiant) {
 
@@ -1407,7 +1248,6 @@ router.get(
                     status: false,
                     message: "Étudiant introuvable"
                 });
-
             }
 
             res.json({
@@ -1426,11 +1266,11 @@ router.get(
                 status: false,
                 message: "Erreur lors de la recherche"
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // PROFESSEUR : LISTER LES ÉTUDIANTS
 // ========================================
@@ -1439,11 +1279,12 @@ router.get(
     "/api/professeur/etudiants",
     authMiddleware,
     roleMiddleware("professeur"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
-            const etudiants = getStudents();
+            const etudiants =
+                await getStudents();
 
             console.log("Étudiants :", etudiants);
 
@@ -1463,56 +1304,11 @@ router.get(
                 status: false,
                 message: error.message
             });
-
         }
-
     }
 );
-// ========================================
-// PROFESSEUR : MES MATIÈRES
-// ========================================
 
-router.get(
-    "/api/professeur/matieres",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
 
-        try {
-
-            const user_id = req.user.id;
-
-            const matieres =
-                getSubjectsByTeacher(user_id);
-
-            res.json({
-
-                status: true,
-
-                matieres: matieres
-
-            });
-
-        } catch (error) {
-
-            console.error(
-                "ERREUR MES MATIÈRES :",
-                error
-            );
-
-            res.status(500).json({
-
-                status: false,
-
-                message:
-                    "Erreur lors du chargement des matières"
-
-            });
-
-        }
-
-    }
-);
 // ========================================
 // PROFESSEUR : AJOUTER UNE NOTE
 // ========================================
@@ -1521,7 +1317,7 @@ router.post(
     "/api/professeur/notes",
     authMiddleware,
     roleMiddleware("professeur"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -1531,7 +1327,6 @@ router.post(
                 note
             } = req.body;
 
-
             if (
                 !student_id ||
                 !subject_id ||
@@ -1539,16 +1334,10 @@ router.post(
             ) {
 
                 return res.status(400).json({
-
                     status: false,
-
-                    message:
-                        "Tous les champs sont obligatoires."
-
+                    message: "Tous les champs sont obligatoires."
                 });
-
             }
-
 
             if (
                 Number(note) < 0 ||
@@ -1556,31 +1345,21 @@ router.post(
             ) {
 
                 return res.status(400).json({
-
                     status: false,
-
                     message:
                         "La note doit être comprise entre 0 et 20."
-
                 });
-
             }
 
-
-            addGrade(
+            await addGrade(
                 Number(student_id),
                 Number(subject_id),
                 Number(note)
             );
 
-
             res.json({
-
                 status: true,
-
-                message:
-                    "Note ajoutée avec succès."
-
+                message: "Note ajoutée avec succès."
             });
 
         } catch (error) {
@@ -1591,18 +1370,14 @@ router.post(
             );
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors de l'ajout de la note."
-
+                message: "Erreur lors de l'ajout de la note."
             });
-
         }
-
     }
 );
+
+
 // ========================================
 // PROFESSEUR : MODIFIER UNE NOTE
 // ========================================
@@ -1611,7 +1386,7 @@ router.put(
     "/api/professeur/notes",
     authMiddleware,
     roleMiddleware("professeur"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -1621,7 +1396,6 @@ router.put(
                 note
             } = req.body;
 
-
             if (
                 !student_id ||
                 !subject_id ||
@@ -1629,16 +1403,10 @@ router.put(
             ) {
 
                 return res.status(400).json({
-
                     status: false,
-
-                    message:
-                        "Tous les champs sont obligatoires."
-
+                    message: "Tous les champs sont obligatoires."
                 });
-
             }
-
 
             if (
                 Number(note) < 0 ||
@@ -1646,31 +1414,21 @@ router.put(
             ) {
 
                 return res.status(400).json({
-
                     status: false,
-
                     message:
                         "La note doit être comprise entre 0 et 20."
-
                 });
-
             }
 
-
-            updateGrade(
+            await updateGrade(
                 Number(note),
                 Number(student_id),
                 Number(subject_id)
             );
 
-
             res.json({
-
                 status: true,
-
-                message:
-                    "Note modifiée avec succès."
-
+                message: "Note modifiée avec succès."
             });
 
         } catch (error) {
@@ -1680,19 +1438,16 @@ router.put(
                 error
             );
 
-
             res.status(500).json({
-
                 status: false,
-
                 message:
                     error.message ||
                     "Erreur lors de la modification de la note."
-
             });
-
         }
-
     }
 );
+
+
 export default router;
+

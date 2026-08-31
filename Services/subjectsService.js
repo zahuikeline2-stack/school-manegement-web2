@@ -1,56 +1,75 @@
+
 import db from "../db/base.js";
-import Subject from "../model/modelSubjects.js";
 
-////ajouter une matiere
+async function addSubjects(nom, teacher_id) {
 
-function addSubjects (nom,teacher_id) {
-    const adSubjects = db.prepare(`
-        INSERT INTO subjects(nom,teacher_id)
-        VALUES(?,?)
-        `)
-     adSubjects.run(nom,teacher_id)
-     console.log("matiere ajouter avec succès!")   
-  }
-  //addSubjects("Dybi",2)
-  //addSubjects("SVT",1)
+    const adSubjects = await db.prepare(`
+        INSERT INTO subjects(nom, teacher_id)
+        VALUES(?, ?)
+    `);
 
-  ///Lister les matieres
+    await adSubjects.run(nom, teacher_id);
+}
 
-  function getSubjects(){
-    const geSubjects = db.prepare(`
+
+async function getSubjects() {
+
+    const subjects = await db.prepare(`
         SELECT * FROM subjects
-        `).all()
-        return geSubjects
-  }
+    `);
 
-    function getSubjectsById(id){
-    const geSubjects = db.prepare(`
-        SELECT * FROM subjects WHERE id = ?
-        `).get(id)
-        return geSubjects
-  }
+    const result = await subjects.all();
 
-  ///affecter un professeur à une matière
+    return result;
+}
 
-  function affectSubject(teacher_id, id){
-    const affeSubject = db.prepare(`
+
+async function getSubjectsById(id) {
+
+    const subject = await db.prepare(`
+        SELECT * FROM subjects
+        WHERE id = ?
+    `);
+
+    const result = await subject.get(id);
+
+    return result;
+}
+
+
+// Matières d'un professeur précis (teacher_id = id dans la table teachers)
+async function getSubjectsByTeacher(teacher_id) {
+
+    const subjects = await db.prepare(`
+        SELECT * FROM subjects
+        WHERE teacher_id = ?
+    `);
+
+    const result = await subjects.all(teacher_id);
+
+    return result;
+}
+
+
+async function affectSubject(teacher_id, id) {
+
+    const affeSubject = await db.prepare(`
         UPDATE subjects
         SET teacher_id = ?
         WHERE id = ?
-        `)
-       return affeSubject.run(teacher_id,id)
+    `);
 
-  }
-  
-  export{
+    const result = await affeSubject.run(teacher_id, id);
+
+    return result;
+}
+
+
+export {
     addSubjects,
     affectSubject,
     getSubjects,
-    getSubjectsById
-  };
-
-  //affectSubject("13456","svt",)
- // addSubjects("stv","keline")
-  // addSubjects("pc","zebi")
- 
+    getSubjectsById,
+    getSubjectsByTeacher
+};
 

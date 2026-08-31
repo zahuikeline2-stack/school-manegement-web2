@@ -1,68 +1,86 @@
+
 import db from "../db/base.js";
-import log from "../utils/logger.js";
 
-///Ajouter un prof//
+async function addTeacher(nom, matiere, user_id) {
 
-function addTeacher(nom,matiere,user_id){
-    const insertTeacher = db.prepare(`
-        INSERT INTO teachers(nom,matiere,user_id)
-        values(?,?,?)
-        `)
-    insertTeacher.run(nom,matiere,user_id)
-    console.log(" professeur ajouter avec succès!")   
+    const insertTeacher = await db.prepare(`
+        INSERT INTO teachers(nom, matiere, user_id)
+        VALUES(?, ?, ?)
+    `);
+
+    await insertTeacher.run(nom, matiere, user_id);
 }
-//addTeacher('Dybi prince','svt')
-//addTeacher('Koffi Elizier','pc')
-//addTeacher('Akpa Edwig','Math')
-//addTeacher("Ocho", "Maths",2);
-//addTeacher('Ocho','ANG',1)
 
 
+async function updateTeacher(id, nom, matiere) {
 
-///modifier un prof//
-
-function updateTeacher(id,nom,matiere){
-    const uptTeacher=db.prepare(`
-        UPDATE teachers 
-        SET nom = ?,
-        matiere = ?
+    const uptTeacher = await db.prepare(`
+        UPDATE teachers
+        SET nom = ?, matiere = ?
         WHERE id = ?
+    `);
 
-        `)
-    uptTeacher.run(nom,matiere,id)
-    console.log("professeur modifier avec succès!")
+    await uptTeacher.run(nom, matiere, id);
 }
 
-// suprimer un prof
 
-function DEleteTeacher(id){
-    const DelTeacher = db.prepare(`
+async function DEleteTeacher(id) {
+
+    const DelTeacher = await db.prepare(`
         DELETE FROM teachers
         WHERE id = ?
-        `)
-    DelTeacher.run(id)
-    console.log("professeur supprimer avec succès!")
+    `);
+
+    await DelTeacher.run(id);
 }
 
-///REchercher un prof
 
-function getTeacher(id) {
-    const geTeacher = db.prepare(`
+async function getTeacher(id) {
+
+    const teacher = await db.prepare(`
         SELECT * FROM teachers
         WHERE id = ?
-        `).get(id)
-        return geTeacher
- }
-function getTeacherById(id) {
-    return db.prepare(`
-        SELECT * FROM teachers
-        WHERE id = ?
-    `).get(id);
+    `);
+
+    const result = await teacher.get(id);
+
+    return result;
 }
- export{
+
+
+async function getTeacherById(id) {
+
+    const teacher = await db.prepare(`
+        SELECT * FROM teachers
+        WHERE id = ?
+    `);
+
+    const result = await teacher.get(id);
+
+    return result;
+}
+
+
+// Retrouve la fiche "teacher" liée à un compte utilisateur connecté
+async function getTeacherByUserId(user_id) {
+
+    const teacher = await db.prepare(`
+        SELECT * FROM teachers
+        WHERE user_id = ?
+    `);
+
+    const result = await teacher.get(user_id);
+
+    return result;
+}
+
+
+export {
     addTeacher,
     updateTeacher,
     DEleteTeacher,
     getTeacher,
-    getTeacherById
- };
+    getTeacherById,
+    getTeacherByUserId
+};
+

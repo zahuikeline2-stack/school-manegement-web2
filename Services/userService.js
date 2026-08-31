@@ -1,62 +1,87 @@
-import db from "../db/base.js"
-import User from "../model/modelUsers.js";
-import log from "../utils/logger.js";
+import db from "../db/base.js";
 
-///ajouter un utilisateur//
 
-function addUser(name,role,password,email){
-    const insertUser = db.prepare(`
-        INSERT INTO  users(name,role,password,email)
-        VALUES(?,?,?,?)
-        `)
-        insertUser.run(name,role,password,email)
-    console.log("utilisateur enregistré avec succes !")
+// ========================================
+// AJOUTER UN UTILISATEUR
+// ========================================
+
+async function addUser(name, role, password, email) {
+
+    const insertUser = await db.prepare(`
+        INSERT INTO users(name, role, password, email)
+        VALUES (?, ?, ?, ?)
+    `);
+
+    await insertUser.run(
+        name,
+        role,
+        password,
+        email
+    );
+
+    console.log("Utilisateur enregistré avec succès !");
 }
-//addUser("zebi","admin","1111","keline@gmail.com")
 
-//addUser(
-    //"franceline",
-    //"étudiant",
-    //"1234",
-    //"franceline@gmail.com" 
-//);//
 
-//addUser('Ocho','professeur','5555','Ocho@gmail.com')
-///supprimer un utilisateur
+// ========================================
+// SUPPRIMER UN UTILISATEUR
+// ========================================
 
-function DeleteUser(id){
-    const DeleUser = db.prepare(`
-        DELETE  FROM users
+async function DeleteUser(id) {
+
+    const deleteUser = await db.prepare(`
+        DELETE FROM users
         WHERE id = ?
-        `)
-        DeleUser.run(id)
-          console.log("utilisateur supprimer avec succes !")
+    `);
+
+    await deleteUser.run(id);
+
+    console.log("Utilisateur supprimé avec succès !");
 }
 
-///listers les utilisateurs
 
-function getUser(){
-    const geUser = db.prepare(`
+// ========================================
+// LISTER LES UTILISATEURS
+// ========================================
+
+async function getUser() {
+
+    const getUsers = await db.prepare(`
         SELECT * FROM users
-    
-        `).all()
-        return geUser
+    `);
+
+    const result = await getUsers.all();
+
+    return result;
 }
 
-///menu de connections
-function login(email,password){
-    const Login = db.prepare(`
-        SELECT * FROM users
-        WHERE email = ? AND password = ?
-        `).get(email,password)
-        return Login
-        
+
+// ========================================
+// CONNEXION
+// ========================================
+
+async function login(email, password) {
+
+    const user = await db.prepare(`
+        SELECT *
+        FROM users
+        WHERE email = ?
+        AND password = ?
+    `);
+
+    const result = await user.get(email, password);
+
+    return result;
 }
 
-export{
+
+// ========================================
+// EXPORTS
+// ========================================
+
+export {
     addUser,
     DeleteUser,
     getUser,
     login
-}
-
+};

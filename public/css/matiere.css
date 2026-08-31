@@ -1,0 +1,615 @@
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ========================================
+   BODY
+======================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #CBDDE9;
+    min-height: 100vh;
+}
+
+
+/* ========================================
+   BARRE LATERALE
+======================================== */
+
+.Barre {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 230px;
+    height: 100vh;
+
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/* TITRE SCHOOL MANAGER */
+
+.Barre h2 {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: #CBDDE9;
+
+}
+
+
+/* MENU */
+
+.Barre nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+/* LIENS */
+
+.Barre a {
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    transition: 0.2s;
+
+}
+
+
+/* HOVER */
+
+.Barre a:hover {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+/* LIEN ACTIF */
+
+.Barre a.active {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+}
+
+
+/* ICÔNES */
+
+.Barre a i {
+
+    width: 25px;
+
+}
+
+
+/* DÉCONNEXION */
+
+#deconnecter {
+
+    margin-top: auto;
+
+}
+
+
+/* ========================================
+   CONTENU PRINCIPAL
+======================================== */
+
+.content {
+
+    margin-left: 230px;
+
+    padding: 40px;
+
+}
+
+
+/* ========================================
+   EN-TÊTE
+======================================== */
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.page-header h1 {
+
+    color: #2872A1;
+
+    margin-bottom: 10px;
+
+}
+
+
+.page-header p {
+
+    color: #2872A1;
+
+}
+
+
+/* ========================================
+   BOUTON RETOUR
+======================================== */
+
+.btn-retour {
+
+    background-color: #2872A1;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-retour:hover {
+
+    background-color: #1f5c83;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-top: 30px;
+
+    margin-bottom: 30px;
+
+    flex-wrap: wrap;
+
+}
+
+
+/* ========================================
+   CARTES ACTIONS
+======================================== */
+
+.action-card {
+
+    width: 220px;
+
+    min-height: 120px;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1);
+
+    transition: 0.2s;
+
+}
+
+
+/* ICÔNE */
+
+.action-card > i {
+
+    font-size: 30px;
+
+    color: #2872A1;
+
+}
+
+
+/* TITRE */
+
+.action-card h3 {
+
+    margin-bottom: 8px;
+
+    color: #2872A1;
+
+}
+
+
+/* DESCRIPTION */
+
+.action-card p {
+
+    color: black;
+
+    line-height: 1.4;
+
+}
+
+
+/* HOVER */
+
+.action-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.15);
+
+}
+
+
+/* ========================================
+   SECTIONS
+======================================== */
+
+.section {
+
+    background-color: white;
+
+    margin-top: 25px;
+
+    padding: 30px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.section h2 {
+
+    color: #2872A1;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* ========================================
+   FORMULAIRE
+======================================== */
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    color: #2872A1;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.form-group input {
+
+    padding: 12px;
+
+    border: 1px solid #CBDDE9;
+
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+.form-group input:focus {
+
+    border-color: #2872A1;
+
+    box-shadow:
+        0 0 0 2px rgba(40, 114, 161, 0.15);
+
+}
+
+
+/* ========================================
+   BOUTONS FORMULAIRE
+======================================== */
+
+.form-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 10px;
+
+}
+
+
+.btn-primary {
+
+    background-color: #2872A1;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-primary:hover {
+
+    background-color: #1f5c83;
+
+}
+
+
+.btn-secondary {
+
+    background-color: #CBDDE9;
+
+    color: #2872A1;
+
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-secondary:hover {
+
+    background-color: #b4cfdf;
+
+}
+
+
+/* ========================================
+   LISTE DES MATIÈRES
+======================================== */
+
+#matieresList {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+    gap: 20px;
+
+}
+
+
+/* ========================================
+   CARTE MATIÈRE
+======================================== */
+
+.matiere-card {
+
+    background-color: #CBDDE9;
+
+    padding: 20px;
+
+    border-radius: 8px;
+
+    border-left: 5px solid #2872A1;
+
+    transition: 0.2s;
+
+}
+
+
+.matiere-card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+
+}
+
+
+.matiere-card h3 {
+
+    color: #2872A1;
+
+    margin-bottom: 15px;
+
+}
+
+
+.matiere-card p {
+
+    color: black;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ========================================
+   MESSAGE AUCUNE MATIÈRE
+======================================== */
+
+#matieresList > p {
+
+    color: #2872A1;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    padding: 20px;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .actions {
+
+        justify-content: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .Barre {
+
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+
+    .content {
+
+        margin-left: 0;
+
+        padding: 25px;
+
+    }
+
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .action-card {
+
+        width: 100%;
+
+    }
+
+
+    .section {
+
+        padding: 20px;
+
+    }
+
+}
+

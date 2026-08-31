@@ -1,8 +1,14 @@
+
 // ========================================
-// TOKEN
+// RÉCUPÉRER LE TOKEN
 // ========================================
 
 const token = localStorage.getItem("token");
+
+
+// ========================================
+// VÉRIFIER LE TOKEN
+// ========================================
 
 if (!token) {
 
@@ -12,7 +18,64 @@ if (!token) {
 
 
 // ========================================
-// ELEMENTS
+// FONCTION NAVIGATION ADMIN
+// ========================================
+
+function allerVers(page) {
+
+    window.location.href =
+        page +
+        "?token=" +
+        encodeURIComponent(token);
+
+}
+
+
+// ========================================
+// MENU ADMIN
+// ========================================
+
+const menuAdmin = [
+
+    "/admin",
+    "/users",
+    "/etudiants",
+    "/professeurs",
+    "/matieres",
+    "/notes",
+    "/absences",
+    "/statistiques"
+
+];
+
+
+// ========================================
+// NAVIGATION ENTRE LES PAGES ADMIN
+// ========================================
+
+menuAdmin.forEach((page) => {
+
+    const lien = document.querySelector(
+        `a[href="${page}"]`
+    );
+
+    if (lien) {
+
+        lien.addEventListener("click", (e) => {
+
+            e.preventDefault();
+
+            allerVers(page);
+
+        });
+
+    }
+
+});
+
+
+// ========================================
+// ELEMENTS HTML
 // ========================================
 
 const btnAjouter =
@@ -50,7 +113,7 @@ const matieresList =
 
 
 // ========================================
-// CACHER TOUT
+// CACHER TOUTES LES SECTIONS
 // ========================================
 
 function cacherTout() {
@@ -63,11 +126,16 @@ function cacherTout() {
 
 }
 
+
+// ========================================
+// AU DÉMARRAGE
+// ========================================
+
 cacherTout();
 
 
 // ========================================
-// AJOUTER
+// BOUTON AJOUTER
 // ========================================
 
 btnAjouter.addEventListener("click", () => {
@@ -80,7 +148,7 @@ btnAjouter.addEventListener("click", () => {
 
 
 // ========================================
-// ANNULER
+// BOUTON ANNULER
 // ========================================
 
 btnAnnuler.addEventListener("click", () => {
@@ -93,32 +161,51 @@ btnAnnuler.addEventListener("click", () => {
 
 
 // ========================================
-// LISTER
+// BOUTON LISTER
 // ========================================
 
-btnLister.addEventListener("click", async () => {
+btnLister.addEventListener("click", () => {
 
     cacherTout();
 
     listeSection.style.display = "block";
+
+    chargerMatieres();
+
+});
+
+
+// ========================================
+// CHARGER LES MATIERES
+// ========================================
+
+async function chargerMatieres() {
 
     try {
 
         const response = await fetch(
             "/api/matieres",
             {
+
                 method: "GET",
 
                 headers: {
+
                     "Authorization":
                         "Bearer " + token
+
                 }
+
             }
         );
 
-        const data = await response.json();
+
+        const data =
+            await response.json();
+
 
         console.log(data);
+
 
         if (!data.status) {
 
@@ -128,11 +215,13 @@ btnLister.addEventListener("click", async () => {
 
         }
 
-        afficherMatieres(data.matieres);
 
-    }
+        afficherMatieres(
+            data.matieres
+        );
 
-    catch (error) {
+
+    } catch (error) {
 
         console.error(error);
 
@@ -142,24 +231,30 @@ btnLister.addEventListener("click", async () => {
 
     }
 
-});
+}
 
 
 // ========================================
-// AFFICHER
+// AFFICHER LES MATIERES
 // ========================================
 
 function afficherMatieres(matieres) {
 
     matieresList.innerHTML = "";
 
+
     if (!matieres || matieres.length === 0) {
 
         matieresList.innerHTML = `
-            <p>Aucune matière trouvée.</p>
+
+            <p>
+                Aucune matière trouvée.
+            </p>
+
         `;
 
         return;
+
     }
 
 
@@ -168,7 +263,11 @@ function afficherMatieres(matieres) {
         const div =
             document.createElement("div");
 
-        div.classList.add("matiere-card");
+
+        div.classList.add(
+            "matiere-card"
+        );
+
 
         div.innerHTML = `
 
@@ -176,17 +275,29 @@ function afficherMatieres(matieres) {
                 ${matiere.nom}
             </h3>
 
-            <p>
-                <strong>ID :</strong>
-                ${matiere.id}
-            </p>
 
             <p>
+
+                <strong>ID :</strong>
+
+                ${matiere.id}
+
+            </p>
+
+
+            <p>
+
                 <strong>Professeur ID :</strong>
-                ${matiere.teacher_id ?? "Non affecté"}
+
+                ${
+                    matiere.teacher_id ??
+                    "Non affecté"
+                }
+
             </p>
 
         `;
+
 
         matieresList.appendChild(div);
 
@@ -196,7 +307,7 @@ function afficherMatieres(matieres) {
 
 
 // ========================================
-// FORMULAIRE AJOUT
+// AJOUTER UNE MATIERE
 // ========================================
 
 matiereForm.addEventListener(
@@ -205,46 +316,56 @@ matiereForm.addEventListener(
 
         e.preventDefault();
 
+
         const nom =
-            document.getElementById("nom").value;
+            document.getElementById(
+                "nom"
+            ).value;
+
 
         const teacher_id =
-            document.getElementById("teacher_id").value;
+            document.getElementById(
+                "teacher_id"
+            ).value;
 
 
         try {
 
-            const response = await fetch(
-                "/api/matieres",
-                {
+            const response =
+                await fetch(
+                    "/api/matieres",
+                    {
 
-                    method: "POST",
+                        method: "POST",
 
-                    headers: {
+                        headers: {
 
-                        "Content-Type":
-                            "application/json",
+                            "Content-Type":
+                                "application/json",
 
-                        "Authorization":
-                            "Bearer " + token
+                            "Authorization":
+                                "Bearer " + token
 
-                    },
+                        },
 
-                    body: JSON.stringify({
+                        body: JSON.stringify({
 
-                        nom: nom,
+                            nom: nom,
 
-                        teacher_id:
-                            Number(teacher_id)
+                            teacher_id:
+                                Number(teacher_id)
 
-                    })
+                        })
 
-                }
-            );
+                    }
+                );
 
 
             const data =
                 await response.json();
+
+
+            console.log(data);
 
 
             if (!data.status) {
@@ -257,19 +378,24 @@ matiereForm.addEventListener(
 
 
             alert(
-                "Matière ajoutée avec succès"
+                "Matière ajoutée avec succès !"
             );
 
 
             matiereForm.reset();
 
+
             cacherTout();
 
-            btnLister.click();
 
-        }
+            listeSection.style.display =
+                "block";
 
-        catch (error) {
+
+            chargerMatieres();
+
+
+        } catch (error) {
 
             console.error(error);
 
@@ -284,7 +410,7 @@ matiereForm.addEventListener(
 
 
 // ========================================
-// AFFECTER
+// BOUTON AFFECTER
 // ========================================
 
 btnAffecter.addEventListener("click", () => {
@@ -297,7 +423,7 @@ btnAffecter.addEventListener("click", () => {
 
 
 // ========================================
-// FORMULAIRE AFFECTATION
+// AFFECTER UN PROFESSEUR
 // ========================================
 
 affecterForm.addEventListener(
@@ -321,35 +447,41 @@ affecterForm.addEventListener(
 
         try {
 
-            const response = await fetch(
-                "/api/matieres/" + id + "/affecter",
-                {
+            const response =
+                await fetch(
+                    "/api/matieres/" +
+                    id +
+                    "/affecter",
+                    {
 
-                    method: "PUT",
+                        method: "PUT",
 
-                    headers: {
+                        headers: {
 
-                        "Content-Type":
-                            "application/json",
+                            "Content-Type":
+                                "application/json",
 
-                        "Authorization":
-                            "Bearer " + token
+                            "Authorization":
+                                "Bearer " + token
 
-                    },
+                        },
 
-                    body: JSON.stringify({
+                        body: JSON.stringify({
 
-                        teacher_id:
-                            Number(teacher_id)
+                            teacher_id:
+                                Number(teacher_id)
 
-                    })
+                        })
 
-                }
-            );
+                    }
+                );
 
 
             const data =
                 await response.json();
+
+
+            console.log(data);
 
 
             if (!data.status) {
@@ -362,19 +494,24 @@ affecterForm.addEventListener(
 
 
             alert(
-                "Professeur affecté avec succès"
+                "Professeur affecté avec succès !"
             );
 
 
             affecterForm.reset();
 
+
             cacherTout();
 
-            btnLister.click();
 
-        }
+            listeSection.style.display =
+                "block";
 
-        catch (error) {
+
+            chargerMatieres();
+
+
+        } catch (error) {
 
             console.error(error);
 
@@ -389,13 +526,45 @@ affecterForm.addEventListener(
 
 
 // ========================================
-// RETOUR
+// RETOUR AU MENU ADMIN
 // ========================================
 
 btnRetour.addEventListener("click", () => {
 
-    window.location.href =
-        "/admin?token=" +
-        encodeURIComponent(token);
+    allerVers("/admin");
 
 });
+
+
+// ========================================
+// DECONNEXION
+// ========================================
+
+const deconnecter =
+    document.getElementById(
+        "deconnecter"
+    );
+
+
+if (deconnecter) {
+
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
+
+            e.preventDefault();
+
+
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+}
+

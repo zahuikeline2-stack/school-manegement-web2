@@ -11,11 +11,6 @@ import {
 
 const router = express.Router();
 
-
-// ========================================
-// STATISTIQUES
-// ========================================
-
 router.get(
     "/api/statistiques",
     authMiddleware,
@@ -24,49 +19,29 @@ router.get(
 
         try {
 
-            const meilleurEtudiant =
-                identifiStudent();
-
-            const moyenne =
-                moyenneGenerale();
-
-            const absences =
-                CompterAbsences();
-
+            const meilleurEtudiant = identifiStudent();
+            const moyenne = moyenneGenerale();
+            const absences = CompterAbsences();
 
             res.json({
-
                 status: true,
-
-                meilleurEtudiant:
-                    meilleurEtudiant,
-
-                moyenneGenerale:
-                    moyenne,
-
-                absences:
-                    absences
-
+                meilleurEtudiant: meilleurEtudiant,
+                moyenneGenerale: moyenne,
+                totalAbsences: absences   // clé alignée avec le front admin
             });
-
 
         } catch (error) {
 
             console.error(error);
 
             res.status(500).json({
-
                 status: false,
-
-                message:
-                    "Erreur lors du chargement des statistiques"
-
+                message: "Erreur lors du chargement des statistiques"
             });
 
         }
 
     }
 );
-
 
 export default router;

@@ -1,9 +1,15 @@
+
 // ========================================
 // TOKEN
 // ========================================
 
-const token = localStorage.getItem("token");
+const token =
+    localStorage.getItem("token");
 
+
+// ========================================
+// VÉRIFIER LE TOKEN
+// ========================================
 
 if (!token) {
 
@@ -19,69 +25,54 @@ if (!token) {
 function allerVers(page) {
 
     window.location.href =
-        page + "?token=" + encodeURIComponent(token);
+        page +
+        "?token=" +
+        encodeURIComponent(token);
 
 }
 
 
 // ========================================
-// MES MATIÈRES
+// MENU PROFESSEUR
 // ========================================
 
-document
-    .getElementById("cardMatieres")
-    .addEventListener("click", (e) => {
+const menuProfesseur = [
 
-        e.preventDefault();
+    "/professeur",
+    "/professeur/matieres",
+    "/professeur/etudiants",
+    "/professeur/notes",
+    "/professeur/absences"
 
-        allerVers("/professeur/matieres");
-
-    });
-
-
-// ========================================
-// ÉTUDIANTS
-// ========================================
-
-document
-    .getElementById("cardEtudiants")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/professeur/etudiants");
-
-    });
+];
 
 
-// ========================================
-// NOTES
-// ========================================
+menuProfesseur.forEach(
+    (page) => {
 
-document
-    .getElementById("cardNotes")
-    .addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        allerVers("/professeur/notes/ajouter");
-
-    });
+        const lien =
+            document.querySelector(
+                `a[href="${page}"]`
+            );
 
 
-// ========================================
-// ABSENCES
-// ========================================
+        if (lien) {
 
-document
-    .getElementById("cardAbsences")
-    .addEventListener("click", (e) => {
+            lien.addEventListener(
+                "click",
+                (e) => {
 
-        e.preventDefault();
+                    e.preventDefault();
 
-        allerVers("/professeur/absences/ajouter");
+                    allerVers(page);
 
-    });
+                }
+            );
+
+        }
+
+    }
+);
 
 
 // ========================================
@@ -89,19 +80,30 @@ document
 // ========================================
 
 const deconnecter =
-    document.getElementById("deconnecter");
+    document.getElementById(
+        "deconnecter"
+    );
 
 
 if (deconnecter) {
 
-    deconnecter.addEventListener("click", (e) => {
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
 
-        e.preventDefault();
+            e.preventDefault();
 
-        localStorage.removeItem("token");
 
-        window.location.href = "/login";
+            localStorage.removeItem(
+                "token"
+            );
 
-    });
+
+            window.location.href =
+                "/login";
+
+        }
+    );
 
 }
+

@@ -1,15 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
 
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>School Manager - Admin</title>
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link
+        rel="stylesheet"
+        href="/css/admin.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
 </head>
 
@@ -17,107 +29,131 @@
 <body>
 
 
-    <!-- =========================
+    <!-- ========================================
          BARRE LATERALE
-    ========================== -->
+    ========================================= -->
 
     <aside class="Barre">
 
-        <h2>School Manager</h2>
+        <h2>
+            School Manager
+        </h2>
 
 
         <nav>
 
-            <!-- Accueil -->
+            <a href="/admin">
 
-            <a href="/admin" id="admin">
-               <i class="fa-solid fa-house"></i>
-               <span> Accueil</span>
-                
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Accueil
+                </span>
+
             </a>
 
 
-            <!-- Utilisateurs -->
+            <a href="/users">
 
-            <a href="/users" id="users">
                 <i class="fa-solid fa-user"></i>
-                <span>Utilisateur</span>
+
+                <span>
+                    Utilisateurs
+                </span>
+
             </a>
 
 
-            <!-- Étudiants -->
+            <a href="/etudiants">
 
-            <a href="/etudiants" id="etudiants">
-                 <i class="fa-solid fa-user-graduate"></i>
-                <span>Étudiant</span>
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>
+                    Étudiants
+                </span>
+
             </a>
 
 
-            <!-- Professeurs -->
+            <a href="/professeurs">
 
-            <a href="/professeurs" id="professeurs">
                 <i class="fa-solid fa-chalkboard-user"></i>
-               <span>Professeurs</span>
-                 
+
+                <span>
+                    Professeurs
+                </span>
+
             </a>
 
 
-            <!-- Matières -->
+            <a href="/matieres">
 
-            <a href="/matieres" id="matieres">
-               <i class="fa-solid fa-book"></i>
-               <span>Matières</span>
-                 
+                <i class="fa-solid fa-book"></i>
+
+                <span>
+                    Matières
+                </span>
+
             </a>
 
 
-            <!-- Notes -->
+            <a href="/notes">
 
-            <a href="/notes" id="notes">
-               <i class="fa-solid fa-clipboard-list"></i>
-               <span>Notes</span>
-                
+                <i class="fa-solid fa-clipboard-list"></i>
+
+                <span>
+                    Notes
+                </span>
+
             </a>
 
 
-            <!-- Absences -->
+            <a href="/absences">
 
-            <a href="/absences" id="absences">
-               <i class="fa-solid fa-calendar-xmark"></i>
-               <span>Absences</span>
-                 
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>
+                    Absences
+                </span>
+
             </a>
 
 
-            <!-- Statistiques -->
+            <a href="/statistiques">
 
-            <a href="/statistiques" id="statistiques">
-              <i class="fa-solid fa-chart-pie"></i>
-               <span> Statistiques</span>
-                
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Statistiques
+                </span>
+
             </a>
 
         </nav>
 
 
-        <!-- Déconnexion -->
+        <!-- DÉCONNEXION -->
 
         <a
             href="/login"
             id="deconnecter"
-            class="deconnecter">
-        
-        <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Déconnexion</span> 
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Déconnexion
+            </span>
+
         </a>
 
     </aside>
 
 
 
-    <!-- =========================
+    <!-- ========================================
          CONTENU PRINCIPAL
-    ========================== -->
+    ========================================= -->
 
     <main class="content">
 
@@ -134,60 +170,66 @@
 
 
 
-        <!-- =========================
+        <!-- ========================================
              CARTES
-        ========================== -->
+        ========================================= -->
 
         <div class="actions">
 
 
-            <!-- Utilisateurs -->
+            <!-- UTILISATEURS -->
 
-            <a
-                href="/users"
-                class="card"
-                id="cardUsers"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
 
                 <h3>
-                     Utilisateurs
+                    Utilisateurs
                 </h3>
 
                 <p>
                     Gérer les comptes des utilisateurs.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Étudiants -->
+            <!-- ÉTUDIANTS -->
 
-            <a
-                href="/etudiants"
-                class="card"
-                id="cardEtudiants"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
 
                 <h3>
-                     Étudiants
+                    Étudiants
                 </h3>
 
                 <p>
                     Gérer les étudiants.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Professeurs -->
+            <!-- PROFESSEURS -->
 
-            <a
-                href="/professeurs"
-                class="card"
-                id="cardProfesseurs"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                </div>
 
                 <h3>
                     Professeurs
@@ -197,87 +239,96 @@
                     Gérer les professeurs.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Matières -->
+            <!-- MATIÈRES -->
 
-            <a
-                href="/matieres"
-                class="card"
-                id="cardMatieres"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-book"></i>
+
+                </div>
 
                 <h3>
-                     Matières
+                    Matières
                 </h3>
 
                 <p>
                     Gérer les matières enseignées.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Notes -->
+            <!-- NOTES -->
 
-            <a
-                href="/notes"
-                class="card"
-                id="cardNotes"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-clipboard-list"></i>
+
+                </div>
 
                 <h3>
-                     Notes
+                    Notes
                 </h3>
 
                 <p>
                     Consulter et gérer les notes.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Absences -->
+            <!-- ABSENCES -->
 
-            <a
-                href="/absences"
-                class="card"
-                id="cardAbsences"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                </div>
 
                 <h3>
-                     Absences
+                    Absences
                 </h3>
 
                 <p>
                     Gérer les absences des étudiants.
                 </p>
 
-            </a>
+            </div>
 
 
 
-            <!-- Statistiques -->
+            <!-- STATISTIQUES -->
 
-            <a
-                href="/statistiques"
-                class="card"
-                id="cardStatistiques"
-            >
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                </div>
 
                 <h3>
-                     Statistiques
+                    Statistiques
                 </h3>
 
                 <p>
                     Voir les statistiques de l'école.
                 </p>
 
-            </a>
+            </div>
+
 
         </div>
 
@@ -285,10 +336,9 @@
 
 
 
-    <!-- JavaScript -->
-
     <script src="/js/admin.js"></script>
 
 </body>
 
 </html>
+

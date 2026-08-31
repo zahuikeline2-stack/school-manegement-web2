@@ -1,15 +1,76 @@
+
 // ========================================
-// TOKEN
+// RÉCUPÉRER LE TOKEN
 // ========================================
 
 const token = localStorage.getItem("token");
-
 
 if (!token) {
 
     window.location.href = "/login";
 
 }
+
+
+// ========================================
+// FONCTION NAVIGATION ADMIN
+// ========================================
+
+function allerVers(page) {
+
+    window.location.href =
+        page +
+        "?token=" +
+        encodeURIComponent(token);
+
+}
+
+
+// ========================================
+// MENU ADMIN
+// ========================================
+
+const menuAdmin = [
+
+    "/admin",
+    "/users",
+    "/etudiants",
+    "/professeurs",
+    "/matieres",
+    "/notes",
+    "/absences",
+    "/statistiques"
+
+];
+
+
+// ========================================
+// NAVIGATION ENTRE LES PAGES ADMIN
+// ========================================
+
+menuAdmin.forEach((page) => {
+
+    const lien =
+        document.querySelector(
+            `a[href="${page}"]`
+        );
+
+    if (lien) {
+
+        lien.addEventListener(
+            "click",
+            (e) => {
+
+                e.preventDefault();
+
+                allerVers(page);
+
+            }
+        );
+
+    }
+
+});
 
 
 // ========================================
@@ -175,37 +236,38 @@ absenceForm.addEventListener(
 
         try {
 
-            const response = await fetch(
-                "/api/absences",
-                {
+            const response =
+                await fetch(
+                    "/api/absences",
+                    {
 
-                    method: "POST",
+                        method: "POST",
 
-                    headers: {
+                        headers: {
 
-                        "Content-Type":
-                            "application/json",
+                            "Content-Type":
+                                "application/json",
 
-                        "Authorization":
-                            "Bearer " + token
+                            "Authorization":
+                                "Bearer " + token
 
-                    },
+                        },
 
-                    body: JSON.stringify({
+                        body: JSON.stringify({
 
-                        student_id:
-                            Number(student_id),
+                            student_id:
+                                Number(student_id),
 
-                        date:
-                            date,
+                            date:
+                                date,
 
-                        status:
-                            status
+                            status:
+                                status
 
-                    })
+                        })
 
-                }
-            );
+                    }
+                );
 
 
             const data =
@@ -291,31 +353,32 @@ justifierForm.addEventListener(
 
         try {
 
-            const response = await fetch(
-                "/api/absences/" + id,
-                {
+            const response =
+                await fetch(
+                    "/api/absences/" + id,
+                    {
 
-                    method: "PUT",
+                        method: "PUT",
 
-                    headers: {
+                        headers: {
 
-                        "Content-Type":
-                            "application/json",
+                            "Content-Type":
+                                "application/json",
 
-                        "Authorization":
-                            "Bearer " + token
+                            "Authorization":
+                                "Bearer " + token
 
-                    },
+                        },
 
-                    body: JSON.stringify({
+                        body: JSON.stringify({
 
-                        status:
-                            status
+                            status:
+                                status
 
-                    })
+                        })
 
-                }
-            );
+                    }
+                );
 
 
             const data =
@@ -392,25 +455,26 @@ btnRechercher.addEventListener(
 
         try {
 
-            const response = await fetch(
+            const response =
+                await fetch(
 
-                "/api/absences/student/"
-                + student_id,
+                    "/api/absences/student/" +
+                    student_id,
 
-                {
+                    {
 
-                    method: "GET",
+                        method: "GET",
 
-                    headers: {
+                        headers: {
 
-                        "Authorization":
-                            "Bearer " + token
+                            "Authorization":
+                                "Bearer " + token
+
+                        }
 
                     }
 
-                }
-
-            );
+                );
 
 
             const data =
@@ -596,9 +660,7 @@ btnRetour.addEventListener(
     "click",
     () => {
 
-        window.location.href =
-            "/admin?token=" +
-            encodeURIComponent(token);
+        allerVers("/admin");
 
     }
 );
@@ -635,3 +697,4 @@ if (deconnecter) {
     );
 
 }
+

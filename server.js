@@ -1,10 +1,14 @@
 import express from "express";
 
-import pageRoutes from "./routes/pageRoutes.js";
+import homeRouter from "./routes/pageRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-import statistiquesRoutes from "./routes/statistiquesRoutes.js";
+
 const app = express();
 
+
+// ========================================
+// MIDDLEWARES
+// ========================================
 
 app.use(express.json());
 
@@ -13,22 +17,34 @@ app.use(
         extended: true
     })
 );
-app.use(statistiquesRoutes);
 
-app.use(express.static("public"));
-
-
-// Pages HTML
-app.use("/", pageRoutes);
+app.use(
+    express.static("public")
+);
 
 
+// ========================================
+// ROUTES
+// ========================================
 
-// API
-app.use(authRoutes);
+app.use("/", homeRouter);
+
+app.use("/", authRoutes);
 
 
-app.listen(3000, () => {
+// ========================================
+// SERVEUR
+// ========================================
 
-    console.log("Serveur lancé sur le port 3000");
+const PORT = 3000;
 
-});
+app.listen(
+    PORT,
+    () => {
+
+        console.log(
+            `Serveur démarré sur http://localhost:${PORT}`
+        );
+
+    }
+);

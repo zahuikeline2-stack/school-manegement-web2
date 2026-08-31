@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -39,10 +40,7 @@
 
         <nav>
 
-            <a
-                href="/professeur"
-                class="active"
-            >
+            <a href="/professeur" class="active">
 
                 <i class="fa-solid fa-house"></i>
 
@@ -55,7 +53,7 @@
 
                 <i class="fa-solid fa-book"></i>
 
-                <span>Mes matières</span>
+                <span>Matières</span>
 
             </a>
 
@@ -69,65 +67,27 @@
             </a>
 
 
-            <a href="/professeur/notes/ajouter">
-
-                <i class="fa-solid fa-plus"></i>
-
-                <span>Ajouter une note</span>
-
-            </a>
-
-
-            <a href="/professeur/notes/modifier">
+            <a href="/professeur/notes">
 
                 <i class="fa-solid fa-pen-to-square"></i>
 
-                <span>Modifier une note</span>
+                <span>Notes</span>
 
             </a>
 
 
-            <a href="/professeur/absences/ajouter">
+            <a href="/professeur/absences">
 
-                <i class="fa-solid fa-calendar-plus"></i>
+                <i class="fa-solid fa-calendar-xmark"></i>
 
-                <span>Enregistrer une absence</span>
-
-            </a>
-
-
-            <a href="/professeur/absences/justifier">
-
-                <i class="fa-solid fa-circle-check"></i>
-
-                <span>Justifier une absence</span>
-
-            </a>
-
-
-            <a href="/professeur/absences/historique">
-
-                <i class="fa-solid fa-clock-rotate-left"></i>
-
-                <span>Historique des absences</span>
-
-            </a>
-
-
-            <a href="/professeur/etudiants/rechercher">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <span>Rechercher un étudiant</span>
+                <span>Absences</span>
 
             </a>
 
         </nav>
 
 
-        <!-- ========================================
-             DÉCONNEXION
-        ========================================= -->
+        <!-- DÉCONNEXION -->
 
         <a
             href="/login"
@@ -153,36 +113,28 @@
 
         <div class="page-header">
 
-            <div>
+            <h1>
+                Bienvenue dans votre espace professeur
+            </h1>
 
-                <h1>
-                    Bienvenue dans votre espace professeur
-                </h1>
-
-                <p>
-                    Gérez vos matières, vos étudiants,
-                    les notes et les absences.
-                </p>
-
-            </div>
+            <p>
+                Gérez vos matières, vos étudiants,
+                vos notes et vos absences.
+            </p>
 
         </div>
 
 
 
         <!-- ========================================
-             CARTES
+             CHOIX
         ========================================= -->
 
         <div class="actions">
 
 
-            <!-- MES MATIÈRES -->
+            <!-- MATIÈRES -->
 
-            <a
-                href="/professeur/matieres"
-                class="action-card"
-            >
 
                 <div class="card-icon">
 
@@ -192,27 +144,21 @@
 
                 <div>
 
-                    <h3>
-                        Mes matières
-                    </h3>
+                    <h3>Matières</h3>
 
                     <p>
-                        Voir les matières qui
-                        vous sont affectées.
+                        Consulter vos matières.
                     </p>
 
                 </div>
 
-            </a>
+            
 
 
 
             <!-- ÉTUDIANTS -->
 
-            <a
-                href="/professeur/etudiants"
-                class="action-card"
-            >
+        
 
                 <div class="card-icon">
 
@@ -222,55 +168,21 @@
 
                 <div>
 
-                    <h3>
-                        Lister les étudiants
-                    </h3>
+                    <h3>Étudiants</h3>
 
                     <p>
-                        Voir la liste des étudiants.
+                        Consulter les étudiants.
                     </p>
 
                 </div>
 
-            </a>
+            
 
 
 
-            <!-- AJOUTER NOTE -->
+            <!-- NOTES -->
 
-            <a
-                href="/professeur/notes/ajouter"
-                class="action-card"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-plus"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        Ajouter une note
-                    </h3>
-
-                    <p>
-                        Enregistrer une nouvelle note.
-                    </p>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- MODIFIER NOTE -->
-
-            <a
-                href="/professeur/notes/modifier"
-                class="action-card"
-            >
+            
 
                 <div class="card-icon">
 
@@ -280,133 +192,39 @@
 
                 <div>
 
-                    <h3>
-                        Modifier une note
-                    </h3>
+                    <h3>Notes</h3>
 
                     <p>
-                        Modifier une note existante.
+                        Ajouter et gérer les notes.
                     </p>
 
                 </div>
 
-            </a>
+            
 
 
 
-            <!-- AJOUTER ABSENCE -->
+            <!-- ABSENCES -->
 
-            <a
-                href="/professeur/absences/ajouter"
-                class="action-card"
-            >
+            
 
                 <div class="card-icon">
 
-                    <i class="fa-solid fa-calendar-plus"></i>
+                    <i class="fa-solid fa-calendar-xmark"></i>
 
                 </div>
 
                 <div>
 
-                    <h3>
-                        Enregistrer une absence
-                    </h3>
+                    <h3>Absences</h3>
 
                     <p>
-                        Enregistrer l'absence d'un étudiant.
+                        Gérer les absences.
                     </p>
 
                 </div>
 
-            </a>
-
-
-
-            <!-- JUSTIFIER ABSENCE -->
-
-            <a
-                href="/professeur/absences/justifier"
-                class="action-card"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-circle-check"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        Justifier une absence
-                    </h3>
-
-                    <p>
-                        Modifier le statut d'une absence.
-                    </p>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- HISTORIQUE -->
-
-            <a
-                href="/professeur/absences/historique"
-                class="action-card"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-clock-rotate-left"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        Historique des absences
-                    </h3>
-
-                    <p>
-                        Consulter les absences d'un étudiant.
-                    </p>
-
-                </div>
-
-            </a>
-
-
-
-            <!-- RECHERCHE ÉTUDIANT -->
-
-            <a
-                href="/professeur/etudiants/rechercher"
-                class="action-card"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-magnifying-glass"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        Rechercher un étudiant
-                    </h3>
-
-                    <p>
-                        Rechercher un étudiant par son ID.
-                    </p>
-
-                </div>
-
-            </a>
+            
 
 
         </div>
@@ -420,3 +238,4 @@
 </body>
 
 </html>
+

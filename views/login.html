@@ -1,25 +1,40 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Connexion - School Manager</title>
 
-    <link rel="stylesheet" href="./css/login.css">
+    <link
+        rel="stylesheet"
+        href="/css/login.css"
+    >
+
 </head>
+
 
 <body>
 
     <div class="login-container">
 
-       <img src="./image/logo.png" alt="">
+        <img
+            src="/image/logo.png"
+            alt="School Manager"
+        >
 
 
         <form id="loginForm">
 
-            <label for="email">Email</label>
+            <label for="email">
+                Email
+            </label>
 
             <input
                 type="email"
@@ -29,7 +44,10 @@
                 required
             >
 
-            <label for="password">Mot de passe</label>
+
+            <label for="password">
+                Mot de passe
+            </label>
 
             <input
                 type="password"
@@ -39,19 +57,29 @@
                 required
             >
 
+
             <button type="submit">
                 Se connecter
             </button>
 
+
+            <p
+                id="loginError"
+                class="login-error"
+            ></p>
+
         </form>
+
 
         <a href="/">
             Retour à l'accueil
         </a>
 
     </div>
-   <script src="/js/login.js"></script>
+
+
+    <script src="/js/login.js"></script>
 
 </body>
-</html>
 
+</html>

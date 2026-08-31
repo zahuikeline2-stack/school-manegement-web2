@@ -1,15 +1,16 @@
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config.js";
 
 function authMiddleware(req, res, next) {
+
+    const authHeader = req.headers.authorization;
 
     let token = null;
 
 
-    // ==========================
-    // 1. Chercher le token dans Authorization
-    // ==========================
-
-    const authHeader = req.headers.authorization;
+    // ========================================
+    // TOKEN DANS AUTHORIZATION
+    // ========================================
 
     if (authHeader) {
 
@@ -18,20 +19,20 @@ function authMiddleware(req, res, next) {
     }
 
 
-    // ==========================
-    // 2. Chercher le token dans l'URL
-    // ==========================
+    // ========================================
+    // TOKEN DANS L'URL
+    // ========================================
 
-    if (!token) {
+    if (!token && req.query.token) {
 
         token = req.query.token;
 
     }
 
 
-    // ==========================
-    // 3. Vérifier si le token existe
-    // ==========================
+    // ========================================
+    // TOKEN MANQUANT
+    // ========================================
 
     if (!token) {
 
@@ -46,43 +47,38 @@ function authMiddleware(req, res, next) {
     }
 
 
-    // ==========================
-    // 4. Vérifier le token
-    // ==========================
+    // ========================================
+    // VÉRIFICATION DU TOKEN
+    // ========================================
 
     try {
 
         const decoded = jwt.verify(
             token,
-            "kelinefranceline"
+            JWT_SECRET
         );
-
-
-        // Mettre les informations
-        // de l'utilisateur dans req.user
 
         req.user = decoded;
 
-
-        // Continuer vers le prochain middleware
-        // ou vers la route
-
         next();
 
-
     } catch (error) {
+
+        console.error(
+            "Erreur token :",
+            error.message
+        );
 
         return res.status(401).json({
 
             status: false,
 
-            message: "Token invalide"
+            message: "Token invalide ou expiré"
 
         });
 
     }
 
 }
-
 
 export default authMiddleware;

@@ -1,329 +1,353 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>School Manager - Professeur</title>
+<title>School Manager - Professeurs</title>
 
-    <link
-        rel="stylesheet"
-        href="/css/professeurs.css"
-    >
+<link
+    rel="stylesheet"
+    href="/css/professeurs.css"
+>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    >
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+```
 
 </head>
 
-
 <body>
 
+```
+<!-- ========================================
+     BARRE LATERALE ADMIN
+========================================= -->
 
-    <!-- ========================================
-         BARRE LATERALE
-    ========================================= -->
+<aside class="Barre">
 
-    <aside class="Barre">
+    <h2>School Manager</h2>
 
-        <h2>School Manager</h2>
+    <nav>
 
-
-        <nav>
-
-
-            <!-- Accueil -->
-
-            <a
-                href="/professeur"
-                id="accueil"
-                class="active"
-            >
-
-                <i class="fa-solid fa-house"></i>
-
-                <span>
-                    Accueil
-                </span>
-
-            </a>
-
-
-            <!-- Mes matières -->
-
-            <a
-                href="/professeur/matieres"
-                id="matieres"
-            >
-
-                <i class="fa-solid fa-book"></i>
-
-                <span>
-                    Mes matières
-                </span>
-
-            </a>
-
-
-            <!-- Étudiants -->
-
-            <a
-                href="/professeur/etudiants"
-                id="etudiants"
-            >
-
-                <i class="fa-solid fa-user-graduate"></i>
-
-                <span>
-                    Étudiants
-                </span>
-
-            </a>
-
-
-            <!-- Notes -->
-
-            <a
-                href="/professeur/notes"
-                id="notes"
-            >
-
-                <i class="fa-solid fa-clipboard-list"></i>
-
-                <span>
-                    Notes
-                </span>
-
-            </a>
-
-
-            <!-- Absences -->
-
-            <a
-                href="/professeur/absences"
-                id="absences"
-            >
-
-                <i class="fa-solid fa-calendar-xmark"></i>
-
-                <span>
-                    Absences
-                </span>
-
-            </a>
-
-
-        </nav>
-
-
-        <!-- Déconnexion -->
+        <!-- ACCUEIL ADMIN -->
 
         <a
-            href="/login"
-            id="deconnecter"
-            class="deconnecter"
+            href="/admin"
+            id="accueil"
+            class="active"
         >
 
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <i class="fa-solid fa-house"></i>
 
             <span>
-                Déconnexion
+                Accueil
             </span>
 
         </a>
 
 
-    </aside>
+        <!-- UTILISATEURS -->
 
+        <a
+            href="/users"
+            id="users"
+        >
+
+            <i class="fa-solid fa-users"></i>
+
+            <span>
+                Utilisateurs
+            </span>
+
+        </a>
+
+
+        <!-- ÉTUDIANTS -->
+
+        <a
+            href="/etudiants"
+            id="etudiants"
+        >
+
+            <i class="fa-solid fa-user-graduate"></i>
+
+            <span>
+                Étudiants
+            </span>
+
+        </a>
+
+
+        <!-- PROFESSEURS -->
+
+        <a
+            href="/professeurs"
+            id="professeurs"
+        >
+
+            <i class="fa-solid fa-chalkboard-user"></i>
+
+            <span>
+                Professeurs
+            </span>
+
+        </a>
+
+
+        <!-- MATIÈRES -->
+
+        <a
+            href="/matieres"
+            id="matieres"
+        >
+
+            <i class="fa-solid fa-book"></i>
+
+            <span>
+                Matières
+            </span>
+
+        </a>
+
+
+        <!-- NOTES -->
+
+        <a
+            href="/notes"
+            id="notes"
+        >
+
+            <i class="fa-solid fa-clipboard-list"></i>
+
+            <span>
+                Notes
+            </span>
+
+        </a>
+
+
+        <!-- ABSENCES -->
+
+        <a
+            href="/absences"
+            id="absences"
+        >
+
+            <i class="fa-solid fa-calendar-xmark"></i>
+
+            <span>
+                Absences
+            </span>
+
+        </a>
+
+
+        <!-- STATISTIQUES -->
+
+        <a
+            href="/statistiques"
+            id="statistiques"
+        >
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            <span>
+                Statistiques
+            </span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- DÉCONNEXION -->
+
+    <a
+        href="/login"
+        id="deconnecter"
+        class="deconnecter"
+    >
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <span>
+            Déconnexion
+        </span>
+
+    </a>
+
+</aside>
+
+
+
+<!-- ========================================
+     CONTENU PRINCIPAL
+========================================= -->
+
+<main class="content">
+
+    <h1>
+        Gestion des professeurs
+    </h1>
+
+    <p class="description">
+
+        Gérez les professeurs de votre établissement.
+
+    </p>
 
 
     <!-- ========================================
-         CONTENU PRINCIPAL
+         ACTIONS
     ========================================= -->
 
-    <main class="content">
+    <div class="actions">
 
 
-        <!-- ====================================
-             EN-TÊTE
-        ===================================== -->
+        <!-- MATIÈRES -->
 
-        <h1>
-            Bienvenue dans votre espace professeur
-        </h1>
+        <a
+            href="/matieres"
+            class="card"
+            id="cardMatieres"
+        >
 
+            <div class="card-icon">
 
-        <p class="description">
+                <i class="fa-solid fa-book"></i>
 
-            Gérez vos matières, vos étudiants,
-            les notes et les absences.
+            </div>
 
-        </p>
+            <div>
 
+                <h3>
+                    Matières
+                </h3>
 
+                <p>
+                    Gérer les matières et
+                    leurs affectations.
+                </p>
 
-        <!-- ====================================
-             CARTES
-        ===================================== -->
+            </div>
 
-        <div class="actions">
+        </a>
 
 
-            <!-- ==================================
-                 MATIÈRES
-            =================================== -->
 
-            <a
-                href="/professeur/matieres"
-                class="card"
-                id="cardMatieres"
-            >
+        <!-- ÉTUDIANTS -->
 
-                <div class="card-icon">
+        <a
+            href="/etudiants"
+            class="card"
+            id="cardEtudiants"
+        >
 
-                    <i class="fa-solid fa-book"></i>
+            <div class="card-icon">
 
-                </div>
+                <i class="fa-solid fa-user-graduate"></i>
 
+            </div>
 
-                <div>
+            <div>
 
-                    <h3>
-                        Mes matières
-                    </h3>
+                <h3>
+                    Étudiants
+                </h3>
 
-                    <p>
-                        Voir les matières qui
-                        vous sont affectées.
-                    </p>
+                <p>
+                    Consulter et gérer
+                    les étudiants.
+                </p>
 
-                </div>
+            </div>
 
-            </a>
+        </a>
 
 
 
-            <!-- ==================================
-                 ÉTUDIANTS
-            =================================== -->
+        <!-- NOTES -->
 
-            <a
-                href="/professeur/etudiants"
-                class="card"
-                id="cardEtudiants"
-            >
+        <a
+            href="/notes"
+            class="card"
+            id="cardNotes"
+        >
 
-                <div class="card-icon">
+            <div class="card-icon">
 
-                    <i class="fa-solid fa-user-graduate"></i>
+                <i class="fa-solid fa-clipboard-list"></i>
 
-                </div>
+            </div>
 
+            <div>
 
-                <div>
+                <h3>
+                    Notes
+                </h3>
 
-                    <h3>
-                        Étudiants
-                    </h3>
+                <p>
+                    Consulter et gérer
+                    les notes.
+                </p>
 
-                    <p>
-                        Lister et rechercher
-                        les étudiants.
-                    </p>
+            </div>
 
-                </div>
+        </a>
 
-            </a>
 
 
+        <!-- ABSENCES -->
 
-            <!-- ==================================
-                 NOTES
-            =================================== -->
+        <a
+            href="/absences"
+            class="card"
+            id="cardAbsences"
+        >
 
-            <a
-                href="/professeur/notes"
-                class="card"
-                id="cardNotes"
-            >
+            <div class="card-icon">
 
-                <div class="card-icon">
+                <i class="fa-solid fa-calendar-xmark"></i>
 
-                    <i class="fa-solid fa-clipboard-list"></i>
+            </div>
 
-                </div>
+            <div>
 
+                <h3>
+                    Absences
+                </h3>
 
-                <div>
+                <p>
+                    Consulter et gérer
+                    les absences.
+                </p>
 
-                    <h3>
-                        Notes
-                    </h3>
+            </div>
 
-                    <p>
-                        Ajouter et modifier
-                        les notes des étudiants.
-                    </p>
+        </a>
 
-                </div>
+    </div>
 
-            </a>
+</main>
 
 
 
-            <!-- ==================================
-                 ABSENCES
-            =================================== -->
+<!-- ========================================
+     JAVASCRIPT
+========================================= -->
 
-            <a
-                href="/professeur/absences"
-                class="card"
-                id="cardAbsences"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-calendar-xmark"></i>
-
-                </div>
-
-
-                <div>
-
-                    <h3>
-                        Absences
-                    </h3>
-
-                    <p>
-                        Enregistrer, justifier
-                        et consulter les absences.
-                    </p>
-
-                </div>
-
-            </a>
-
-
-        </div>
-
-
-    </main>
-
-
-
-    <!-- ========================================
-         JAVASCRIPT
-    ========================================= -->
-
-    <script src="/js/professeur.js"></script>
+<script src="/js/professeurs.js"></script>
 
 
 </body>

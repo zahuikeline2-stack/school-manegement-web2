@@ -1,12 +1,72 @@
+
 // ========================================
-// TOKEN
+// RÉCUPÉRER LE TOKEN
 // ========================================
 
 const token = localStorage.getItem("token");
 
 if (!token) {
+
     window.location.href = "/login";
+
 }
+
+
+// ========================================
+// FONCTION NAVIGATION ADMIN
+// ========================================
+
+function allerVers(page) {
+
+    window.location.href =
+        page +
+        "?token=" +
+        encodeURIComponent(token);
+
+}
+
+
+// ========================================
+// MENU ADMIN
+// ========================================
+
+const menuAdmin = [
+
+    "/admin",
+    "/users",
+    "/etudiants",
+    "/professeurs",
+    "/matieres",
+    "/notes",
+    "/absences",
+    "/statistiques"
+
+];
+
+
+// ========================================
+// NAVIGATION ENTRE LES PAGES ADMIN
+// ========================================
+
+menuAdmin.forEach((page) => {
+
+    const lien = document.querySelector(
+        `a[href="${page}"]`
+    );
+
+    if (lien) {
+
+        lien.addEventListener("click", (e) => {
+
+            e.preventDefault();
+
+            allerVers(page);
+
+        });
+
+    }
+
+});
 
 
 // ========================================
@@ -63,7 +123,13 @@ function cacherTout() {
     supprimerSection.style.display = "none";
 
     moyenneSection.style.display = "none";
+
 }
+
+
+// ========================================
+// AU DÉMARRAGE
+// ========================================
 
 cacherTout();
 
@@ -140,95 +206,114 @@ btnMoyenne.addEventListener("click", () => {
 const noteForm =
     document.getElementById("noteForm");
 
-noteForm.addEventListener("submit", async (e) => {
 
-    e.preventDefault();
+noteForm.addEventListener(
+    "submit",
+    async (e) => {
 
-
-    const student_id =
-        document.getElementById("student_id").value;
-
-    const subject_id =
-        document.getElementById("subject_id").value;
-
-    const note =
-        document.getElementById("note").value;
+        e.preventDefault();
 
 
-    if (note < 0 || note > 20) {
-
-        alert("La note doit être entre 0 et 20");
-
-        return;
-    }
+        const student_id =
+            document.getElementById(
+                "student_id"
+            ).value;
 
 
-    try {
-
-        const response = await fetch(
-            "/api/notes",
-            {
-
-                method: "POST",
-
-                headers: {
-
-                    "Content-Type":
-                        "application/json",
-
-                    "Authorization":
-                        "Bearer " + token
-
-                },
-
-                body: JSON.stringify({
-
-                    student_id:
-                        Number(student_id),
-
-                    subject_id:
-                        Number(subject_id),
-
-                    note:
-                        Number(note)
-
-                })
-
-            }
-        );
+        const subject_id =
+            document.getElementById(
+                "subject_id"
+            ).value;
 
 
-        const data =
-            await response.json();
+        const note =
+            document.getElementById(
+                "note"
+            ).value;
 
 
-        if (!data.status) {
+        // Vérifier la note
 
-            alert(data.message);
+        if (note < 0 || note > 20) {
+
+            alert(
+                "La note doit être entre 0 et 20"
+            );
 
             return;
+
         }
 
 
-        alert(
-            "Note ajoutée avec succès"
-        );
+        try {
+
+            const response =
+                await fetch(
+                    "/api/notes",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                "Bearer " + token
+
+                        },
+
+                        body: JSON.stringify({
+
+                            student_id:
+                                Number(student_id),
+
+                            subject_id:
+                                Number(subject_id),
+
+                            note:
+                                Number(note)
+
+                        })
+
+                    }
+                );
 
 
-        noteForm.reset();
+            const data =
+                await response.json();
 
 
-    } catch (error) {
+            if (!data.status) {
 
-        console.error(error);
+                alert(data.message);
 
-        alert(
-            "Erreur lors de l'ajout de la note"
-        );
+                return;
+
+            }
+
+
+            alert(
+                "Note ajoutée avec succès"
+            );
+
+
+            noteForm.reset();
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Erreur lors de l'ajout de la note"
+            );
+
+        }
 
     }
-
-});
+);
 
 
 // ========================================
@@ -236,7 +321,9 @@ noteForm.addEventListener("submit", async (e) => {
 // ========================================
 
 const btnChargerNotes =
-    document.getElementById("btnChargerNotes");
+    document.getElementById(
+        "btnChargerNotes"
+    );
 
 
 btnChargerNotes.addEventListener(
@@ -256,6 +343,7 @@ btnChargerNotes.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -263,7 +351,8 @@ btnChargerNotes.addEventListener(
 
             const response =
                 await fetch(
-                    "/api/notes/" + student_id,
+                    "/api/notes/" +
+                    student_id,
                     {
 
                         method: "GET",
@@ -288,6 +377,7 @@ btnChargerNotes.addEventListener(
                 alert(data.message);
 
                 return;
+
             }
 
 
@@ -325,19 +415,26 @@ function afficherNotes(notes) {
     notesList.innerHTML = "";
 
 
-    if (!notes || notes.length === 0) {
+    if (
+        !notes ||
+        notes.length === 0
+    ) {
 
         notesList.innerHTML =
             "<p>Aucune note trouvée.</p>";
 
         return;
+
     }
 
 
     notes.forEach((note) => {
 
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         div.classList.add(
             "note-card"
@@ -347,23 +444,38 @@ function afficherNotes(notes) {
         div.innerHTML = `
 
             <p>
+
                 <strong>ID :</strong>
+
                 ${note.id}
+
             </p>
 
+
             <p>
+
                 <strong>Étudiant :</strong>
+
                 ${note.student_id}
+
             </p>
 
+
             <p>
+
                 <strong>Matière :</strong>
+
                 ${note.subject_id}
+
             </p>
 
+
             <p>
+
                 <strong>Note :</strong>
+
                 ${note.note}/20
+
             </p>
 
         `;
@@ -377,7 +489,7 @@ function afficherNotes(notes) {
 
 
 // ========================================
-// MODIFIER
+// MODIFIER UNE NOTE
 // ========================================
 
 const modifierForm =
@@ -411,13 +523,17 @@ modifierForm.addEventListener(
             ).value;
 
 
-        if (note < 0 || note > 20) {
+        if (
+            note < 0 ||
+            note > 20
+        ) {
 
             alert(
                 "La note doit être entre 0 et 20"
             );
 
             return;
+
         }
 
 
@@ -466,6 +582,7 @@ modifierForm.addEventListener(
                 alert(data.message);
 
                 return;
+
             }
 
 
@@ -492,7 +609,7 @@ modifierForm.addEventListener(
 
 
 // ========================================
-// SUPPRIMER
+// SUPPRIMER UNE NOTE
 // ========================================
 
 const btnDelete =
@@ -518,6 +635,7 @@ btnDelete.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -528,7 +646,9 @@ btnDelete.addEventListener(
 
 
         if (!confirmation) {
+
             return;
+
         }
 
 
@@ -561,6 +681,7 @@ btnDelete.addEventListener(
                 alert(data.message);
 
                 return;
+
             }
 
 
@@ -615,6 +736,7 @@ btnCalculer.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -649,6 +771,7 @@ btnCalculer.addEventListener(
                 alert(data.message);
 
                 return;
+
             }
 
 
@@ -663,10 +786,14 @@ btnCalculer.addEventListener(
                 <div class="moyenne-result">
 
                     Moyenne de l'étudiant :
-                    ${moyenne
+
+                    ${
+                        moyenne
                         ? Number(moyenne).toFixed(2)
                         : "0.00"
-                    } / 20
+                    }
+
+                    / 20
 
                 </div>
 
@@ -688,16 +815,14 @@ btnCalculer.addEventListener(
 
 
 // ========================================
-// RETOUR ADMIN
+// RETOUR AU MENU ADMIN
 // ========================================
 
 btnRetour.addEventListener(
     "click",
     () => {
 
-        window.location.href =
-            "/admin?token=" +
-            encodeURIComponent(token);
+        allerVers("/admin");
 
     }
 );
@@ -713,16 +838,25 @@ const deconnecter =
     );
 
 
-deconnecter.addEventListener(
-    "click",
-    (e) => {
+if (deconnecter) {
 
-        e.preventDefault();
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
 
-        localStorage.removeItem("token");
+            e.preventDefault();
 
-        window.location.href =
-            "/login";
 
-    }
-);
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+}
+

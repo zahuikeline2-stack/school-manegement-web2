@@ -1,0 +1,473 @@
+```html
+<!
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Absences</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/professeurAbsence.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         BARRE LATERALE
+    ========================================= -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+            <a href="/professeur">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Accueil</span>
+
+            </a>
+
+
+            <a href="/professeur/matieres">
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>Mes matières</span>
+
+            </a>
+
+
+            <a href="/professeur/etudiants">
+
+                <i class="fa-solid fa-user-graduate"></i>
+
+                <span>Étudiants</span>
+
+            </a>
+
+
+            <a href="/professeur/notes">
+
+                <i class="fa-solid fa-clipboard-list"></i>
+
+                <span>Notes</span>
+
+            </a>
+
+
+            <a
+                href="/professeur/absences"
+                class="active"
+            >
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>Absences</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- DÉCONNEXION -->
+
+        <a
+            href="/login"
+            id="deconnecter"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- ========================================
+         CONTENU PRINCIPAL
+    ========================================= -->
+
+    <main class="content">
+
+
+        <!-- EN-TÊTE -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    Gestion des absences
+                </h1>
+
+                <p>
+                    Gérez les absences des étudiants.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="btnRetour"
+                class="btn-retour"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Retour
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+             ACTIONS
+        ========================================= -->
+
+        <div class="actions">
+
+
+            <!-- ENREGISTRER -->
+
+            <button
+                type="button"
+                id="btnAjouter"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Enregistrer une absence
+                    </h3>
+
+                    <p>
+                        Ajouter une nouvelle absence.
+                    </p>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- RECHERCHER -->
+
+            <button
+                type="button"
+                id="btnRechercher"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Rechercher
+                    </h3>
+
+                    <p>
+                        Rechercher les absences d'un étudiant.
+                    </p>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- HISTORIQUE -->
+
+            <button
+                type="button"
+                id="btnHistorique"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Historique
+                    </h3>
+
+                    <p>
+                        Voir les absences enregistrées.
+                    </p>
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================================
+             SECTION AJOUTER
+        ========================================= -->
+
+        <section
+            id="ajouterSection"
+            class="section"
+        >
+
+            <h2>
+
+                <i class="fa-solid fa-plus"></i>
+
+                Enregistrer une absence
+
+            </h2>
+
+
+            <form id="absenceForm">
+
+
+                <!-- ÉTUDIANT -->
+
+                <div class="form-group">
+
+                    <label for="student_id">
+
+                        ID de l'étudiant
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="student_id"
+                        min="1"
+                        placeholder="Ex : 1"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="date">
+
+                        Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- STATUT -->
+
+                <div class="form-group">
+
+                    <label for="status">
+
+                        Statut
+
+                    </label>
+
+
+                    <select
+                        id="status"
+                        required
+                    >
+
+                        <option value="non_justifiee">
+                            Non justifiée
+                        </option>
+
+                        <option value="justifiee">
+                            Justifiée
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Enregistrer
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="annulerAjout"
+                        class="btn-secondary"
+                    >
+
+                        Annuler
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ========================================
+             SECTION RECHERCHE
+        ========================================= -->
+
+        <section
+            id="rechercheSection"
+            class="section"
+        >
+
+            <h2>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                Rechercher une absence
+
+            </h2>
+
+
+            <div class="search-box">
+
+                <input
+                    type="number"
+                    id="rechercheStudent"
+                    min="1"
+                    placeholder="ID de l'étudiant"
+                >
+
+
+                <button
+                    type="button"
+                    id="btnLancerRecherche"
+                    class="btn-primary"
+                >
+
+                    <i class="fa-solid fa-search"></i>
+
+                    Rechercher
+
+                </button>
+
+            </div>
+
+
+            <div id="resultatRecherche"></div>
+
+        </section>
+
+
+
+        <!-- ========================================
+             SECTION HISTORIQUE
+        ========================================= -->
+
+        <section
+            id="historiqueSection"
+            class="section"
+        >
+
+            <h2>
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                Historique des absences
+
+            </h2>
+
+
+            <div id="historiqueList">
+
+                <p class="loading">
+
+                    Cliquez sur « Historique »
+                    pour afficher les absences.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+    </main>
+
+
+
+    <script src="/js/professeurAbsence.js"></script>
+
+</body>
+
+</html>
+```

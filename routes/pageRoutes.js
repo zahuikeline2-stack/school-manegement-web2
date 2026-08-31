@@ -7,9 +7,9 @@ import roleMiddleware from "../middleware/roleMiddleware.js";
 const router = express.Router();
 
 
-// ==========================
-// PAGE D'ACCUEIL
-// ==========================
+// ========================================
+// ACCUEIL
+// ========================================
 
 router.get("/", (req, res) => {
 
@@ -20,9 +20,9 @@ router.get("/", (req, res) => {
 });
 
 
-// ==========================
-// PAGE DE CONNEXION
-// ==========================
+// ========================================
+// CONNEXION
+// ========================================
 
 router.get("/login", (req, res) => {
 
@@ -33,9 +33,9 @@ router.get("/login", (req, res) => {
 });
 
 
-// ==========================
-// PAGE ADMIN
-// ==========================
+// ========================================
+// ADMIN - ACCUEIL
+// ========================================
 
 router.get(
     "/admin",
@@ -51,9 +51,9 @@ router.get(
 );
 
 
-// ==========================
-// PAGE UTILISATEURS
-// ==========================
+// ========================================
+// ADMIN - UTILISATEURS
+// ========================================
 
 router.get(
     "/users",
@@ -69,40 +69,10 @@ router.get(
 );
 
 
-// ==========================
-// PAGE AJOUTER UTILISATEUR
-// ==========================
+// ========================================
+// ADMIN - ÉTUDIANTS
+// ========================================
 
-router.get(
-    "/ajouter",
-    authMiddleware,
-    roleMiddleware("admin"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(process.cwd(), "views", "ajouter.html")
-        );
-
-    }
-);
-
-
-// ==========================
-// PAGE LISTE UTILISATEURS
-// ==========================
-
-router.get(
-    "/users/api",
-    authMiddleware,
-    roleMiddleware("admin"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(process.cwd(), "views", "usersApi.html")
-        );
-
-    }
-);
 router.get(
     "/etudiants",
     authMiddleware,
@@ -110,18 +80,15 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "etudiants.html"
-            )
+            path.join(process.cwd(), "views", "etudiants.html")
         );
 
     }
-
 );
+
+
 // ========================================
-// PAGE PROFESSEURS
+// ADMIN - PROFESSEURS
 // ========================================
 
 router.get(
@@ -131,15 +98,17 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeur.html"
-            )
+            path.join(process.cwd(), "views", "professeurs.html")
         );
 
     }
 );
+
+
+// ========================================
+// ADMIN - MATIÈRES
+// ========================================
+
 router.get(
     "/matieres",
     authMiddleware,
@@ -147,17 +116,15 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "matiere.html"
-            )
+            path.join(process.cwd(), "views", "matiere.html")
         );
 
     }
 );
+
+
 // ========================================
-// PAGE GESTION DES NOTES
+// ADMIN - NOTES
 // ========================================
 
 router.get(
@@ -167,15 +134,17 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "notes.html"
-            )
+            path.join(process.cwd(), "views", "notes.html")
         );
 
     }
 );
+
+
+// ========================================
+// ADMIN - ABSENCES
+// ========================================
+
 router.get(
     "/absences",
     authMiddleware,
@@ -183,15 +152,17 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "absences.html"
-            )
+            path.join(process.cwd(), "views", "absences.html")
         );
 
     }
 );
+
+
+// ========================================
+// ADMIN - STATISTIQUES
+// ========================================
+
 router.get(
     "/statistiques",
     authMiddleware,
@@ -199,11 +170,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "statistique.html"
-            )
+            path.join(process.cwd(), "views", "statistique.html")
         );
 
     }
@@ -218,14 +185,39 @@ router.get(
             path.join(
                 process.cwd(),
                 "views",
-                "professeurs.html"
+                "professeur.html"
             )
         );
 
     }
 );
+
+
+// PAGE MES MATIÈRES PROFESSEUR
 // ========================================
-// ESPACE PROFESSEUR
+
+router.get(
+    "/professeur/matieres",
+
+    authMiddleware,
+
+    roleMiddleware("professeur"),
+
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                process.cwd(),
+                "views",
+                "professeurMatieres.html"
+            )
+        );
+
+    }
+);
+
+// ========================================
+// PROFESSEUR - ACCUEIL
 // ========================================
 
 router.get(
@@ -247,7 +239,7 @@ router.get(
 
 
 // ========================================
-// MES MATIÈRES
+// PROFESSEUR - MATIÈRES
 // ========================================
 
 router.get(
@@ -269,7 +261,7 @@ router.get(
 
 
 // ========================================
-// ÉTUDIANTS
+// PROFESSEUR - ÉTUDIANTS
 // ========================================
 
 router.get(
@@ -291,11 +283,11 @@ router.get(
 
 
 // ========================================
-// AJOUTER UNE NOTE
+// PROFESSEUR - NOTES
 // ========================================
 
 router.get(
-    "/professeur/notes/ajouter",
+    "/professeur/notes",
     authMiddleware,
     roleMiddleware("professeur"),
     (req, res) => {
@@ -304,7 +296,7 @@ router.get(
             path.join(
                 process.cwd(),
                 "views",
-                "professeurAjouterNote.html"
+                "professeurNote.html"
             )
         );
 
@@ -313,11 +305,11 @@ router.get(
 
 
 // ========================================
-// MODIFIER UNE NOTE
+// PROFESSEUR - ABSENCES
 // ========================================
 
 router.get(
-    "/professeur/notes/modifier",
+    "/professeur/absences",
     authMiddleware,
     roleMiddleware("professeur"),
     (req, res) => {
@@ -326,98 +318,11 @@ router.get(
             path.join(
                 process.cwd(),
                 "views",
-                "professeurModifierNote.html"
+                "professeurAbsence.html"
             )
         );
 
     }
 );
 
-
-// ========================================
-// ENREGISTRER UNE ABSENCE
-// ========================================
-
-router.get(
-    "/professeur/absences/ajouter",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurAjouterAbsence.html"
-            )
-        );
-
-    }
-);
-
-
-// ========================================
-// JUSTIFIER UNE ABSENCE
-// ========================================
-
-router.get(
-    "/professeur/absences/justifier",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurJustifierAbsence.html"
-            )
-        );
-
-    }
-);
-
-
-// ========================================
-// HISTORIQUE DES ABSENCES
-// ========================================
-
-router.get(
-    "/professeur/absences/historique",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurHistoriqueAbsences.html"
-            )
-        );
-
-    }
-);
-
-
-// ========================================
-// RECHERCHER UN ÉTUDIANT
-// ========================================
-
-router.get(
-    "/professeur/etudiants/rechercher",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurRechercherEtudiant.html"
-            )
-        );
-
-    }
-);
 export default router;

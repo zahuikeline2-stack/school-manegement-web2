@@ -1,11 +1,20 @@
+
 // ========================================
 // TOKEN
 // ========================================
 
-const token = localStorage.getItem("token");
+const token =
+    localStorage.getItem("token");
+
+
+// ========================================
+// VÉRIFIER LE TOKEN
+// ========================================
 
 if (!token) {
+
     window.location.href = "/login";
+
 }
 
 
@@ -24,54 +33,194 @@ const deconnecter =
 
 
 // ========================================
-// CHARGER LES MATIÈRES
+// FONCTION NAVIGATION
+// ========================================
+
+function allerVers(page) {
+
+    window.location.href =
+        page +
+        "?token=" +
+        encodeURIComponent(token);
+
+}
+
+
+// ========================================
+// MENU PROFESSEUR
+// ========================================
+
+const menuProfesseur = [
+
+    "/professeur",
+
+    "/professeur/matieres",
+
+    "/professeur/etudiants",
+
+    "/professeur/notes",
+
+    "/professeur/absences"
+
+];
+
+
+// ========================================
+// LIENS DE LA BARRE LATERALE
+// ========================================
+
+const liens =
+    document.querySelectorAll(
+        ".Barre nav a"
+    );
+
+
+liens.forEach(
+    (lien) => {
+
+        lien.addEventListener(
+            "click",
+            (e) => {
+
+                e.preventDefault();
+
+
+                const page =
+                    lien.getAttribute(
+                        "href"
+                    );
+
+
+                if (
+                    menuProfesseur.includes(page)
+                ) {
+
+                    allerVers(page);
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+// ========================================
+// CHARGER MES MATIÈRES
 // ========================================
 
 async function chargerMatieres() {
 
     try {
 
-        const response = await fetch(
-            "/api/professeur/matieres",
-            {
-                method: "GET",
+        matieresList.innerHTML = `
 
-                headers: {
-                    "Authorization":
-                        "Bearer " + token
+            <p class="loading">
+
+                Chargement des matières...
+
+            </p>
+
+        `;
+
+
+        const response =
+            await fetch(
+                "/api/professeur/matieres",
+                {
+
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
+
                 }
-            }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Réponse matières :",
+            data
         );
 
 
-        const data = await response.json();
+        // ========================================
+        // TOKEN INVALIDE OU EXPIRÉ
+        // ========================================
 
-        console.log(data);
+        if (
+            response.status === 401 ||
+            response.status === 403
+        ) {
 
+            localStorage.removeItem(
+                "token"
+            );
+
+            window.location.href =
+                "/login";
+
+            return;
+
+        }
+
+
+        // ========================================
+        // ERREUR API
+        // ========================================
 
         if (!data.status) {
 
             matieresList.innerHTML = `
-                <p class="erreur">
+
+                <p class="loading">
+
                     ${data.message}
+
                 </p>
+
             `;
 
             return;
+
         }
 
 
-        afficherMatieres(data.matieres);
+        // ========================================
+        // AFFICHER LES MATIÈRES
+        // ========================================
+
+        afficherMatieres(
+            data.matieres
+        );
 
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Erreur chargement matières :",
+            error
+        );
+
 
         matieresList.innerHTML = `
-            <p class="erreur">
-                Erreur lors du chargement des matières.
+
+            <p class="loading">
+
+                Erreur lors du chargement
+                des matières.
+
             </p>
+
         `;
 
     }
@@ -88,94 +237,148 @@ function afficherMatieres(matieres) {
     matieresList.innerHTML = "";
 
 
-    if (!matieres || matieres.length === 0) {
+    // ========================================
+    // AUCUNE MATIÈRE
+    // ========================================
+
+    if (
+        !matieres ||
+        matieres.length === 0
+    ) {
 
         matieresList.innerHTML = `
-            <div class="aucune">
+
+            <div class="matiere-vide">
 
                 <i class="fa-solid fa-book-open"></i>
 
                 <p>
-                    Aucune matière ne vous est affectée.
+
+                    Aucune matière ne vous
+                    est affectée.
+
                 </p>
 
             </div>
+
         `;
 
         return;
+
     }
 
 
-    matieres.forEach((matiere) => {
+    // ========================================
+    // CRÉER LES CARTES
+    // ========================================
 
-        const card =
-            document.createElement("div");
+    matieres.forEach(
+        (matiere) => {
 
-        card.classList.add("matiere-card");
-
-
-        card.innerHTML = `
-
-            <div class="matiere-icon">
-
-                <i class="fa-solid fa-book"></i>
-
-            </div>
+            const div =
+                document.createElement(
+                    "div"
+                );
 
 
-            <div class="matiere-info">
-
-                <h3>
-                    ${matiere.nom}
-                </h3>
-
-                <p>
-                    ID de la matière :
-                    <strong>${matiere.id}</strong>
-                </p>
-
-            </div>
-
-        `;
+            div.classList.add(
+                "matiere-card"
+            );
 
 
-        matieresList.appendChild(card);
+            div.innerHTML = `
 
-    });
+                <div class="matiere-icon">
+
+                    <i class="fa-solid fa-book"></i>
+
+                </div>
+
+
+                <div class="matiere-info">
+
+                    <h3>
+
+                        ${matiere.nom}
+
+                    </h3>
+
+
+                    <p>
+
+                        <strong>
+                            ID :
+                        </strong>
+
+                        ${matiere.id}
+
+                    </p>
+
+                </div>
+
+            `;
+
+
+            matieresList.appendChild(
+                div
+            );
+
+        }
+    );
 
 }
 
 
 // ========================================
-// RETOUR
+// BOUTON RETOUR
 // ========================================
 
-btnRetour.addEventListener("click", () => {
+if (btnRetour) {
 
-    window.location.href =
-        "/professeur";
+    btnRetour.addEventListener(
+        "click",
+        () => {
 
-});
+            allerVers(
+                "/professeur"
+            );
+
+        }
+    );
+
+}
 
 
 // ========================================
 // DÉCONNEXION
 // ========================================
 
-deconnecter.addEventListener("click", (e) => {
+if (deconnecter) {
 
-    e.preventDefault();
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
 
-    localStorage.removeItem("token");
+            e.preventDefault();
 
-    window.location.href =
-        "/login";
 
-});
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+}
 
 
 // ========================================
-// LANCEMENT
+// CHARGEMENT AUTOMATIQUE
 // ========================================
 
 chargerMatieres();
+

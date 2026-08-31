@@ -5,12 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Enregistrer une absence</title>
-    <link rel="stylesheet" href="/css/professeurAjouterAbsence.css">
+    <title>School Manager - Ajouter une note</title>
 
-    
+    <link
+        rel="stylesheet"
+        href="/css/professeurAjouterNote.css"
+    >
 
     <link
         rel="stylesheet"
@@ -19,124 +24,234 @@
 
 </head>
 
+
 <body>
+
+
+<!-- ========================================
+     BARRE LATERALE
+========================================= -->
 
 <aside class="Barre">
 
     <h2>School Manager</h2>
 
+
     <nav>
 
         <a href="/professeur">
+
             <i class="fa-solid fa-house"></i>
+
             <span>Accueil</span>
+
         </a>
+
 
         <a href="/professeur/matieres">
+
             <i class="fa-solid fa-book"></i>
+
             <span>Mes matières</span>
+
         </a>
+
 
         <a href="/professeur/etudiants">
+
             <i class="fa-solid fa-user-graduate"></i>
+
             <span>Étudiants</span>
+
         </a>
 
-        <a href="/professeur/notes">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <span>Notes</span>
+
+        <a
+            href="/professeur/notes/ajouter"
+            class="active"
+        >
+
+            <i class="fa-solid fa-plus"></i>
+
+            <span>Ajouter une note</span>
+
         </a>
 
-        <a href="/professeur/absences" class="active">
-            <i class="fa-solid fa-calendar-xmark"></i>
-            <span>Absences</span>
+
+        <a href="/professeur/notes/modifier">
+
+            <i class="fa-solid fa-pen-to-square"></i>
+
+            <span>Modifier une note</span>
+
+        </a>
+
+
+        <a href="/professeur/absences/ajouter">
+
+            <i class="fa-solid fa-calendar-plus"></i>
+
+            <span>Enregistrer une absence</span>
+
+        </a>
+
+
+        <a href="/professeur/absences/justifier">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>Justifier une absence</span>
+
+        </a>
+
+
+        <a href="/professeur/absences/historique">
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            <span>Historique des absences</span>
+
+        </a>
+
+
+        <a href="/professeur/etudiants/rechercher">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Rechercher un étudiant</span>
+
         </a>
 
     </nav>
 
-    <a href="/login" id="deconnecter">
+
+    <a
+        href="/login"
+        id="deconnecter"
+    >
+
         <i class="fa-solid fa-right-from-bracket"></i>
+
         <span>Déconnexion</span>
+
     </a>
 
 </aside>
 
 
+
+<!-- ========================================
+     CONTENU
+========================================= -->
+
 <main class="content">
+
 
     <div class="page-header">
 
         <div>
 
-            <h1>Enregistrer une absence</h1>
+            <h1>Ajouter une note</h1>
 
             <p>
-                Enregistrer l'absence d'un étudiant.
+                Enregistrer une nouvelle note pour un étudiant.
             </p>
 
         </div>
 
-        <button id="btnRetour" class="btn-retour">
+
+        <button
+            id="btnRetour"
+            class="btn-retour"
+        >
+
             <i class="fa-solid fa-arrow-left"></i>
+
             Retour
+
         </button>
 
     </div>
 
 
+
+    <!-- ========================================
+         FORMULAIRE
+    ========================================= -->
+
     <section class="section">
 
-        <form id="absenceForm">
+
+        <h2>
+
+            <i class="fa-solid fa-pen"></i>
+
+            Nouvelle note
+
+        </h2>
+
+
+        <form id="noteForm">
+
 
             <div class="form-group">
 
                 <label for="student_id">
+
                     ID de l'étudiant
+
                 </label>
 
                 <input
                     type="number"
                     id="student_id"
+                    placeholder="Ex : 1"
                     required
                 >
 
             </div>
 
 
+
             <div class="form-group">
 
-                <label for="date">
-                    Date
+                <label for="subject_id">
+
+                    ID de la matière
+
                 </label>
 
                 <input
-                    type="date"
-                    id="date"
+                    type="number"
+                    id="subject_id"
+                    placeholder="Ex : 2"
                     required
                 >
 
             </div>
 
 
+
             <div class="form-group">
 
-                <label for="status">
-                    Statut
+                <label for="note">
+
+                    Note /20
+
                 </label>
 
-                <select id="status" required>
-
-                    <option value="non_justifiee">
-                        Non justifiée
-                    </option>
-
-                    <option value="justifiee">
-                        Justifiée
-                    </option>
-
-                </select>
+                <input
+                    type="number"
+                    id="note"
+                    min="0"
+                    max="20"
+                    step="0.01"
+                    placeholder="Ex : 15"
+                    required
+                >
 
             </div>
+
 
 
             <button
@@ -146,18 +261,25 @@
 
                 <i class="fa-solid fa-check"></i>
 
-                Enregistrer
+                Enregistrer la note
 
             </button>
 
+
         </form>
 
+
+        <div id="message"></div>
+
+
     </section>
+
 
 </main>
 
 
-<script src="/js/professeurAjouterAbsence.js"></script>
+
+<script src="/js/professeurAjouterNote.js"></script>
 
 </body>
 

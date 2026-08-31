@@ -1,3 +1,4 @@
+
 // ========================================
 // TOKEN
 // ========================================
@@ -11,6 +12,68 @@ if (!token) {
     window.location.href = "/login";
 
 }
+
+
+// ========================================
+// FONCTION NAVIGATION ADMIN
+// ========================================
+
+function allerVers(page) {
+
+    window.location.href =
+        page +
+        "?token=" +
+        encodeURIComponent(token);
+
+}
+
+
+// ========================================
+// MENU ADMIN
+// ========================================
+
+const menuAdmin = [
+
+    "/admin",
+    "/users",
+    "/etudiants",
+    "/professeurs",
+    "/matieres",
+    "/notes",
+    "/absences",
+    "/statistiques"
+
+];
+
+
+// ========================================
+// NAVIGATION ENTRE LES PAGES ADMIN
+// ========================================
+
+menuAdmin.forEach((page) => {
+
+    const lien =
+        document.querySelector(
+            `a[href="${page}"]`
+        );
+
+
+    if (lien) {
+
+        lien.addEventListener(
+            "click",
+            (e) => {
+
+                e.preventDefault();
+
+                allerVers(page);
+
+            }
+        );
+
+    }
+
+});
 
 
 // ========================================
@@ -129,15 +192,26 @@ if (btnMeilleur) {
                     <h3>🏆 Meilleur étudiant</h3>
 
                     <p>
-                        <strong>ID étudiant :</strong>
+
+                        <strong>
+                            ID étudiant :
+                        </strong>
+
                         ${meilleur.student_id}
+
                     </p>
 
+
                     <p>
-                        <strong>Moyenne :</strong>
+
+                        <strong>
+                            Moyenne :
+                        </strong>
+
                         ${Number(
                             meilleur.moyenne
                         ).toFixed(2)}/20
+
                     </p>
 
                 </div>
@@ -178,12 +252,17 @@ if (btnMoyenne) {
                     <h3>📊 Moyenne générale</h3>
 
                     <p>
+
                         Moyenne :
+
                         <strong>
+
                             ${Number(
                                 moyenne.moyenne_generale || 0
                             ).toFixed(2)}/20
+
                         </strong>
+
                     </p>
 
                 </div>
@@ -224,10 +303,15 @@ if (btnAbsences) {
                     <h3>📅 Absences</h3>
 
                     <p>
+
                         Nombre total :
+
                         <strong>
+
                             ${absences.total_absences}
+
                         </strong>
+
                     </p>
 
                 </div>
@@ -241,7 +325,7 @@ if (btnAbsences) {
 
 
 // ========================================
-// RETOUR
+// RETOUR ADMIN
 // ========================================
 
 if (btnRetour) {
@@ -250,11 +334,43 @@ if (btnRetour) {
         "click",
         () => {
 
-            window.location.href =
-                "/admin?token=" +
-                encodeURIComponent(token);
+            allerVers("/admin");
 
         }
     );
 
 }
+
+
+// ========================================
+// DÉCONNEXION
+// ========================================
+
+const deconnecter =
+    document.getElementById(
+        "deconnecter"
+    );
+
+
+if (deconnecter) {
+
+    deconnecter.addEventListener(
+        "click",
+        (e) => {
+
+            e.preventDefault();
+
+
+            localStorage.removeItem(
+                "token"
+            );
+
+
+            window.location.href =
+                "/login";
+
+        }
+    );
+
+}
+

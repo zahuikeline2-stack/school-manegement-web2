@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/zahuikeline2-stack/school-manegement-web2#readme",
   "dependencies": {
+    "@tursodatabase/serverless": "^1.4.0",
     "better-sqlite3": "^13.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.14"

@@ -12,7 +12,10 @@
 
     <title>Gestion des utilisateurs - School Manager</title>
 
-    <link rel="stylesheet" href="/css/users.css">
+    <link
+        rel="stylesheet"
+        href="/css/users.css"
+    >
 
 </head>
 
@@ -20,9 +23,9 @@
 <body>
 
 
-    <!-- =========================
-         BARRE LATERALE
-    ========================== -->
+    <!-- ========================================
+         BARRE LATÉRALE
+    ======================================== -->
 
     <aside class="Barre">
 
@@ -32,58 +35,61 @@
         <nav>
 
             <a href="/admin" id="retourAccueil">
-                 Accueil
+                Accueil
             </a>
 
             <a href="/users" class="active">
-                 Utilisateurs
+                Utilisateurs
             </a>
 
-            <a href="/etudiants">
-                 Étudiants
+            <a href="/etudiants" class="menu-admin">
+                Étudiants
             </a>
 
-            <a href="/professeurs">
-                 Professeurs
+            <a href="/professeurs" class="menu-admin">
+                Professeurs
             </a>
 
-            <a href="/matieres">
-                 Matières
+            <a href="/matieres" class="menu-admin">
+                Matières
             </a>
 
-            <a href="/notes">
-             Notes
+            <a href="/notes" class="menu-admin">
+                Notes
             </a>
 
-            <a href="/absences">
-                 Absences
+            <a href="/absences" class="menu-admin">
+                Absences
             </a>
 
-            <a href="/statistiques">
-                 Statistiques
+            <a href="/statistiques" class="menu-admin">
+                Statistiques
             </a>
 
         </nav>
 
+
+        <!-- ========================================
+             DÉCONNEXION
+        ======================================== -->
 
         <a
             href="/login"
             id="deconnecter"
             class="deconnecter"
         >
-             Déconnexion
+            Déconnexion
         </a>
 
     </aside>
 
 
 
-    <!-- =========================
+    <!-- ========================================
          CONTENU PRINCIPAL
-    ========================== -->
+    ======================================== -->
 
     <main class="content">
-
 
         <h1>
             Gestion des utilisateurs
@@ -96,49 +102,42 @@
 
 
 
-        <!-- =========================
+        <!-- ========================================
              ACTIONS
-        ========================== -->
+        ======================================== -->
 
         <div class="actions">
-
-
-            <!-- Ajouter -->
 
             <button
                 type="button"
                 id="btnAjouter"
             >
-                 Ajouter un utilisateur
+                Ajouter un utilisateur
             </button>
 
-
-            <!-- Lister -->
 
             <button
                 type="button"
                 id="btnLister"
             >
-                 Lister les utilisateurs
+                Lister les utilisateurs
             </button>
 
-
-            <!-- Retour -->
 
             <button
                 type="button"
                 id="btnRetour"
             >
-                  Retour au menu
+                Retour au menu
             </button>
 
         </div>
 
 
 
-        <!-- =========================
-             FORMULAIRE AJOUT
-        ========================== -->
+        <!-- ========================================
+             FORMULAIRE
+        ======================================== -->
 
         <section
             id="formulaireSection"
@@ -152,7 +151,6 @@
 
 
             <form id="userForm">
-
 
                 <label for="name">
                     Nom
@@ -226,16 +224,15 @@
                     Ajouter
                 </button>
 
-
             </form>
 
         </section>
 
 
 
-        <!-- =========================
-             LISTE UTILISATEURS
-        ========================== -->
+        <!-- ========================================
+             LISTE
+        ======================================== -->
 
         <section
             id="listeSection"
