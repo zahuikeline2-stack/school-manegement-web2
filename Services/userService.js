@@ -21,7 +21,7 @@ async function addUser(name, role, password, email) {
 
     console.log("Utilisateur enregistré avec succès !");
 }
-
+//addUser("zebi", "admin", "8888", "ZEBI@gmail.com");
 
 // ========================================
 // SUPPRIMER UN UTILISATEUR

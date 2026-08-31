@@ -1,23 +1,14 @@
-import { connect } from "@tursodatabase/serverless";
+import { createClient } from "@tursodatabase/serverless/compat";
 
-const db = connect({
+const db = createClient({
     url: process.env.TURSO_DATABASE_URL,
     authToken: process.env.TURSO_AUTH_TOKEN
 });
 
-
-
 async function initDb() {
+    await db.execute(`PRAGMA foreign_keys = ON`);
 
-    // Pour gérer mes clés étrangères
-    await db.exec(`
-        PRAGMA foreign_keys = ON
-    `);
-
-
-    
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS users(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -27,10 +18,7 @@ async function initDb() {
         )
     `);
 
-
-    
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS students(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             matricule TEXT NOT NULL,
@@ -43,9 +31,7 @@ async function initDb() {
         )
     `);
 
-
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS teachers(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nom TEXT NOT NULL,
@@ -55,10 +41,7 @@ async function initDb() {
         )
     `);
 
-
-   
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS subjects(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nom TEXT NOT NULL,
@@ -67,10 +50,7 @@ async function initDb() {
         )
     `);
 
-
-    
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS grades(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             student_id INTEGER NOT NULL,
@@ -81,10 +61,7 @@ async function initDb() {
         )
     `);
 
-
-    
-
-    await db.exec(`
+    await db.execute(`
         CREATE TABLE IF NOT EXISTS absences(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             student_id INTEGER NOT NULL,
@@ -93,16 +70,7 @@ async function initDb() {
             FOREIGN KEY (student_id) REFERENCES students(id)
         )
     `);
-
-
-   
 }
 
-
-
-export {
-    db,
-    initDb
-};
-
+export { db, initDb };
 export default db;

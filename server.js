@@ -31,7 +31,11 @@ app.use("/", homeRouter);
 
 app.use("/", authRoutes);
 
-
+console.log("URL TURSO :", process.env.TURSO_DATABASE_URL);
+console.log(
+    "TOKEN TURSO présent :",
+    !!process.env.TURSO_AUTH_TOKEN
+);
 // ========================================
 // SERVEUR
 // ========================================
