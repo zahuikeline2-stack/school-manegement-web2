@@ -1,5 +1,4 @@
 import express from "express";
-
 import homeRouter from "./routes/pageRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import { initDb } from "./db/base.js";
@@ -7,9 +6,8 @@ import { initDb } from "./db/base.js";
 const app = express();
 
 
-// ========================================
+
 // MIDDLEWARES
-// ========================================
 
 app.use(express.json());
 
@@ -20,13 +18,12 @@ app.use(
 );
 
 app.use(
-    express.static("public")
+    express.static(__dirname + "/public")
 );
 
 
-// ========================================
 // ROUTES
-// ========================================
+
 
 app.use("/", homeRouter);
 
@@ -37,9 +34,9 @@ console.log(
     "TOKEN TURSO présent :",
     !!process.env.TURSO_AUTH_TOKEN
 );
-// ========================================
+
 // SERVEUR
-// ========================================
+
 
 const PORT = 3000;
 
