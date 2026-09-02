@@ -4,9 +4,9 @@ import { login } from "../Services/userService.js";
 import { JWT_SECRET } from "../config.js";
 
 
-// ========================================
+
 // CONNEXION
-// ========================================
+
 
 async function loginUser(req, res) {
 
@@ -21,9 +21,8 @@ async function loginUser(req, res) {
         console.log("Email reçu :", email);
 
 
-        // ========================================
         // RECHERCHER L'UTILISATEUR
-        // ========================================
+      
 
         const user =
             await login(
@@ -32,10 +31,8 @@ async function loginUser(req, res) {
             );
 
 
-        // ========================================
         // IDENTIFIANTS INCORRECTS
-        // ========================================
-
+     
         if (!user) {
 
             return res.status(401).json({
@@ -50,9 +47,8 @@ async function loginUser(req, res) {
         }
 
 
-        // ========================================
         // CREATION DU TOKEN
-        // ========================================
+      
 
         const token =
             jwt.sign(
@@ -73,9 +69,9 @@ async function loginUser(req, res) {
             );
 
 
-        // ========================================
+   
         // REPONSE
-        // ========================================
+    
 
         return res.json({
 

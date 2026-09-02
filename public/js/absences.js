@@ -1,7 +1,6 @@
 
-// ========================================
 // RÉCUPÉRER LE TOKEN
-// ========================================
+
 
 const token = localStorage.getItem("token");
 
@@ -12,9 +11,9 @@ if (!token) {
 }
 
 
-// ========================================
+
 // FONCTION NAVIGATION ADMIN
-// ========================================
+
 
 function allerVers(page) {
 
@@ -26,9 +25,9 @@ function allerVers(page) {
 }
 
 
-// ========================================
+
 // MENU ADMIN
-// ========================================
+
 
 const menuAdmin = [
 
@@ -44,9 +43,9 @@ const menuAdmin = [
 ];
 
 
-// ========================================
+
 // NAVIGATION ENTRE LES PAGES ADMIN
-// ========================================
+
 
 menuAdmin.forEach((page) => {
 
@@ -73,9 +72,9 @@ menuAdmin.forEach((page) => {
 });
 
 
-// ========================================
+
 // ÉLÉMENTS HTML
-// ========================================
+
 
 const btnAjouter =
     document.getElementById("btnAjouter");
@@ -124,9 +123,8 @@ const absencesList =
     document.getElementById("absencesList");
 
 
-// ========================================
 // CACHER TOUT
-// ========================================
+
 
 function cacherTout() {
 
@@ -139,16 +137,16 @@ function cacherTout() {
 }
 
 
-// ========================================
+
 // AU CHARGEMENT
-// ========================================
+
 
 cacherTout();
 
 
-// ========================================
+
 // AJOUTER
-// ========================================
+
 
 btnAjouter.addEventListener(
     "click",
@@ -162,9 +160,9 @@ btnAjouter.addEventListener(
 );
 
 
-// ========================================
+
 // JUSTIFIER
-// ========================================
+
 
 btnJustifier.addEventListener(
     "click",
@@ -178,9 +176,9 @@ btnJustifier.addEventListener(
 );
 
 
-// ========================================
+
 // HISTORIQUE
-// ========================================
+
 
 btnHistorique.addEventListener(
     "click",
@@ -194,9 +192,8 @@ btnHistorique.addEventListener(
 );
 
 
-// ========================================
 // AJOUTER UNE ABSENCE
-// ========================================
+
 
 absenceForm.addEventListener(
     "submit",
@@ -317,9 +314,9 @@ absenceForm.addEventListener(
 );
 
 
-// ========================================
+
 // JUSTIFIER UNE ABSENCE
-// ========================================
+
 
 justifierForm.addEventListener(
     "submit",
@@ -428,9 +425,9 @@ justifierForm.addEventListener(
 );
 
 
-// ========================================
+
 // RECHERCHER HISTORIQUE
-// ========================================
+
 
 btnRechercher.addEventListener(
     "click",

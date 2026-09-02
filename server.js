@@ -2,6 +2,7 @@ import express from "express";
 
 import homeRouter from "./routes/pageRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import { initDb } from "./db/base.js";
 
 const app = express();
 
@@ -45,10 +46,10 @@ const PORT = 3000;
 app.listen(
     PORT,
     () => {
-
-        console.log(
+        initDb().then(()=>         console.log(
             `Serveur démarré sur http://localhost:${PORT}`
-        );
+        )
+)
 
     }
 );

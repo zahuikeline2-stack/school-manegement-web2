@@ -8,9 +8,8 @@ function authMiddleware(req, res, next) {
     let token = null;
 
 
-    // ========================================
     // TOKEN DANS AUTHORIZATION
-    // ========================================
+
 
     if (authHeader) {
 
@@ -18,10 +17,8 @@ function authMiddleware(req, res, next) {
 
     }
 
-
-    // ========================================
     // TOKEN DANS L'URL
-    // ========================================
+
 
     if (!token && req.query.token) {
 
@@ -30,9 +27,8 @@ function authMiddleware(req, res, next) {
     }
 
 
-    // ========================================
     // TOKEN MANQUANT
-    // ========================================
+
 
     if (!token) {
 
@@ -47,9 +43,9 @@ function authMiddleware(req, res, next) {
     }
 
 
-    // ========================================
+  
     // VÉRIFICATION DU TOKEN
-    // ========================================
+   
 
     try {
 

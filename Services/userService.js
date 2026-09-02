@@ -1,83 +1,88 @@
 import db from "../db/base.js";
 
 
-// ========================================
+
 // AJOUTER UN UTILISATEUR
-// ========================================
+
 
 async function addUser(name, role, password, email) {
 
-    const insertUser = await db.prepare(`
-        INSERT INTO users(name, role, password, email)
-        VALUES (?, ?, ?, ?)
-    `);
-
-    await insertUser.run(
-        name,
-        role,
-        password,
-        email
-    );
+    await db.execute({
+        sql: `
+            INSERT INTO users(name, role, password, email)
+            VALUES (?, ?, ?, ?)
+        `,
+        args: [
+            name,
+            role,
+            password,
+            email
+        ]
+    });
 
     console.log("Utilisateur enregistré avec succès !");
 }
-//addUser("zebi", "admin", "8888", "ZEBI@gmail.com");
 
-// ========================================
+//addUser("keline" ,"professeur",5555,"keline@gmail.com")
+
 // SUPPRIMER UN UTILISATEUR
-// ========================================
+
 
 async function DeleteUser(id) {
 
-    const deleteUser = await db.prepare(`
-        DELETE FROM users
-        WHERE id = ?
-    `);
-
-    await deleteUser.run(id);
+    await db.execute({
+        sql: `
+            DELETE FROM users
+            WHERE id = ?
+        `,
+        args: [id]
+    });
 
     console.log("Utilisateur supprimé avec succès !");
 }
 
 
-// ========================================
+
 // LISTER LES UTILISATEURS
-// ========================================
+
 
 async function getUser() {
 
-    const getUsers = await db.prepare(`
-        SELECT * FROM users
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT * FROM users
+        `,
+        args: []
+    });
 
-    const result = await getUsers.all();
-
-    return result;
+    return result.rows;
 }
 
 
-// ========================================
 // CONNEXION
-// ========================================
 
 async function login(email, password) {
 
-    const user = await db.prepare(`
-        SELECT *
-        FROM users
-        WHERE email = ?
-        AND password = ?
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT *
+            FROM users
+            WHERE email = ?
+            AND password = ?
+        `,
+        args: [
+            email,
+            password
+        ]
+    });
 
-    const result = await user.get(email, password);
-
-    return result;
+    return result.rows[0] || null;
 }
 
 
-// ========================================
+
 // EXPORTS
-// ========================================
+
 
 export {
     addUser,
