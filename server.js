@@ -18,7 +18,7 @@ app.use(
 );
 
 app.use(
-    express.static(__dirname + "/public")
+    express.static( "/public")
 );
 
 

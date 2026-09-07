@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>School Manager - Étudiant</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/etudiant.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         BARRE LATERALE
+    ========================================= -->
+
+    <aside class="Barre">
+
+        <h2>School Manager</h2>
+
+
+        <nav>
+
+            <!-- ACCUEIL -->
+
+            <a
+                href="/etudiant"
+                class="active"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Accueil</span>
+
+            </a>
+
+
+            <!-- MATIÈRES -->
+
+            <a href="/etudiant/matieres">
+
+                <i class="fa-solid fa-book"></i>
+
+                <span>Matières</span>
+
+            </a>
+
+
+            <!-- NOTES -->
+
+            <a href="/etudiant/notes">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+                <span>Notes</span>
+
+            </a>
+
+
+            <!-- ABSENCES -->
+
+            <a href="/etudiant/absences">
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <span>Absences</span>
+
+            </a>
+
+
+            <!-- STATISTIQUES -->
+
+            <a href="/etudiant/statistiques">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>Statistiques</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- ========================================
+             DÉCONNEXION
+        ========================================= -->
+
+        <a
+            href="/login"
+            id="deconnecter"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Déconnexion</span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- ========================================
+         CONTENU PRINCIPAL
+    ========================================= -->
+
+    <main class="content">
+
+
+        <!-- ========================================
+             EN-TÊTE
+        ========================================= -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    Bienvenue dans votre espace étudiant
+                </h1>
+
+                <p>
+                    Consultez vos matières, vos notes
+                    et vos absences.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             CARTES
+        ========================================= -->
+
+        <div class="actions">
+
+
+            <!-- ====================================
+                 MATIÈRES
+            ===================================== -->
+
+            <a
+                href="/etudiant/matieres"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-book"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Mes matières
+                    </h3>
+
+                    <p>
+                        Consultez les matières
+                        qui vous sont attribuées.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ====================================
+                 NOTES
+            ===================================== -->
+
+            <a
+                href="/etudiant/notes"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-pen-to-square"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Mes notes
+                    </h3>
+
+                    <p>
+                        Consultez vos notes
+                        et vos résultats.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ====================================
+                 ABSENCES
+            ===================================== -->
+
+            <a
+                href="/etudiant/absences"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Mes absences
+                    </h3>
+
+                    <p>
+                        Consultez votre historique
+                        d'absences.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ====================================
+                 STATISTIQUES
+            ===================================== -->
+
+            <a
+                href="/etudiant/statistiques"
+                class="action-card"
+            >
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Mes statistiques
+                    </h3>
+
+                    <p>
+                        Consultez votre moyenne
+                        et vos résultats.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
+
+    <script src="../js/etudiant.js"></script>
+
+</body>
+
+</html>
