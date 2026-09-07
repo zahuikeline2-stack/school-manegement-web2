@@ -1,3 +1,4 @@
+
 import db from "../db/base.js";
 
 
@@ -25,6 +26,8 @@ async function addUser(name, role, password, email) {
 
 //addUser("franceline" ,"admin",1111,"franceline@gmail.com")
 
+
+
 // SUPPRIMER UN UTILISATEUR
 
 
@@ -40,7 +43,9 @@ async function DeleteUser(id) {
 
     console.log("Utilisateur supprimé avec succès !");
 }
+
 //DeleteUser(11)
+
 
 
 // LISTER LES UTILISATEURS
@@ -50,16 +55,41 @@ async function getUser() {
 
     const result = await db.execute({
         sql: `
-            SELECT * FROM users
+            SELECT
+                id,
+                name,
+                email,
+                role
+            FROM users
         `,
         args: []
     });
 
-    return result.rows;
+
+    console.log(
+        "UTILISATEURS TURSO :",
+        result.rows
+    );
+
+
+    return result.rows.map((user) => ({
+
+        id: user.id,
+
+        name: user.name,
+
+        email: user.email,
+
+        role: user.role
+
+    }));
+
 }
 
 
+
 // CONNEXION
+
 
 async function login(email, password) {
 
@@ -90,3 +120,4 @@ export {
     getUser,
     login
 };
+

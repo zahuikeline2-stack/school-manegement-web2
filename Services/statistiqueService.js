@@ -1,21 +1,23 @@
 
 import db from "../db/base.js";
 
+
 // Identifier le meilleur étudiant (selon moyenne)
 
 async function identifiStudent() {
 
-    const identifStudent = await db.prepare(`
-        SELECT student_id, AVG(note) AS moyenne
-        FROM grades
-        GROUP BY student_id
-        ORDER BY moyenne DESC
-        LIMIT 1
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT student_id, AVG(note) AS moyenne
+            FROM grades
+            GROUP BY student_id
+            ORDER BY moyenne DESC
+            LIMIT 1
+        `,
+        args: []
+    });
 
-    const result = await identifStudent.get();
-
-    return result;
+    return result.rows[0];
 }
 
 
@@ -23,14 +25,15 @@ async function identifiStudent() {
 
 async function moyenneGenerale() {
 
-    const moyenGenerale = await db.prepare(`
-        SELECT AVG(note) AS moyenne_generale
-        FROM grades
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT AVG(note) AS moyenne_generale
+            FROM grades
+        `,
+        args: []
+    });
 
-    const result = await moyenGenerale.get();
-
-    return result;
+    return result.rows[0];
 }
 
 
@@ -38,14 +41,15 @@ async function moyenneGenerale() {
 
 async function CompterAbsences() {
 
-    const CompteAbsences = await db.prepare(`
-        SELECT COUNT(*) AS total_absences
-        FROM absences
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT COUNT(*) AS total_absences
+            FROM absences
+        `,
+        args: []
+    });
 
-    const result = await CompteAbsences.get();
-
-    return result;
+    return result.rows[0];
 }
 
 

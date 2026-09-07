@@ -13,7 +13,7 @@ async function addTeacher(nom, matiere, user_id) {
     });
 }
 
-
+//addTeacher("keline","svt",8)
 async function updateTeacher(id, nom, matiere) {
 
     await db.execute({

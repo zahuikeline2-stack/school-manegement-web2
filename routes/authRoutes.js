@@ -1,5 +1,5 @@
 
-import express, { json } from "express";
+import express from "express";
 import db from "../db/base.js";
 
 import { loginUser } from "../controllers/authcontrollers.js";
@@ -451,24 +451,45 @@ router.get(
 
         try {
 
-            const statement = await db.prepare(`
-                SELECT * FROM teachers
-            `);
+            const result = await db.execute({
 
-            const professeurs = await statement.all();
+                sql: `
+                    SELECT
+                        id,
+                        nom,
+                        matiere,
+                        user_id
+                    FROM teachers
+                `,
+
+                args: []
+
+            });
 
             res.json({
+
                 status: true,
-                professeurs: professeurs
+
+                professeurs:
+                    result.rows
+
             });
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR CHARGEMENT PROFESSEURS :",
+                error
+            );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du chargement des professeurs"
+
+                message:
+                    error.message ||
+                    "Erreur lors du chargement des professeurs"
+
             });
         }
     }
@@ -609,7 +630,8 @@ router.get(
 
         try {
 
-            const professeur = await getTeacherById(id);
+            const professeur =
+                await getTeacherById(id);
 
             if (!professeur) {
 
@@ -649,20 +671,38 @@ router.get(
 
         try {
 
-            const matieres = await getSubjects();
+            const matieres =
+                await getSubjects();
+
+            console.log(
+                "MATIERES ENVOYEES :",
+                matieres
+            );
 
             res.json({
+
                 status: true,
-                matieres: matieres
+
+                matieres:
+                    matieres
+
             });
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR CHARGEMENT MATIERES :",
+                error
+            );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du chargement des matières"
+
+                message:
+                    error.message ||
+                    "Erreur lors du chargement des matières"
+
             });
         }
     }
@@ -686,23 +726,119 @@ router.post(
 
         try {
 
+            // ========================================
+            // VÉRIFIER LES CHAMPS
+            // ========================================
+
+            if (!nom || !teacher_id) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "Le nom et l'ID du professeur sont obligatoires"
+
+                });
+
+            }
+
+
+            const teacherId =
+                Number(teacher_id);
+
+
+            // ========================================
+            // VÉRIFIER L'ID DU PROFESSEUR
+            // ========================================
+
+            if (
+                !Number.isInteger(teacherId) ||
+                teacherId <= 0
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "L'ID du professeur est invalide"
+
+                });
+
+            }
+
+
+            // ========================================
+            // VÉRIFIER SI LE PROFESSEUR EXISTE
+            // ========================================
+
+            const professeur =
+                await db.execute({
+
+                    sql: `
+                        SELECT id
+                        FROM teachers
+                        WHERE id = ?
+                    `,
+
+                    args: [
+                        teacherId
+                    ]
+
+                });
+
+
+            if (
+                professeur.rows.length === 0
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "Ce professeur n'existe pas"
+
+                });
+
+            }
+
+
+            // ========================================
+            // AJOUTER LA MATIERE
+            // ========================================
+
             await addSubjects(
                 nom,
-                teacher_id
+                teacherId
             );
 
+
             res.json({
+
                 status: true,
-                message: "Matière ajoutée avec succès"
+
+                message:
+                    "Matière ajoutée avec succès"
+
             });
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR AJOUT MATIERE :",
+                error
+            );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de l'ajout de la matière"
+
+                message:
+                    error.message ||
+                    "Erreur lors de l'ajout de la matière"
+
             });
         }
     }
@@ -721,21 +857,31 @@ router.get(
 
         try {
 
-            const id = req.params.id;
+            const id =
+                req.params.id;
 
-            const matiere = await getSubjectsById(id);
+            const matiere =
+                await getSubjectsById(id);
 
             if (!matiere) {
 
                 return res.status(404).json({
+
                     status: false,
-                    message: "Matière introuvable"
+
+                    message:
+                        "Matière introuvable"
+
                 });
             }
 
             res.json({
+
                 status: true,
-                matiere: matiere
+
+                matiere:
+                    matiere
+
             });
 
         } catch (error) {
@@ -743,8 +889,12 @@ router.get(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de la recherche"
+
+                message:
+                    "Erreur lors de la recherche"
+
             });
         }
     }
@@ -761,7 +911,8 @@ router.put(
     roleMiddleware("admin"),
     async (req, res) => {
 
-        const id = req.params.id;
+        const id =
+            req.params.id;
 
         const {
             teacher_id
@@ -769,14 +920,84 @@ router.put(
 
         try {
 
+            const teacherId =
+                Number(teacher_id);
+
+
+            // ========================================
+            // VÉRIFIER L'ID DU PROFESSEUR
+            // ========================================
+
+            if (
+                !Number.isInteger(teacherId) ||
+                teacherId <= 0
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "L'ID du professeur est invalide"
+
+                });
+
+            }
+
+
+            // ========================================
+            // VÉRIFIER QUE LE PROFESSEUR EXISTE
+            // ========================================
+
+            const professeur =
+                await db.execute({
+
+                    sql: `
+                        SELECT id
+                        FROM teachers
+                        WHERE id = ?
+                    `,
+
+                    args: [
+                        teacherId
+                    ]
+
+                });
+
+
+            if (
+                professeur.rows.length === 0
+            ) {
+
+                return res.status(400).json({
+
+                    status: false,
+
+                    message:
+                        "Ce professeur n'existe pas"
+
+                });
+
+            }
+
+
+            // ========================================
+            // AFFECTER LE PROFESSEUR
+            // ========================================
+
             await affectSubject(
-                teacher_id,
+                teacherId,
                 id
             );
 
+
             res.json({
+
                 status: true,
-                message: "Professeur affecté avec succès"
+
+                message:
+                    "Professeur affecté avec succès"
+
             });
 
         } catch (error) {
@@ -784,8 +1005,13 @@ router.put(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de l'affectation"
+
+                message:
+                    error.message ||
+                    "Erreur lors de l'affectation"
+
             });
         }
     }
@@ -810,12 +1036,20 @@ router.post(
 
         try {
 
-            if (note < 0 || note > 20) {
+            if (
+                Number(note) < 0 ||
+                Number(note) > 20
+            ) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "La note doit être entre 0 et 20"
+
+                    message:
+                        "La note doit être entre 0 et 20"
+
                 });
+
             }
 
             await addGrade(
@@ -825,8 +1059,12 @@ router.post(
             );
 
             res.json({
+
                 status: true,
-                message: "Note ajoutée avec succès"
+
+                message:
+                    "Note ajoutée avec succès"
+
             });
 
         } catch (error) {
@@ -834,8 +1072,12 @@ router.post(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de l'ajout de la note"
+
+                message:
+                    "Erreur lors de l'ajout de la note"
+
             });
         }
     }
@@ -854,13 +1096,21 @@ router.get(
 
         try {
 
-            const student_id = req.params.student_id;
+            const student_id =
+                req.params.student_id;
 
-            const notes = await getGradesStudent(student_id);
+            const notes =
+                await getGradesStudent(
+                    student_id
+                );
 
             res.json({
+
                 status: true,
-                notes: notes
+
+                notes:
+                    notes
+
             });
 
         } catch (error) {
@@ -868,8 +1118,12 @@ router.get(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du chargement des notes"
+
+                message:
+                    "Erreur lors du chargement des notes"
+
             });
         }
     }
@@ -901,8 +1155,12 @@ router.put(
             );
 
             res.json({
+
                 status: true,
-                message: "Note modifiée avec succès"
+
+                message:
+                    "Note modifiée avec succès"
+
             });
 
         } catch (error) {
@@ -910,8 +1168,12 @@ router.put(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de la modification"
+
+                message:
+                    "Erreur lors de la modification"
+
             });
         }
     }
@@ -930,13 +1192,18 @@ router.delete(
 
         try {
 
-            const id = req.params.id;
+            const id =
+                req.params.id;
 
             await DeleteGrade(id);
 
             res.json({
+
                 status: true,
-                message: "Note supprimée avec succès"
+
+                message:
+                    "Note supprimée avec succès"
+
             });
 
         } catch (error) {
@@ -944,8 +1211,12 @@ router.delete(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de la suppression"
+
+                message:
+                    "Erreur lors de la suppression"
+
             });
         }
     }
@@ -964,13 +1235,19 @@ router.get(
 
         try {
 
-            const student_id = req.params.student_id;
+            const student_id =
+                req.params.student_id;
 
-            const moyenne = await getGrade(student_id);
+            const moyenne =
+                await getGrade(student_id);
 
             res.json({
+
                 status: true,
-                moyenne: moyenne
+
+                moyenne:
+                    moyenne
+
             });
 
         } catch (error) {
@@ -978,8 +1255,12 @@ router.get(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du calcul de la moyenne"
+
+                message:
+                    "Erreur lors du calcul de la moyenne"
+
             });
         }
     }
@@ -1004,12 +1285,21 @@ router.post(
                 status
             } = req.body;
 
-            if (!student_id || !date || !status) {
+            if (
+                !student_id ||
+                !date ||
+                !status
+            ) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "Tous les champs sont obligatoires"
+
+                    message:
+                        "Tous les champs sont obligatoires"
+
                 });
+
             }
 
             await addAbsence(
@@ -1019,8 +1309,12 @@ router.post(
             );
 
             res.json({
+
                 status: true,
-                message: "Absence enregistrée avec succès"
+
+                message:
+                    "Absence enregistrée avec succès"
+
             });
 
         } catch (error) {
@@ -1028,8 +1322,12 @@ router.post(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de l'enregistrement de l'absence"
+
+                message:
+                    "Erreur lors de l'enregistrement de l'absence"
+
             });
         }
     }
@@ -1048,7 +1346,8 @@ router.put(
 
         try {
 
-            const id = req.params.id;
+            const id =
+                req.params.id;
 
             const {
                 status
@@ -1057,9 +1356,14 @@ router.put(
             if (!status) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "Le statut est obligatoire"
+
+                    message:
+                        "Le statut est obligatoire"
+
                 });
+
             }
 
             await updateAbsence(
@@ -1068,8 +1372,12 @@ router.put(
             );
 
             res.json({
+
                 status: true,
-                message: "Absence modifiée avec succès"
+
+                message:
+                    "Absence modifiée avec succès"
+
             });
 
         } catch (error) {
@@ -1077,8 +1385,12 @@ router.put(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de la modification"
+
+                message:
+                    "Erreur lors de la modification"
+
             });
         }
     }
@@ -1097,26 +1409,47 @@ router.get(
 
         try {
 
-            const student_id = req.params.student_id;
+            const student_id =
+                req.params.student_id;
 
-            console.log("ID étudiant reçu :", student_id);
+            console.log(
+                "ID étudiant reçu :",
+                student_id
+            );
 
-            const absences = await getAbsence(student_id);
+            const absences =
+                await getAbsence(
+                    student_id
+                );
 
-            console.log("Absences trouvées :", absences);
+            console.log(
+                "Absences trouvées :",
+                absences
+            );
 
             res.json({
+
                 status: true,
-                absences: absences
+
+                absences:
+                    absences
+
             });
 
         } catch (error) {
 
-            console.error("ERREUR HISTORIQUE :", error);
+            console.error(
+                "ERREUR HISTORIQUE :",
+                error
+            );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du chargement de l'historique"
+
+                message:
+                    "Erreur lors du chargement de l'historique"
+
             });
         }
     }
@@ -1156,6 +1489,7 @@ router.get(
 
                 totalAbsences:
                     absences
+
             });
 
         } catch (error) {
@@ -1168,6 +1502,7 @@ router.get(
 
                 message:
                     "Erreur lors du chargement des statistiques"
+
             });
         }
     }
@@ -1186,16 +1521,67 @@ router.get(
 
         try {
 
-            const user_id = req.user.id;
+            const user_id =
+                req.user.id;
+
+
+            // ========================================
+            // TROUVER LE PROFESSEUR
+            // ========================================
+
+            const professeur =
+                await db.execute({
+
+                    sql: `
+                        SELECT id
+                        FROM teachers
+                        WHERE user_id = ?
+                    `,
+
+                    args: [
+                        user_id
+                    ]
+
+                });
+
+
+            if (
+                professeur.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    status: false,
+
+                    message:
+                        "Professeur introuvable"
+
+                });
+
+            }
+
+
+            const teacher_id =
+                professeur.rows[0].id;
+
+
+            // ========================================
+            // RECUPERER SES MATIERES
+            // ========================================
 
             const matieres =
-                await getSubjectsByTeacher(user_id);
+                await getSubjectsByTeacher(
+                    teacher_id
+                );
+
 
             res.json({
 
                 status: true,
 
-                matieres: matieres
+                matieres:
+                    matieres
+
             });
 
         } catch (error) {
@@ -1211,6 +1597,7 @@ router.get(
 
                 message:
                     "Erreur lors du chargement des matières"
+
             });
         }
     }
@@ -1229,14 +1616,20 @@ router.get(
 
         try {
 
-            const id = Number(req.params.id);
+            const id =
+                Number(req.params.id);
 
             if (!id) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "ID étudiant invalide"
+
+                    message:
+                        "ID étudiant invalide"
+
                 });
+
             }
 
             const etudiant =
@@ -1245,14 +1638,23 @@ router.get(
             if (!etudiant) {
 
                 return res.status(404).json({
+
                     status: false,
-                    message: "Étudiant introuvable"
+
+                    message:
+                        "Étudiant introuvable"
+
                 });
+
             }
 
             res.json({
+
                 status: true,
-                etudiant: etudiant
+
+                etudiant:
+                    etudiant
+
             });
 
         } catch (error) {
@@ -1263,8 +1665,12 @@ router.get(
             );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de la recherche"
+
+                message:
+                    "Erreur lors de la recherche"
+
             });
         }
     }
@@ -1286,11 +1692,18 @@ router.get(
             const etudiants =
                 await getStudents();
 
-            console.log("Étudiants :", etudiants);
+            console.log(
+                "Étudiants :",
+                etudiants
+            );
 
             res.json({
+
                 status: true,
-                etudiants: etudiants
+
+                etudiants:
+                    etudiants
+
             });
 
         } catch (error) {
@@ -1301,8 +1714,12 @@ router.get(
             );
 
             res.status(500).json({
+
                 status: false,
-                message: error.message
+
+                message:
+                    error.message
+
             });
         }
     }
@@ -1334,9 +1751,14 @@ router.post(
             ) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "Tous les champs sont obligatoires."
+
+                    message:
+                        "Tous les champs sont obligatoires."
+
                 });
+
             }
 
             if (
@@ -1345,10 +1767,14 @@ router.post(
             ) {
 
                 return res.status(400).json({
+
                     status: false,
+
                     message:
                         "La note doit être comprise entre 0 et 20."
+
                 });
+
             }
 
             await addGrade(
@@ -1358,8 +1784,12 @@ router.post(
             );
 
             res.json({
+
                 status: true,
-                message: "Note ajoutée avec succès."
+
+                message:
+                    "Note ajoutée avec succès."
+
             });
 
         } catch (error) {
@@ -1370,8 +1800,12 @@ router.post(
             );
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors de l'ajout de la note."
+
+                message:
+                    "Erreur lors de l'ajout de la note."
+
             });
         }
     }
@@ -1403,9 +1837,14 @@ router.put(
             ) {
 
                 return res.status(400).json({
+
                     status: false,
-                    message: "Tous les champs sont obligatoires."
+
+                    message:
+                        "Tous les champs sont obligatoires."
+
                 });
+
             }
 
             if (
@@ -1414,10 +1853,14 @@ router.put(
             ) {
 
                 return res.status(400).json({
+
                     status: false,
+
                     message:
                         "La note doit être comprise entre 0 et 20."
+
                 });
+
             }
 
             await updateGrade(
@@ -1427,8 +1870,12 @@ router.put(
             );
 
             res.json({
+
                 status: true,
-                message: "Note modifiée avec succès."
+
+                message:
+                    "Note modifiée avec succès."
+
             });
 
         } catch (error) {
@@ -1439,10 +1886,13 @@ router.put(
             );
 
             res.status(500).json({
+
                 status: false,
+
                 message:
                     error.message ||
                     "Erreur lors de la modification de la note."
+
             });
         }
     }
@@ -1452,6 +1902,7 @@ router.put(
 // ========================================
 // ETUDIANT : MES MATIÈRES
 // ========================================
+
 router.get(
     "/api/etudiant/matieres",
     authMiddleware,
@@ -1460,14 +1911,21 @@ router.get(
 
         try {
 
-            const student_id = req.user.id;
+            const student_id =
+                req.user.id;
 
             const matieres =
-                await getSubjectsById(student_id);
+                await getSubjectsById(
+                    student_id
+                );
 
             res.json({
+
                 status: true,
-                matieres: matieres
+
+                matieres:
+                    matieres
+
             });
 
         } catch (error) {
@@ -1475,12 +1933,17 @@ router.get(
             console.error(error);
 
             res.status(500).json({
+
                 status: false,
-                message: "Erreur lors du chargement des matières"
+
+                message:
+                    "Erreur lors du chargement des matières"
+
             });
         }
     }
 );
+
 
 export default router;
 

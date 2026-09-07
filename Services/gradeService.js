@@ -2,6 +2,7 @@
 import db from "../db/base.js";
 import Grades from "../model/modelGrades.js";
 
+
 /// Ajouter une note (entre 0 et 20)
 async function addGrade(student_id, subject_id, note) {
 
@@ -10,12 +11,13 @@ async function addGrade(student_id, subject_id, note) {
         // console.log("la note doit être entre 0 et 20");
     }
 
-    const adGrade = await db.prepare(`
-        INSERT INTO grades(student_id, subject_id, note)
-        VALUES(?, ?, ?)
-    `);
-
-    await adGrade.run(student_id, subject_id, note);
+    await db.execute({
+        sql: `
+            INSERT INTO grades(student_id, subject_id, note)
+            VALUES(?, ?, ?)
+        `,
+        args: [student_id, subject_id, note]
+    });
 
     // console.log("note de l'étudiant ajoutée avec succès!");
 }
@@ -24,69 +26,75 @@ async function addGrade(student_id, subject_id, note) {
 /// Modifier une note
 async function updateGrade(note, student_id, subject_id) {
 
-    const updGrade = await db.prepare(`
-        UPDATE grades
-        SET note = ?
-        WHERE student_id = ? AND subject_id = ?
-    `);
-
-    await updGrade.run(note, student_id, subject_id);
+    await db.execute({
+        sql: `
+            UPDATE grades
+            SET note = ?
+            WHERE student_id = ? AND subject_id = ?
+        `,
+        args: [note, student_id, subject_id]
+    });
 }
 
 
 /// Supprimer une note
 async function DeleteGrade(id) {
 
-    const DeletGrade = await db.prepare(`
-        DELETE FROM grades
-        WHERE id = ?
-    `);
-
-    await DeletGrade.run(id);
+    await db.execute({
+        sql: `
+            DELETE FROM grades
+            WHERE id = ?
+        `,
+        args: [id]
+    });
 }
 
 
 /// Calculer la moyenne d’un étudiant
 async function getGrade(student_id) {
 
-    const geGrade = await db.prepare(`
-        SELECT AVG(note) AS moyenne
-        FROM grades
-        WHERE student_id = ?
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT AVG(note) AS moyenne
+            FROM grades
+            WHERE student_id = ?
+        `,
+        args: [student_id]
+    });
 
-    const result = await geGrade.get(student_id);
-
-    return result;
+    return result.rows[0];
 }
 
 
 /// Récupérer toutes les notes
 async function getGradesStudent(student_id) {
 
-    const grades = await db.prepare(`
-        SELECT *
-        FROM grades
-        WHERE student_id = ?
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT *
+            FROM grades
+            WHERE student_id = ?
+        `,
+        args: [student_id]
+    });
 
-    const result = await grades.all(student_id);
-
-    return result;
+    return result.rows;
 }
 
 
+/// Récupérer les matières associées aux notes de l'étudiant
 async function getSubject(student_id) {
 
-    const grades = await db.prepare(`
-        SELECT *
-        FROM grades
-        WHERE student_id = ?
-    `);
+    const result = await db.execute({
+        sql: `
+            SELECT *
+            FROM grades
+            WHERE student_id = ?
+        `,
+        args: [student_id]
+    });
 
-    const result = await grades.all(student_id);
-
-    return result;
+    return result.rows;
 }
 
 
@@ -95,6 +103,7 @@ export {
     updateGrade,
     DeleteGrade,
     getGrade,
-    getGradesStudent
+    getGradesStudent,
+    getSubject
 };
 

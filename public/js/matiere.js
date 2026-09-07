@@ -3,7 +3,8 @@
 // RÉCUPÉRER LE TOKEN
 // ========================================
 
-const token = localStorage.getItem("token");
+const token =
+    localStorage.getItem("token");
 
 
 // ========================================
@@ -55,19 +56,24 @@ const menuAdmin = [
 
 menuAdmin.forEach((page) => {
 
-    const lien = document.querySelector(
-        `a[href="${page}"]`
-    );
+    const lien =
+        document.querySelector(
+            `a[href="${page}"]`
+        );
+
 
     if (lien) {
 
-        lien.addEventListener("click", (e) => {
+        lien.addEventListener(
+            "click",
+            (e) => {
 
-            e.preventDefault();
+                e.preventDefault();
 
-            allerVers(page);
+                allerVers(page);
 
-        });
+            }
+        );
 
     }
 
@@ -79,37 +85,69 @@ menuAdmin.forEach((page) => {
 // ========================================
 
 const btnAjouter =
-    document.getElementById("btnAjouter");
+    document.getElementById(
+        "btnAjouter"
+    );
+
 
 const btnLister =
-    document.getElementById("btnLister");
+    document.getElementById(
+        "btnLister"
+    );
+
 
 const btnAffecter =
-    document.getElementById("btnAffecter");
+    document.getElementById(
+        "btnAffecter"
+    );
+
 
 const btnRetour =
-    document.getElementById("btnRetour");
+    document.getElementById(
+        "btnRetour"
+    );
+
 
 const btnAnnuler =
-    document.getElementById("btnAnnuler");
+    document.getElementById(
+        "btnAnnuler"
+    );
+
 
 const formulaireSection =
-    document.getElementById("formulaireSection");
+    document.getElementById(
+        "formulaireSection"
+    );
+
 
 const affecterSection =
-    document.getElementById("affecterSection");
+    document.getElementById(
+        "affecterSection"
+    );
+
 
 const listeSection =
-    document.getElementById("listeSection");
+    document.getElementById(
+        "listeSection"
+    );
+
 
 const matiereForm =
-    document.getElementById("matiereForm");
+    document.getElementById(
+        "matiereForm"
+    );
+
 
 const affecterForm =
-    document.getElementById("affecterForm");
+    document.getElementById(
+        "affecterForm"
+    );
+
 
 const matieresList =
-    document.getElementById("matieresList");
+    document.getElementById(
+        "matieresList"
+    );
 
 
 // ========================================
@@ -118,11 +156,16 @@ const matieresList =
 
 function cacherTout() {
 
-    formulaireSection.style.display = "none";
+    formulaireSection.style.display =
+        "none";
 
-    affecterSection.style.display = "none";
 
-    listeSection.style.display = "none";
+    affecterSection.style.display =
+        "none";
+
+
+    listeSection.style.display =
+        "none";
 
 }
 
@@ -138,41 +181,52 @@ cacherTout();
 // BOUTON AJOUTER
 // ========================================
 
-btnAjouter.addEventListener("click", () => {
+btnAjouter.addEventListener(
+    "click",
+    () => {
 
-    cacherTout();
+        cacherTout();
 
-    formulaireSection.style.display = "block";
+        formulaireSection.style.display =
+            "block";
 
-});
+    }
+);
 
 
 // ========================================
 // BOUTON ANNULER
 // ========================================
 
-btnAnnuler.addEventListener("click", () => {
+btnAnnuler.addEventListener(
+    "click",
+    () => {
 
-    matiereForm.reset();
+        matiereForm.reset();
 
-    cacherTout();
+        cacherTout();
 
-});
+    }
+);
 
 
 // ========================================
 // BOUTON LISTER
 // ========================================
 
-btnLister.addEventListener("click", () => {
+btnLister.addEventListener(
+    "click",
+    () => {
 
-    cacherTout();
+        cacherTout();
 
-    listeSection.style.display = "block";
+        listeSection.style.display =
+            "block";
 
-    chargerMatieres();
+        chargerMatieres();
 
-});
+    }
+);
 
 
 // ========================================
@@ -183,33 +237,43 @@ async function chargerMatieres() {
 
     try {
 
-        const response = await fetch(
-            "/api/matieres",
-            {
+        const response =
+            await fetch(
+                "/api/matieres",
+                {
 
-                method: "GET",
+                    method: "GET",
 
-                headers: {
+                    headers: {
 
-                    "Authorization":
-                        "Bearer " + token
+                        "Authorization":
+                            "Bearer " + token
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
 
         const data =
             await response.json();
 
 
-        console.log(data);
+        console.log(
+            "MATIERES RECUES :",
+            data
+        );
 
 
-        if (!data.status) {
+        if (
+            !response.ok ||
+            !data.status
+        ) {
 
-            alert(data.message);
+            alert(
+                data.message ||
+                "Erreur lors du chargement des matières"
+            );
 
             return;
 
@@ -223,7 +287,11 @@ async function chargerMatieres() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERREUR CHARGEMENT MATIERES :",
+            error
+        );
+
 
         alert(
             "Erreur lors du chargement des matières"
@@ -243,7 +311,10 @@ function afficherMatieres(matieres) {
     matieresList.innerHTML = "";
 
 
-    if (!matieres || matieres.length === 0) {
+    if (
+        !matieres ||
+        matieres.length === 0
+    ) {
 
         matieresList.innerHTML = `
 
@@ -258,50 +329,115 @@ function afficherMatieres(matieres) {
     }
 
 
-    matieres.forEach((matiere) => {
+    matieres.forEach(
+        (matiere) => {
 
-        const div =
-            document.createElement("div");
+            // ========================================
+            // RÉCUPÉRER LES VALEURS
+            // ========================================
 
+            let id;
 
-        div.classList.add(
-            "matiere-card"
-        );
+            let nom;
 
-
-        div.innerHTML = `
-
-            <h3>
-                ${matiere.nom}
-            </h3>
+            let teacher_id;
 
 
-            <p>
+            // ========================================
+            // SI TURSO RENVOIE UN TABLEAU
+            // ========================================
 
-                <strong>ID :</strong>
+            if (Array.isArray(matiere)) {
 
-                ${matiere.id}
+                id =
+                    matiere[0];
 
-            </p>
+                nom =
+                    matiere[1];
+
+                teacher_id =
+                    matiere[2];
+
+            }
 
 
-            <p>
+            // ========================================
+            // SI TURSO RENVOIE UN OBJET
+            // ========================================
 
-                <strong>Professeur ID :</strong>
+            else {
 
-                ${
+                id =
+                    matiere.id ??
+                    matiere.ID ??
+                    matiere["id"];
+
+
+                nom =
+                    matiere.nom ??
+                    matiere.Nom ??
+                    matiere["nom"];
+
+
+                teacher_id =
                     matiere.teacher_id ??
-                    "Non affecté"
-                }
+                    matiere.teacherId ??
+                    matiere["teacher_id"];
 
-            </p>
-
-        `;
+            }
 
 
-        matieresList.appendChild(div);
+            // ========================================
+            // CREER LA CARTE
+            // ========================================
 
-    });
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.classList.add(
+                "matiere-card"
+            );
+
+
+            div.innerHTML = `
+
+                <h3>
+                    ${nom ?? "Nom inconnu"}
+                </h3>
+
+
+                <p>
+
+                    <strong>ID :</strong>
+
+                    ${id ?? "Inconnu"}
+
+                </p>
+
+
+                <p>
+
+                    <strong>Professeur ID :</strong>
+
+                    ${
+                        teacher_id ??
+                        "Non affecté"
+                    }
+
+                </p>
+
+            `;
+
+
+            matieresList.appendChild(
+                div
+            );
+
+        }
+    );
 
 }
 
@@ -317,16 +453,69 @@ matiereForm.addEventListener(
         e.preventDefault();
 
 
+        // ========================================
+        // RÉCUPÉRER LES VALEURS
+        // ========================================
+
         const nom =
-            document.getElementById(
-                "nom"
-            ).value;
+            document
+                .getElementById("nom")
+                .value
+                .trim();
 
 
         const teacher_id =
-            document.getElementById(
-                "teacher_id"
-            ).value;
+            document
+                .getElementById("teacher_id")
+                .value;
+
+
+        // ========================================
+        // VÉRIFIER LE NOM
+        // ========================================
+
+        if (!nom) {
+
+            alert(
+                "Veuillez entrer le nom de la matière"
+            );
+
+            return;
+
+        }
+
+
+        // ========================================
+        // VÉRIFIER LE PROFESSEUR
+        // ========================================
+
+        if (!teacher_id) {
+
+            alert(
+                "Veuillez entrer l'ID du professeur"
+            );
+
+            return;
+
+        }
+
+
+        const teacherId =
+            Number(teacher_id);
+
+
+        if (
+            !Number.isInteger(teacherId) ||
+            teacherId <= 0
+        ) {
+
+            alert(
+                "L'ID du professeur est invalide"
+            );
+
+            return;
+
+        }
 
 
         try {
@@ -348,14 +537,16 @@ matiereForm.addEventListener(
 
                         },
 
-                        body: JSON.stringify({
+                        body:
+                            JSON.stringify({
 
-                            nom: nom,
+                                nom:
+                                    nom,
 
-                            teacher_id:
-                                Number(teacher_id)
+                                teacher_id:
+                                    teacherId
 
-                        })
+                            })
 
                     }
                 );
@@ -365,12 +556,30 @@ matiereForm.addEventListener(
                 await response.json();
 
 
-            console.log(data);
+            console.log(
+                "RÉPONSE AJOUT MATIÈRE :",
+                data
+            );
+
+
+            if (!response.ok) {
+
+                alert(
+                    data.message ||
+                    "Erreur serveur lors de l'ajout de la matière"
+                );
+
+                return;
+
+            }
 
 
             if (!data.status) {
 
-                alert(data.message);
+                alert(
+                    data.message ||
+                    "Impossible d'ajouter la matière"
+                );
 
                 return;
 
@@ -394,13 +603,16 @@ matiereForm.addEventListener(
 
             chargerMatieres();
 
-
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR AJOUT MATIÈRE :",
+                error
+            );
+
 
             alert(
-                "Erreur lors de l'ajout de la matière"
+                "Impossible de contacter le serveur"
             );
 
         }
@@ -413,13 +625,17 @@ matiereForm.addEventListener(
 // BOUTON AFFECTER
 // ========================================
 
-btnAffecter.addEventListener("click", () => {
+btnAffecter.addEventListener(
+    "click",
+    () => {
 
-    cacherTout();
+        cacherTout();
 
-    affecterSection.style.display = "block";
+        affecterSection.style.display =
+            "block";
 
-});
+    }
+);
 
 
 // ========================================
@@ -434,15 +650,69 @@ affecterForm.addEventListener(
 
 
         const id =
-            document.getElementById(
-                "matiere_id"
-            ).value;
+            document
+                .getElementById(
+                    "matiere_id"
+                )
+                .value;
 
 
         const teacher_id =
-            document.getElementById(
-                "affectTeacherId"
-            ).value;
+            document
+                .getElementById(
+                    "affectTeacherId"
+                )
+                .value;
+
+
+        if (
+            !id ||
+            !teacher_id
+        ) {
+
+            alert(
+                "Veuillez remplir tous les champs"
+            );
+
+            return;
+
+        }
+
+
+        const matiereId =
+            Number(id);
+
+
+        const teacherId =
+            Number(teacher_id);
+
+
+        if (
+            !Number.isInteger(matiereId) ||
+            matiereId <= 0
+        ) {
+
+            alert(
+                "L'ID de la matière est invalide"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !Number.isInteger(teacherId) ||
+            teacherId <= 0
+        ) {
+
+            alert(
+                "L'ID du professeur est invalide"
+            );
+
+            return;
+
+        }
 
 
         try {
@@ -450,7 +720,7 @@ affecterForm.addEventListener(
             const response =
                 await fetch(
                     "/api/matieres/" +
-                    id +
+                    matiereId +
                     "/affecter",
                     {
 
@@ -466,12 +736,13 @@ affecterForm.addEventListener(
 
                         },
 
-                        body: JSON.stringify({
+                        body:
+                            JSON.stringify({
 
-                            teacher_id:
-                                Number(teacher_id)
+                                teacher_id:
+                                    teacherId
 
-                        })
+                            })
 
                     }
                 );
@@ -481,12 +752,21 @@ affecterForm.addEventListener(
                 await response.json();
 
 
-            console.log(data);
+            console.log(
+                "AFFECTATION :",
+                data
+            );
 
 
-            if (!data.status) {
+            if (
+                !response.ok ||
+                !data.status
+            ) {
 
-                alert(data.message);
+                alert(
+                    data.message ||
+                    "Erreur lors de l'affectation"
+                );
 
                 return;
 
@@ -513,7 +793,11 @@ affecterForm.addEventListener(
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "ERREUR AFFECTATION :",
+                error
+            );
+
 
             alert(
                 "Erreur lors de l'affectation"
@@ -529,11 +813,14 @@ affecterForm.addEventListener(
 // RETOUR AU MENU ADMIN
 // ========================================
 
-btnRetour.addEventListener("click", () => {
+btnRetour.addEventListener(
+    "click",
+    () => {
 
-    allerVers("/admin");
+        allerVers("/admin");
 
-});
+    }
+);
 
 
 // ========================================
