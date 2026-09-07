@@ -1,3 +1,4 @@
+
 /* ========================================
    RESET
 ======================================== */
@@ -6,6 +7,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -36,6 +41,8 @@ body {
     padding: 25px 15px;
 
     box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
+
+    z-index: 1000;
 }
 
 
@@ -88,6 +95,7 @@ body {
 .Barre nav a i,
 #deconnecter i {
     width: 22px;
+
     font-size: 18px;
 }
 
@@ -180,6 +188,8 @@ body {
     grid-template-columns: repeat(2, 1fr);
 
     gap: 25px;
+
+    margin-bottom: 40px;
 }
 
 
@@ -269,6 +279,269 @@ body {
 
 
 /* ========================================
+   SECTIONS ÉTUDIANT
+======================================== */
+
+.student-section {
+    background-color: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    scroll-margin-top: 30px;
+}
+
+
+/* ========================================
+   EN-TETE DES SECTIONS
+======================================== */
+
+.section-header {
+    margin-bottom: 25px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 2px solid #CBDDE9;
+}
+
+.section-header h2 {
+    color: #2872A1;
+
+    font-size: 24px;
+
+    margin-bottom: 8px;
+}
+
+.section-header h2 i {
+    margin-right: 10px;
+}
+
+.section-header p {
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   LISTE DES DONNÉES
+======================================== */
+
+.data-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+.data-list > p {
+    color: #666;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background-color: #CBDDE9;
+
+    border-radius: 10px;
+
+    grid-column: 1 / -1;
+}
+
+
+/* ========================================
+   CARTE MATIÈRE
+======================================== */
+
+.matiere-card {
+    background-color: #CBDDE9;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    border-left: 5px solid #2872A1;
+
+    transition: 0.3s ease;
+}
+
+.matiere-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.matiere-card h3 {
+    color: #2872A1;
+
+    font-size: 18px;
+}
+
+
+/* ========================================
+   CARTE NOTE
+======================================== */
+
+.note-card {
+    background-color: #CBDDE9;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    border-left: 5px solid #2872A1;
+
+    transition: 0.3s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.note-card h3 {
+    color: #2872A1;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+.note-card p {
+    color: #555;
+
+    margin-bottom: 8px;
+
+    line-height: 1.5;
+}
+
+.note-card strong {
+    color: #2872A1;
+}
+
+
+/* ========================================
+   CARTE ABSENCE
+======================================== */
+
+.absence-card {
+    background-color: #CBDDE9;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    border-left: 5px solid #2872A1;
+
+    transition: 0.3s ease;
+}
+
+.absence-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.absence-card h3 {
+    color: #2872A1;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+.absence-card p {
+    color: #555;
+
+    margin-bottom: 8px;
+
+    line-height: 1.5;
+}
+
+.absence-card strong {
+    color: #2872A1;
+}
+
+
+/* ========================================
+   STATUT ABSENCE
+======================================== */
+
+.status {
+    display: inline-block;
+
+    background-color: #2872A1;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   STATISTIQUES
+======================================== */
+
+.stat-card {
+    background-color: #CBDDE9;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border-left: 5px solid #2872A1;
+
+    text-align: center;
+
+    transition: 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+.stat-card i {
+    color: #2872A1;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+}
+
+.stat-card h3 {
+    color: #2872A1;
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    color: #555;
+
+    font-size: 16px;
+}
+
+
+/* ========================================
    RESPONSIVE TABLETTE
 ======================================== */
 
@@ -285,6 +558,10 @@ body {
     }
 
     .actions {
+        grid-template-columns: 1fr;
+    }
+
+    .data-list {
         grid-template-columns: 1fr;
     }
 
@@ -346,6 +623,18 @@ body {
 
     .action-card {
         padding: 20px;
+    }
+
+    .student-section {
+        padding: 20px;
+    }
+
+    .section-header h2 {
+        font-size: 21px;
+    }
+
+    .data-list {
+        grid-template-columns: 1fr;
     }
 
 }

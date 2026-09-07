@@ -15,7 +15,7 @@ router.get(
     "/api/statistiques",
     authMiddleware,
     roleMiddleware("admin"),
-    (req, res) => {
+    async (req, res) => {
 
         try {
 
@@ -27,7 +27,7 @@ router.get(
                 status: true,
                 meilleurEtudiant: meilleurEtudiant,
                 moyenneGenerale: moyenne,
-                totalAbsences: absences   // clé alignée avec le front admin
+                totalAbsences: absences  
             });
 
         } catch (error) {

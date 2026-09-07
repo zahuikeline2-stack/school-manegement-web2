@@ -1,5 +1,5 @@
 
-import express from "express";
+import express, { json } from "express";
 import db from "../db/base.js";
 
 import { loginUser } from "../controllers/authcontrollers.js";
@@ -1448,6 +1448,39 @@ router.put(
     }
 );
 
+
+// ========================================
+// ETUDIANT : MES MATIÈRES
+// ========================================
+router.get(
+    "/api/etudiant/matieres",
+    authMiddleware,
+    roleMiddleware("etudiant"),
+    async (req, res) => {
+
+        try {
+
+            const student_id = req.user.id;
+
+            const matieres =
+                await getSubjectsById(student_id);
+
+            res.json({
+                status: true,
+                matieres: matieres
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
+            res.status(500).json({
+                status: false,
+                message: "Erreur lors du chargement des matières"
+            });
+        }
+    }
+);
 
 export default router;
 

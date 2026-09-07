@@ -23,7 +23,7 @@ async function addUser(name, role, password, email) {
     console.log("Utilisateur enregistré avec succès !");
 }
 
-//addUser("keline" ,"professeur",5555,"keline@gmail.com")
+//addUser("franceline" ,"admin",1111,"franceline@gmail.com")
 
 // SUPPRIMER UN UTILISATEUR
 
@@ -40,7 +40,7 @@ async function DeleteUser(id) {
 
     console.log("Utilisateur supprimé avec succès !");
 }
-
+//DeleteUser(11)
 
 
 // LISTER LES UTILISATEURS

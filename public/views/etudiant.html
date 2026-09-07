@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -42,7 +43,7 @@
             <!-- ACCUEIL -->
 
             <a
-                href="/etudiant"
+                href="#accueil"
                 class="active"
             >
 
@@ -55,7 +56,7 @@
 
             <!-- MATIÈRES -->
 
-            <a href="/etudiant/matieres">
+            <a href="#matieres">
 
                 <i class="fa-solid fa-book"></i>
 
@@ -66,7 +67,7 @@
 
             <!-- NOTES -->
 
-            <a href="/etudiant/notes">
+            <a href="#notes">
 
                 <i class="fa-solid fa-pen-to-square"></i>
 
@@ -77,7 +78,7 @@
 
             <!-- ABSENCES -->
 
-            <a href="/etudiant/absences">
+            <a href="#absences">
 
                 <i class="fa-solid fa-calendar-xmark"></i>
 
@@ -88,7 +89,7 @@
 
             <!-- STATISTIQUES -->
 
-            <a href="/etudiant/statistiques">
+            <a href="#statistiques">
 
                 <i class="fa-solid fa-chart-column"></i>
 
@@ -126,167 +127,357 @@
 
 
         <!-- ========================================
-             EN-TÊTE
+             ACCUEIL
         ========================================= -->
 
-        <div class="page-header">
+        <section id="accueil">
 
-            <div>
 
-                <h1>
-                    Bienvenue dans votre espace étudiant
-                </h1>
+            <!-- ========================================
+                 EN-TÊTE
+            ========================================= -->
 
-                <p>
-                    Consultez vos matières, vos notes
-                    et vos absences.
-                </p>
+            <div class="page-header">
+
+                <div>
+
+                    <h1>
+                        Bienvenue dans votre espace étudiant
+                    </h1>
+
+                    <p>
+                        Consultez vos matières, vos notes,
+                        vos absences et vos statistiques.
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+
+
+            <!-- ========================================
+                 CARTES
+            ========================================= -->
+
+            <div class="actions">
+
+
+                <!-- ====================================
+                     MATIÈRES
+                ===================================== -->
+
+                <a
+                    href="#matieres"
+                    class="action-card"
+                >
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-book"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Mes matières
+                        </h3>
+
+                        <p>
+                            Consultez les matières
+                            qui vous sont attribuées.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ====================================
+                     NOTES
+                ===================================== -->
+
+                <a
+                    href="#notes"
+                    class="action-card"
+                >
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Mes notes
+                        </h3>
+
+                        <p>
+                            Consultez vos notes
+                            et vos résultats.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ====================================
+                     ABSENCES
+                ===================================== -->
+
+                <a
+                    href="#absences"
+                    class="action-card"
+                >
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-calendar-xmark"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Mes absences
+                        </h3>
+
+                        <p>
+                            Consultez votre historique
+                            d'absences.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ====================================
+                     STATISTIQUES
+                ===================================== -->
+
+                <a
+                    href="#statistiques"
+                    class="action-card"
+                >
+
+                    <div class="card-icon">
+
+                        <i class="fa-solid fa-chart-column"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Mes statistiques
+                        </h3>
+
+                        <p>
+                            Consultez votre moyenne
+                            et vos résultats.
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+
+        </section>
 
 
 
         <!-- ========================================
-             CARTES
+             MES MATIÈRES
         ========================================= -->
 
-        <div class="actions">
+        <section
+            id="matieres"
+            class="student-section"
+        >
 
-
-            <!-- ====================================
-                 MATIÈRES
-            ===================================== -->
-
-            <a
-                href="/etudiant/matieres"
-                class="action-card"
-            >
-
-                <div class="card-icon">
-
-                    <i class="fa-solid fa-book"></i>
-
-                </div>
-
+            <div class="section-header">
 
                 <div>
 
-                    <h3>
+                    <h2>
+
+                        <i class="fa-solid fa-book"></i>
+
                         Mes matières
-                    </h3>
+
+                    </h2>
 
                     <p>
-                        Consultez les matières
-                        qui vous sont attribuées.
+                        Voici les matières qui vous sont attribuées.
                     </p>
 
                 </div>
 
-            </a>
+            </div>
 
 
-
-            <!-- ====================================
-                 NOTES
-            ===================================== -->
-
-            <a
-                href="/etudiant/notes"
-                class="action-card"
+            <div
+                id="matieresList"
+                class="data-list"
             >
 
-                <div class="card-icon">
+                <p>
+                    Chargement des matières...
+                </p>
 
-                    <i class="fa-solid fa-pen-to-square"></i>
+            </div>
 
-                </div>
+        </section>
 
+
+
+        <!-- ========================================
+             MES NOTES
+        ========================================= -->
+
+        <section
+            id="notes"
+            class="student-section"
+        >
+
+            <div class="section-header">
 
                 <div>
 
-                    <h3>
+                    <h2>
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
                         Mes notes
-                    </h3>
+
+                    </h2>
 
                     <p>
-                        Consultez vos notes
-                        et vos résultats.
+                        Consultez vos notes et vos résultats.
                     </p>
 
                 </div>
 
-            </a>
+            </div>
 
 
-
-            <!-- ====================================
-                 ABSENCES
-            ===================================== -->
-
-            <a
-                href="/etudiant/absences"
-                class="action-card"
+            <div
+                id="notesList"
+                class="data-list"
             >
 
-                <div class="card-icon">
+                <p>
+                    Chargement des notes...
+                </p>
 
-                    <i class="fa-solid fa-calendar-xmark"></i>
+            </div>
 
-                </div>
+        </section>
 
+
+
+        <!-- ========================================
+             MES ABSENCES
+        ========================================= -->
+
+        <section
+            id="absences"
+            class="student-section"
+        >
+
+            <div class="section-header">
 
                 <div>
 
-                    <h3>
+                    <h2>
+
+                        <i class="fa-solid fa-calendar-xmark"></i>
+
                         Mes absences
-                    </h3>
+
+                    </h2>
 
                     <p>
-                        Consultez votre historique
-                        d'absences.
+                        Consultez votre historique d'absences.
                     </p>
 
                 </div>
 
-            </a>
+            </div>
 
 
-
-            <!-- ====================================
-                 STATISTIQUES
-            ===================================== -->
-
-            <a
-                href="/etudiant/statistiques"
-                class="action-card"
+            <div
+                id="absencesList"
+                class="data-list"
             >
 
-                <div class="card-icon">
+                <p>
+                    Chargement des absences...
+                </p>
 
-                    <i class="fa-solid fa-chart-column"></i>
+            </div>
 
-                </div>
+        </section>
 
+
+
+        <!-- ========================================
+             MES STATISTIQUES
+        ========================================= -->
+
+        <section
+            id="statistiques"
+            class="student-section"
+        >
+
+            <div class="section-header">
 
                 <div>
 
-                    <h3>
+                    <h2>
+
+                        <i class="fa-solid fa-chart-column"></i>
+
                         Mes statistiques
-                    </h3>
+
+                    </h2>
 
                     <p>
-                        Consultez votre moyenne
-                        et vos résultats.
+                        Consultez votre moyenne et vos résultats.
                     </p>
 
                 </div>
 
-            </a>
+            </div>
 
 
-        </div>
+            <div
+                id="statistiquesList"
+                class="data-list"
+            >
+
+                <p>
+                    Chargement des statistiques...
+                </p>
+
+            </div>
+
+        </section>
 
 
     </main>
@@ -299,6 +490,8 @@
 
     <script src="../js/etudiant.js"></script>
 
+
 </body>
 
 </html>
+

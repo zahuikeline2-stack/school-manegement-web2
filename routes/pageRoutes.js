@@ -8,13 +8,24 @@ const router = express.Router();
 
 
 // ========================================
+// CHEMIN DU DOSSIER VIEWS
+// ========================================
+
+const viewsPath = path.join(
+    process.cwd(),
+    "public",
+    "views"
+);
+
+
+// ========================================
 // ACCUEIL
 // ========================================
 
 router.get("/", (req, res) => {
 
     res.sendFile(
-        path.join(process.cwd(), "views", "index.html")
+        path.join(viewsPath, "index.html")
     );
 
 });
@@ -27,7 +38,7 @@ router.get("/", (req, res) => {
 router.get("/login", (req, res) => {
 
     res.sendFile(
-        path.join(process.cwd(), "views", "login.html")
+        path.join(viewsPath, "login.html")
     );
 
 });
@@ -44,7 +55,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "admin.html")
+            path.join(viewsPath, "admin.html")
         );
 
     }
@@ -62,7 +73,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "users.html")
+            path.join(viewsPath, "users.html")
         );
 
     }
@@ -80,7 +91,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "etudiants.html")
+            path.join(viewsPath, "etudiants.html")
         );
 
     }
@@ -98,7 +109,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "professeurs.html")
+            path.join(viewsPath, "professeurs.html")
         );
 
     }
@@ -116,7 +127,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "matiere.html")
+            path.join(viewsPath, "matiere.html")
         );
 
     }
@@ -134,7 +145,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "notes.html")
+            path.join(viewsPath, "notes.html")
         );
 
     }
@@ -152,7 +163,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "absences.html")
+            path.join(viewsPath, "absences.html")
         );
 
     }
@@ -170,51 +181,12 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(process.cwd(), "views", "statistique.html")
-        );
-
-    }
-);
-router.get(
-    "/professeur",
-    authMiddleware,
-    roleMiddleware("professeur"),
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeur.html"
-            )
+            path.join(viewsPath, "statistique.html")
         );
 
     }
 );
 
-
-// PAGE MES MATIÈRES PROFESSEUR
-// ========================================
-
-router.get(
-    "/professeur/matieres",
-
-    authMiddleware,
-
-    roleMiddleware("professeur"),
-
-    (req, res) => {
-
-        res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurMatieres.html"
-            )
-        );
-
-    }
-);
 
 // ========================================
 // PROFESSEUR - ACCUEIL
@@ -227,11 +199,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeur.html"
-            )
+            path.join(viewsPath, "professeur.html")
         );
 
     }
@@ -249,11 +217,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurMatieres.html"
-            )
+            path.join(viewsPath, "professeurMatieres.html")
         );
 
     }
@@ -271,11 +235,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurEtudiants.html"
-            )
+            path.join(viewsPath, "professeurEtudiants.html")
         );
 
     }
@@ -293,11 +253,7 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurNote.html"
-            )
+            path.join(viewsPath, "professeurNote.html")
         );
 
     }
@@ -315,14 +271,28 @@ router.get(
     (req, res) => {
 
         res.sendFile(
-            path.join(
-                process.cwd(),
-                "views",
-                "professeurAbsence.html"
-            )
+            path.join(viewsPath, "professeurAbsence.html")
         );
 
     }
 );
+
+///========================================
+// ETUDIANT
+// ========================================
+
+router.get(
+    "/etudiant",
+    authMiddleware,
+    roleMiddleware("etudiant"),
+    (req, res) => {
+
+        res.sendFile(
+            path.join(viewsPath, "etudiant.html")
+        );
+
+    }
+);
+
 
 export default router;
